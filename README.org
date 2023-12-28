@@ -1,0 +1,121 @@
+#+title: Termux Configuration
+
+* Termux
+Termux is an opensource, GNU/Linux environment for Android which is available 
+for install on either the *Play Store* or the alternative *F-Droid* applications
+repository.
+
+This *git repository* contains the configuration files I use with it, along with
+some [[file:scripts][scripts]] to facilitate the installation of a working
+environment on new devices.
+
+At the moment of writing, this environment has only been tested on a non-rooted
+*Google Pixel 7 Pro*, although I plan to install the exact same environment on an
+old *Samsung Tab A6*.
+
+** Setup the environment
+Before installing the different modules there are a couple of preliminary
+steps that need to be performed manually since they will pop confirmation
+dialogs up and need interaction with the user.
+
+*** Install fish
+Install the ~fish~ shell and set it as default, this is *mandatory* for the
+remainder of the installation process since all the scripts use the ~fish~
+syntax (sorry bash!)
+
+#+begin_src
+$ pkg install -y fish
+$ chsh
+#+end_src
+
+*** Package manager
+Setup the default package manager (~pkg~) and choose a mirror close to
+your location
+
+#+begin_src shell
+$ termux-setup-package-manager
+$ termux-change-repo
+#+end_src
+
+*** Storage access
+If you need to access stuff on either your SD card or the
+~/storage/emulated/0~ folder (the writable part of the system's disk):
+
+- Go to the ~termux~ application settings in Android and give it the
+  permission to access the files, then
+
+#+begin_src shell
+$ termux-setup-storage
+#+end_src
+
+This will create a ~storage~ folder in your ~$HOME~. If you use
+~orgmode~, also create a symbolic link to the ~org~ folder in your
+~$HOME~:
+
+#+begin_src shell
+$ cd $HOME
+$ ln -s ./storage/org
+#+end_src
+
+** Modules
+Some modules are handled, for each of them an installation script is
+provided, together with a corresponding ~install_module.fish~.
+
+*** Termux
+This simple module will create a sane ~termux.properties~ file and copy
+over the Monaspace patched font from GitHub.
+
+*** Git
+Simple module that simply creates a ~.gitconfig~ file and stores it in
+the home folder of Termux.
+
+*** Fish
+The default ~termux~ environment comes with a ~bash~ shell, this module replaces
+that default shell with ~fish~ and some plugins.
+
+This module will also install some packages which will be used by ~fish~ and
+~NeoVim~:
+- ~curl~
+- ~ripgrep~
+- ~bat~
+- ~fd~
+- ~fzf~
+- ~tldr~ using ~tealdeer~
+
+**** Fisher
+[[https://github.com/jorgebucaran/fisher][fisher]] is a plugin manager
+for the ~fish~ shell, it uses a [[file:./fish/fish_plugins][plain text file]]
+to keep track of the installed plugins and gives you an easy
+access to new plugins which may be located remotely (on
+[[https://github.com][GitHub]] or even locally if you want to develop
+your own.
+
+**** Tide
+[[https://github.com/IlanCosman/tide][tide]] is a modern prompt for
+~fish~ with icons, git branch display and other cool stuff. After
+installing you can easily configure it with the command ~tide configure~
+
+**** Z
+[[https://github.com/jethrokuan/z][Z]] is a directory hopper for ~fish~,
+similar to the one which exists for ~zsh~
+
+**** Bang Bang
+[[https://github.com/oh-my-fish/plugin-bang-bang][Bang bang]] is a plugin
+which adds a functionality similar to the ~!!~ pattern in ~bash~.
+
+*** NeoVim
+This is the biggest and by far the most curated module in this repository
+and probably the one which will see the most evolutions. This module
+creates a working ~NeoVim~ installation using 
+[[https://github.com/folke/lazy.nvim][Lazy.nvim]] and some plugins for
+productivity, including (list not exhaustive):
+- ~orgmode~ to work with ~.org~ files
+- ~nvim-cmp~ to provide basic completion for most common stuff
+- ~nvim-treesitter~ for syntax highlighting
+- ~neogit~ to work with git repositories...
+- ~toggleterm~ to handle terminal buffers easily
+- ~telescope~ fuzzy finder
+- ~which-key~ to guide your next keystroke
+
+This is basically a tuned-down configuration of my main repository
+[[https://github.com/massix/nixos][here]].

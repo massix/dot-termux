@@ -1,0 +1,10 @@
+[user]
+  email = "massimo.gengarelli@gmail.com"
+  name = "Massimo Gengarelli"
+
+[alias]
+  lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+  st = "status"
+  ci = "commit"
+  cb = "checkout -b"
+
