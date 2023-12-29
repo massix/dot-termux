@@ -20,7 +20,7 @@ return {
       -- stylua: ignore
       dashboard.section.buttons.val = {
         dashboard.button("f", " " .. " Find file", "<CMD> Telescope find_files<CR>"),
-        dashboard.button("e", "🦄" .. " Open org", [[<CMD> cd ~/org <BAR> Oil<CR>]]),
+        dashboard.button("e", " " .. " Open org", [[<CMD> cd ~/org <BAR> e ./index.org<CR>]]),
         dashboard.button("l", "󰒲 " .. " Lazy", "<CMD> Lazy<CR>"),
         dashboard.button("q", " " .. " Quit", "<CMD> qa<CR>"),
       }
