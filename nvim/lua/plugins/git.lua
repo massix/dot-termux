@@ -9,7 +9,16 @@ return {
       "sindrets/diffview.nvim",
       "ibhagwan/fzf-lua",
     },
-    config = true,
+    config = function(_, opts)
+      require("neogit").setup(opts)
+      local group = api.nvim_create_augroup("NeogitEvents", { clear = true })
+
+      api.nvim_create_autocmd("User", {
+        group = group,
+        pattern = "NeogitPushComplete",
+        callback = function() require("neogit").close() end,
+      })
+    end,
     opts = {
       console_timeout = 15000,
       status = {
