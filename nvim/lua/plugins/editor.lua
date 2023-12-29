@@ -62,29 +62,20 @@ return {
     end,
   },
 
-  -- Easily edit files and folders
+  -- mini.files is an excellent netrw replacement and file browser
   {
-    "stevearc/oil.nvim",
+    "echasnovski/mini.files",
+    version = false,
     lazy = false,
     event = "VeryLazy",
     opts = {
-      default_file_explorer = true,
-      columns = {
-        "icon",
-        "permissions",
-        "size",
-        "mtime",
-      },
-
-      view_options = {
-        show_hidden = true,
+      windows = {
+        preview = true,
+        width_preview = 30,
       },
     },
-    config = function(_, opts)
-      require("oil").setup(opts)
-    end,
     keys = {
-      { "<leader>fo", [[<cmd>Oil<CR>]], desc = "Open Oil in current directory" },
+      { "<leader>fo", function() MiniFiles.open() end, desc = "File Browser" },
     },
   },
 
