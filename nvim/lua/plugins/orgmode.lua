@@ -29,10 +29,14 @@ return {
         t = {
           description = "Task",
           template = "* TODO %?\n%u",
+          headline = "Tasks",
+          target = "~/org/refile.org",
         },
         r = {
-          description = "Random note",
+          description = "Note",
           template = "* %?\n%u",
+          headline = "Notes",
+          target = "~/org/refile.org",
         },
       },
       ui = {
