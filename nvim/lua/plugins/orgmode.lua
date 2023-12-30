@@ -40,6 +40,11 @@ return {
           handler = nil,
         },
       },
+      mappings = {
+        org = {
+          org_toggle_checkbox = "<C-l>",
+        },
+      },
     },
   },
 
