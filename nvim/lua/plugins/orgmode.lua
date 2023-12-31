@@ -15,8 +15,22 @@ return {
       require("orgmode").setup(opts)
     end,
     opts = {
-      org_agenda_files = { "~/org/**/*" },
-      org_todo_keywords = { "TODO(t)", "NEXT(n)", "PROGRESS(p)", "|", "DONE(d)", "NOTVALID(i)" },
+      org_agenda_files = {
+        "~/org/index.org",
+        "~/org/refile.org",
+        "~/org/mobile-refile.org",
+        "~/org/work.org",
+      },
+      org_todo_keywords = {
+        "TODO(t)",
+        "NEXT(n)",
+        "PROGRESS(p)",
+        "WAITING(w)",
+        "|",
+        "DONE(d)",
+        "CANCELLED(c)",
+        "DELEGATED(D)",
+      },
       org_default_notes_file = "~/org/refile.org",
       org_indent_mode = "virtual_indent",
       win_split_mode = "horizontal",
@@ -37,6 +51,12 @@ return {
           template = "* %?\n%u",
           headline = "Notes",
           target = "~/org/refile.org",
+        },
+        m = {
+          description = "Meeting minutes",
+          template = "* %<%Y-%m-%d> %?\n%u\n** Participants\n** Topics",
+          headline = "Meetings",
+          target = "~/org/work.org",
         },
       },
       ui = {
