@@ -30,6 +30,7 @@ return {
       },
       org_default_notes_file = "~/org/refile.org",
       org_indent_mode = "virtual_indent",
+      org_tags_column = -70,
       win_split_mode = "horizontal",
       win_border = "rounded",
       org_hide_leading_stars = true,
