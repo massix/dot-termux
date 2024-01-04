@@ -383,7 +383,7 @@ return {
       vim.opt.foldenable = true
       vim.opt.foldlevel = 99
       vim.opt.foldlevelstart = 99
-      vim.opt.foldcolumn = "1"
+      vim.opt.foldcolumn = "0"
     end,
     -- stylua: ignore
     keys = {
@@ -410,7 +410,7 @@ return {
     "folke/zen-mode.nvim",
     opts = {
       window = {
-        width = 120,
+        width = 82,
         height = 1,
         options = {
           number = false,
