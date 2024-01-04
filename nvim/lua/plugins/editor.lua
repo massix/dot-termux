@@ -439,5 +439,37 @@ return {
     keys = {
       { "<leader>zz", "<CMD>ZenMode<CR>", desc = "Start Zen Mode" },
     },
-  }
+  },
+
+  -- Code biscuits
+  {
+    "code-biscuits/nvim-biscuits",
+    event = "BufEnter",
+    init = function()
+      local wk = require("which-key")
+      wk.register({
+        [ "<leader>c" ] = { name = "+code" },
+      })
+    end,
+    opts = {
+      on_events = { "InsertLeave", "CursorHoldI" },
+      max_length = 4,
+      trim_by_words = true,
+      default_config = {
+        prefix_string = " ",
+      },
+      language_config = {
+        org = { disabled = true }
+      },
+    },
+    keys = {
+      {
+        "<leader>cb",
+        function()
+          require('nvim-biscuits').toggle_biscuits()
+        end,
+        desc = "Toggle biscuits"
+      },
+    },
+  },
 }
