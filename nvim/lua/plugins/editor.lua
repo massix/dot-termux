@@ -136,6 +136,7 @@ return {
     },
   },
 
+  -- Jump around!
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -150,6 +151,7 @@ return {
     },
   },
 
+  -- Icon Picker
   {
     "ziontee113/icon-picker.nvim",
     cmd = { "IconPickerNormal", "IconPickerYank", "IconPickerInsert" },
@@ -323,4 +325,119 @@ return {
     },
   },
 
+  -- Better folding
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    event = "BufEnter",
+    opts = {
+      open_fold_hl_timeout = 150,
+      close_fold_kinds = { "imports", "comment" },
+      fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local suffix = (" 󰁂 %d "):format(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            -- str width returned from truncate() may less than 2nd argument, need padding
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, { suffix, "MoreMsg" })
+        return newVirtText
+      end,
+      preview = {
+        win_config = {
+          border = { "", "─", "", "", "", "─", "", "" },
+          winhighlight = "Normal:Folded",
+          winblend = 0,
+        },
+        mappings = {
+          scrollU = "<C-b>",
+          scrollD = "<C-f>",
+          jumpTop = "[",
+          jumpBot = "]",
+        },
+      },
+      provider_selector = function()
+        return { "treesitter", "indent" }
+      end,
+    },
+    config = function(_, opts)
+      require("ufo").setup(opts)
+
+      vim.opt.foldenable = true
+      vim.opt.foldlevel = 99
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldcolumn = "1"
+    end,
+    -- stylua: ignore
+    keys = {
+      { "zR", function() require("ufo").openAllFolds() end, desc = "Open all folds", },
+      { "zM", function() require("ufo").closeAllFolds() end, desc = "Close all folds", },
+      { "zp", function() require('ufo').peekFoldedLinesUnderCursor() end, desc = "Preview fold", },
+    },
+  },
+
+  -- Dim inactive parts of code
+  {
+    "folke/twilight.nvim",
+    lazy = false,
+    opts = {
+      context = 2,
+    },
+    keys = {
+      { "<leader>zt", "<CMD>Twilight<CR>", desc = "Toggle Twilight" },
+    },
+  },
+
+  -- Zen Mode editing
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      window = {
+        width = 120,
+        height = 1,
+        options = {
+          number = false,
+          relativenumber = false,
+          signcolumn = "no",
+          cursorline = false,
+          foldcolumn = "0",
+        },
+      },
+      plugins = {
+        gitsigns = { enabled = true },
+        options = {
+          enabled = true,
+          ruler = true,
+          showcmd = true,
+        },
+      },
+    },
+    init = function()
+      local wk = require("which-key")
+      wk.register({
+        ["<leader>z"] = { name = "+zen" },
+      })
+    end,
+    commands = { "ZenMode" },
+    keys = {
+      { "<leader>zz", "<CMD>ZenMode<CR>", desc = "Start Zen Mode" },
+    },
+  }
 }
