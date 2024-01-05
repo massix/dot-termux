@@ -28,8 +28,16 @@ return {
           lualine_b = {
             { "branch" },
             {
+              -- FIXME: this can be done in a better way probably
               function()
-                return orgmode.statusline()
+                ---@diagnostic disable-next-line: undefined-global
+                local clock = orgmode.statusline()
+                if clock ~= nil and clock ~= "" then
+                  local final = clock:gsub("%(Org%)", " "):gsub("%%", "%%%%"):gsub("%((.*)%)", "%1")
+                  return final
+                else
+                  return ""
+                end
               end,
             },
           },
