@@ -87,6 +87,7 @@ return {
     config = function(_, opts)
       require('telescope').setup(opts)
       require('telescope').load_extension('orgmode')
+      require('telescope').load_extension('projects')
     end,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -121,6 +122,7 @@ return {
       { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
       { "<leader>sO", "<cmd>Telescope orgmode search_headings<cr>", desc = "Org Headings" },
+      { "<leader>sp", "<cmd>Telescope projects<cr>", desc = "Change project" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
     },
   },
