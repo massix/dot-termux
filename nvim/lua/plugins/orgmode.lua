@@ -13,6 +13,16 @@ return {
     config = function(_, opts)
       require("orgmode").setup_ts_grammar()
       require("orgmode").setup(opts)
+
+      -- Disable column in orgagenda
+      vim.api.nvim_create_autocmd("Filetype", {
+        pattern = { "orgagenda" },
+        callback = function()
+          vim.opt_local.foldcolumn = "0"
+          vim.opt_local.number = false
+          vim.opt_local.relativenumber = false
+        end,
+      })
     end,
     opts = {
       org_agenda_files = {
@@ -36,7 +46,7 @@ return {
       org_hide_leading_stars = true,
       org_hide_emphasis_markers = true,
       org_log_into_drawer = "LOGBOOK",
-      org_startup_folded = "inherit",
+      org_startup_folded = "content",
       org_capture_templates = {
         t = {
           description = "Task",
