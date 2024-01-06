@@ -6,8 +6,8 @@ return {
     dependencies = {
       { "akinsho/org-bullets.nvim", config = true, lazy = false },
       { "lukas-reineke/headlines.nvim", config = true, lazy = false },
-      { "nvim-treesitter/nvim-treesitter", lazy = true, },
-      { "joaomsa/telescope-orgmode.nvim", lazy = false, }
+      { "nvim-treesitter/nvim-treesitter", lazy = true },
+      { "joaomsa/telescope-orgmode.nvim", lazy = false },
     },
     event = "VeryLazy",
     config = function(_, opts)

@@ -54,4 +54,3 @@ require("lazy").setup({
 require("config.keymaps")
 
 vim.cmd([[colorscheme kanagawa]])
-

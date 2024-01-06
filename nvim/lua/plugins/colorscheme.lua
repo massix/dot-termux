@@ -92,4 +92,3 @@ return {
     config = false,
   },
 }
-

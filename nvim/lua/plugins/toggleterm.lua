@@ -57,6 +57,5 @@ return {
       { "<c-c>tS", [[<cmd>execute "ToggleTermSendCurrentLine ". v:count<CR>]], desc = "Send current line to terminal" },
       { "<c-c>tS", [[<cmd>execute "ToggleTermSendVisualSelection " . v:count<CR>]], mode = { "v" }, desc = "Send visual selection to terminal" },
     },
-  }
+  },
 }
-

@@ -62,4 +62,3 @@ api.nvim_create_autocmd("TextYankPost", {
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
-
