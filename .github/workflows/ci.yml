@@ -1,0 +1,13 @@
+name: Linter
+on: [ push ]
+jobs:
+  stylua:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Check Lua files
+      uses: nebularg/actions-luacheck@v1
+      with:
+        files: ./nvim
+
