@@ -10,6 +10,8 @@ jobs:
       uses: nebularg/actions-luacheck@v1
       with:
         files: ./nvim
+    - name: fish-actions/install-fish
+      uses: fish-actions/install-fish@v1.1.0
     - name: fish-shop/syntax-check
       uses: fish-shop/syntax-check@v1.5.0
 
