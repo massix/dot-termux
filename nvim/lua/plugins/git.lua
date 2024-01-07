@@ -16,7 +16,9 @@ return {
       api.nvim_create_autocmd("User", {
         group = group,
         pattern = "NeogitPushComplete",
-        callback = function() require("neogit").close() end,
+        callback = function()
+          require("neogit").close()
+        end,
       })
     end,
     opts = {
@@ -62,5 +64,4 @@ return {
     config = true,
     event = { "BufReadPre", "BufNewFile" },
   },
-
 }

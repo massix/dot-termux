@@ -1,0 +1,18 @@
+name: Check shell and Lua
+on: [ push ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Check Lua files
+      uses: nebularg/actions-luacheck@v1
+      with:
+        files: ./nvim
+    - name: fish-actions/install-fish
+      uses: fish-actions/install-fish@v1.1.0
+    - name: fish-shop/syntax-check
+      uses: fish-shop/syntax-check@v1.5.0
+
+

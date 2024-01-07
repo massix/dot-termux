@@ -42,7 +42,7 @@ return {
             },
           },
           lualine_c = {
-            { "diagnostics", },
+            { "diagnostics" },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 1 } },
             {
               "filename",
@@ -60,10 +60,14 @@ return {
             },
           },
           lualine_x = {
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates, },
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             {
-              function() return require("noice").api.status.command.get() end,
-              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+              function()
+                return require("noice").api.status.command.get()
+              end,
+              cond = function()
+                return package.loaded["noice"] and require("noice").api.status.command.has()
+              end,
               color = fg("Statement"),
             },
             -- stylua: ignore
@@ -101,4 +105,3 @@ return {
     end,
   },
 }
-

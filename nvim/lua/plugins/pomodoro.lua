@@ -5,7 +5,7 @@ return {
     init = function()
       local wk = require("which-key")
       wk.register({
-        [ "<leader>p" ] = { name = "+pomodoro" },
+        ["<leader>p"] = { name = "+pomodoro" },
       })
     end,
     opts = {
@@ -30,4 +30,3 @@ return {
     },
   },
 }
-

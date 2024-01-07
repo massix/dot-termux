@@ -75,7 +75,13 @@ return {
       },
     },
     keys = {
-      { "<leader>fo", function() MiniFiles.open() end, desc = "File Browser" },
+      {
+        "<leader>fo",
+        function()
+          MiniFiles.open()
+        end,
+        desc = "File Browser",
+      },
     },
   },
 
@@ -85,9 +91,9 @@ return {
     event = "VeryLazy",
     cmd = "Telescope",
     config = function(_, opts)
-      require('telescope').setup(opts)
-      require('telescope').load_extension('orgmode')
-      require('telescope').load_extension('projects')
+      require("telescope").setup(opts)
+      require("telescope").load_extension("orgmode")
+      require("telescope").load_extension("projects")
     end,
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -450,7 +456,7 @@ return {
     init = function()
       local wk = require("which-key")
       wk.register({
-        [ "<leader>c" ] = { name = "+code" },
+        ["<leader>c"] = { name = "+code" },
       })
     end,
     opts = {
@@ -461,16 +467,16 @@ return {
         prefix_string = " ",
       },
       language_config = {
-        org = { disabled = true }
+        org = { disabled = true },
       },
     },
     keys = {
       {
         "<leader>cb",
         function()
-          require('nvim-biscuits').toggle_biscuits()
+          require("nvim-biscuits").toggle_biscuits()
         end,
-        desc = "Toggle biscuits"
+        desc = "Toggle biscuits",
       },
     },
   },
