@@ -1,4 +1,4 @@
-name: Linter
+name: Check shell and Lua
 on: [ push ]
 jobs:
   stylua:
@@ -10,4 +10,7 @@ jobs:
       uses: nebularg/actions-luacheck@v1
       with:
         files: ./nvim
+    - name: fish-shop/syntax-check
+      uses: fish-shop/syntax-check@v1.5.0
+
 
