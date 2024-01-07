@@ -1,7 +1,7 @@
 name: Check shell and Lua
 on: [ push ]
 jobs:
-  stylua:
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
