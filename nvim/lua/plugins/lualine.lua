@@ -18,7 +18,7 @@ return {
     opts = function()
       return {
         options = {
-          theme = "seoul256",
+          theme = "auto",
           globalstatus = true,
           disabled_filetypes = { statusline = { "dashboard", "alpha" } },
           icons_enabled = true,
@@ -92,9 +92,9 @@ return {
           -- stylua: ignore
           lualine_z = {
             {
-              function() return require("pomodoro").statusline() end,
+              function() return require("nomodoro").status() end,
               cond = function()
-                return package.loaded["pomodoro"] and require("pomodoro").statusline() ~= nil
+                return package.loaded["nomodoro"] and require("nomodoro").status() ~= nil
               end,
             },
             { function() return " " .. os.date("%R") end, },

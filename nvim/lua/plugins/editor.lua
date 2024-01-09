@@ -362,6 +362,7 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "orgmode" },
+          { name = "mkdnflow" },
           { name = "path" },
           { name = "buffer" },
         }),
