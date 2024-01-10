@@ -24,7 +24,22 @@ return {
           icons_enabled = true,
         },
         sections = {
-          lualine_a = { "mode" },
+          lualine_a = {
+            { "mode" },
+            {
+              function()
+                local status = require("better_escape").waiting
+                if status then
+                  return "…"
+                else
+                  return ""
+                end
+              end,
+              cond = function()
+                return package.loaded["better_escape"] and require("better_escape").waiting ~= nil
+              end,
+            },
+          },
           lualine_b = {
             { "branch" },
             {

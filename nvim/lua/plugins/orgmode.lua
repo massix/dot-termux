@@ -86,8 +86,25 @@ return {
   -- markdown navigation for 2nd brain
   {
     "jakewvincent/mkdnflow.nvim",
-    lazy = false,
-    event = "VeryLazy",
-    opts = {},
+    ft = "markdown",
+    lazy = true,
+    opts = {
+      modules = {
+        cmp = true,
+      },
+      wrap = true,
+      links = {
+        style = "markdown",
+        transform_explicit = function(text)
+          text = text:gsub(" ", "-")
+          text = text:lower()
+          return text
+        end,
+      },
+      new_file_template = {
+        use_template = true,
+        template = "# {{ title }}"
+      },
+    },
   },
 }
