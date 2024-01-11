@@ -103,7 +103,7 @@ similar to the one which exists for ~zsh~
 [[https://github.com/oh-my-fish/plugin-bang-bang][Bang bang]] is a plugin
 which adds a functionality similar to the ~!!~ pattern in ~bash~.
 
-*** NeoVim
+* NeoVim
 This is the biggest and by far the most curated module in this repository
 and probably the one which will see the most evolutions. This module
 creates a working ~NeoVim~ installation using 
@@ -116,6 +116,16 @@ productivity, including (list not exhaustive):
 - ~toggleterm~ to handle terminal buffers easily
 - ~telescope~ fuzzy finder
 - ~which-key~ to guide your next keystroke
+- ~venn.nvim~ to design beautiful diagrams like the one below
+
+#+begin_example
+    ┌────────────┐    ┌──────┐
+    │VENN Diagram├───►│Task 3│
+    └───────┬────┘    └──────┘
+ ┌──────┐   │      ┌──────┐
+ │Task 2│◄──┴─────►│Task 1│
+ └──────┘          └──────┘
+#+end_example
 
 This is basically a tuned-down configuration of my main repository
 [[https://github.com/massix/nixos][here]].

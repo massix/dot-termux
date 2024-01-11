@@ -107,4 +107,43 @@ return {
       },
     },
   },
+
+  -- Draw diagrams
+  {
+    "jbyuki/venn.nvim",
+    lazy = false,
+    event = "VeryLazy",
+    config = function()
+      vim.g.venn_enabled = false
+
+      -- Create a function in the global namespace
+      -- FIXME: probably not the best solution
+      function _G.Toggle_Venn()
+        if vim.g.venn_enabled == false then
+          vim.notify("Enabling Venn mode")
+          vim.g.venn_enabled = true
+
+          vim.opt_local.virtualedit = "all"
+          vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
+          vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", { noremap = true })
+          vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
+          vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", { noremap = true })
+          vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
+        else
+          vim.notify("Disabling Venn mode")
+          vim.g.venn_enabled = false
+
+          vim.opt_local.virtualedit = "none"
+          vim.api.nvim_buf_del_keymap(0, "n", "J")
+          vim.api.nvim_buf_del_keymap(0, "n", "H")
+          vim.api.nvim_buf_del_keymap(0, "n", "K")
+          vim.api.nvim_buf_del_keymap(0, "n", "L")
+          vim.api.nvim_buf_del_keymap(0, "v", "f")
+        end
+      end
+
+      -- stylua: ignore
+      vim.api.nvim_set_keymap( "n", "<leader>Iv", ":lua Toggle_Venn()<CR>", { noremap = true, desc = "Toggle Venn Mode" })
+    end,
+  },
 }
