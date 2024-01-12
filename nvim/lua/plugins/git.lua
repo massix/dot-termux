@@ -22,9 +22,22 @@ return {
       })
     end,
     opts = {
+      disable_hint = false,
+      disable_signs = false,
+      disable_line_numbers = false,
       console_timeout = 15000,
       status = {
         recent_commit_count = 50,
+      },
+      graph_style = "unicode",
+      signs = {
+        hunk = { " ", " " },
+        item = { " ", " " },
+        section = { " ", " " },
+      },
+      integrations = {
+        telescope = true,
+        diffview = true,
       },
     },
 
