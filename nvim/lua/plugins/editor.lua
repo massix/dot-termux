@@ -536,14 +536,16 @@ return {
       })
     end,
     opts = {
-      on_events = { "InsertLeave", "CursorHoldI" },
-      max_length = 4,
-      trim_by_words = true,
+      show_on_start = false,
+      cursor_line_only = true,
+      on_events = { "CursorHoldI", "InsertLeave" },
+      trim_by_words = false,
       default_config = {
         prefix_string = " ",
       },
       language_config = {
         org = { disabled = true },
+        markdown = { disabled = true },
       },
     },
     keys = {

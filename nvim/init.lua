@@ -28,7 +28,9 @@ require("lazy").setup({
   },
 
   -- Install a colorscheme
-  install = { colorscheme = { "kanagawa" } },
+  install = {
+    colorscheme = { "catppuccin" }
+  },
 
   -- Enable checker for updating plugins
   checker = { enabled = true },
