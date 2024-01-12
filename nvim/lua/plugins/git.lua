@@ -6,8 +6,8 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      "sindrets/diffview.nvim",
-      "ibhagwan/fzf-lua",
+      { "sindrets/diffview.nvim", lazy = false, },
+      { "ibhagwan/fzf-lua", lazy = false, },
     },
     config = function(_, opts)
       require("neogit").setup(opts)
@@ -31,7 +31,7 @@ return {
       },
       graph_style = "unicode",
       signs = {
-        hunk = { " ", " " },
+        hunk = { "", "" },
         item = { " ", " " },
         section = { " ", " " },
       },
