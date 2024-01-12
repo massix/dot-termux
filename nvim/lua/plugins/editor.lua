@@ -574,4 +574,26 @@ return {
       require("better_escape").setup(opts)
     end,
   },
+
+  {
+    'stevearc/aerial.nvim',
+    opts = {
+      layout = {
+        default_direction = "prefer_left",
+        placement = "edge",
+      },
+
+      highlight_on_hover = true,
+      show_guides = true,
+    },
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    keys = {
+      { "<leader>co", "<cmd>AerialToggle<cr>", desc = "Open outline" },
+      { "<leader>cn", "<cmd>AerialNavToggle<cr>", desc = "Open float outline" },
+    },
+  },
 }
