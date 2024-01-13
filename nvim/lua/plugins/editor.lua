@@ -85,6 +85,30 @@ return {
     },
   },
 
+  -- Oil
+  {
+    "stevearc/oil.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    init = function()
+      local wk = require("which-key")
+      wk.register({
+        [ "<leader>fm" ] = { name = "+oil" },
+      })
+    end,
+    opts = {
+      columns = {
+        "icon",
+        "permissions",
+        "size",
+        "mtime"
+      },
+    },
+    keys = {
+      { "<leader>fmo", "<cmd>Oil<cr>", desc = "Oil" },
+      { "<leader>fmf", "<cmd>Oil --float<cr>", desc = "Oil (float)" },
+    },
+  },
+
   -- Fuzzy finder
   {
     "nvim-telescope/telescope.nvim",

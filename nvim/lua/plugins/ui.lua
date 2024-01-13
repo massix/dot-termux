@@ -2,7 +2,7 @@ return {
   -- Dressing (better vim ui)
   {
     "stevearc/dressing.nvim",
-    lazy = true,
+    event = "VeryLazy",
     init = function()
       vim.ui.select = function(...)
         require("lazy").load({ plugins = { "dressing.nvim" } })
