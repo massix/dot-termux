@@ -724,4 +724,11 @@ return {
     end,
   },
 
+  -- Autopairs
+  {
+    'echasnovski/mini.pairs',
+    version = '*',
+    event = { "BufEnter", "BufWinEnter" },
+    opts = {},
+  },
 }
