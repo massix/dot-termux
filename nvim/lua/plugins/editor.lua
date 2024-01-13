@@ -599,6 +599,7 @@ return {
     end,
   },
 
+  -- Code outline and navigation
   {
     'stevearc/aerial.nvim',
     opts = {
@@ -722,4 +723,5 @@ return {
       })
     end,
   },
+
 }
