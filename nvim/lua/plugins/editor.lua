@@ -685,4 +685,41 @@ return {
     event = "VeryLazy",
     opts = {},
   },
+
+  -- Trailspaces and stuff
+  {
+    "echasnovski/mini.trailspace",
+    version = '*',
+    event = { "BufEnter", "BufWinEnter" },
+    opts = {
+      only_in_normal_buffers = true,
+    },
+    config = function(_, opts)
+      require("mini.trailspace").setup(opts)
+      vim.g.remove_trailspaces = true
+
+      function _G.Toggle_trailspaces()
+        if vim.g.remove_trailspaces then
+          vim.notify("Disabling automatic trim of whitespaces")
+          vim.g.remove_trailspaces = false
+        else
+          vim.notify("Enabling automatic trim of whitespaces")
+          vim.g.remove_trailspaces = true
+        end
+      end
+
+      vim.api.nvim_set_keymap( "n", "<leader>cw", ":lua Toggle_trailspaces()<CR>", { noremap = true, desc = "Toggle Trailspaces" })
+
+      local group = vim.api.nvim_create_augroup("TrimWhitespaces", { clear = true })
+      vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+        group = group,
+        pattern = "*",
+        callback = function()
+          if vim.g.remove_trailspaces then
+            MiniTrailspace.trim()
+          end
+        end,
+      })
+    end,
+  },
 }
