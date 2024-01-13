@@ -8,12 +8,12 @@ return {
       -- stylua: ignore
       -- luacheck: ignore
       local logo = [[
-                                        ,e,               ,d8 8b,    e88",8,  
-        888 888 8e   ,"Y88b  dP"Y  dP"Y  "       Y8b Y8Y  "Y8 8P"   d888  "   
-        888 888 88b "8" 888 C88b  C88b  888       Y8b Y   ,d8 8b,  C8888 88e  
-        888 888 888 ,ee 888  Y88D  Y88D 888      e Y8b   C888 888D  Y888 888D 
-        888 888 888 "88 888 d,dP  d,dP  888     d8b Y8b   "Y8 8P"    "88 88"  
-                                            888                               
+                                        ,e,               ,d8 8b,    e88",8,
+        888 888 8e   ,"Y88b  dP"Y  dP"Y  "       Y8b Y8Y  "Y8 8P"   d888  "
+        888 888 88b "8" 888 C88b  C88b  888       Y8b Y   ,d8 8b,  C8888 88e
+        888 888 888 ,ee 888  Y88D  Y88D 888      e Y8b   C888 888D  Y888 888D
+        888 888 888 "88 888 d,dP  d,dP  888     d8b Y8b   "Y8 8P"    "88 88"
+                                            888
       ]]
 
       dashboard.section.header.val = vim.split(logo, "\n")
@@ -23,7 +23,7 @@ return {
         dashboard.button("e", " " .. " Open org", [[<CMD> cd ~/org <BAR> e ./index.org<CR>]]),
         dashboard.button("L", "󰒲 " .. " Lazy", "<CMD> Lazy<CR>"),
         dashboard.button("h", " " .. " Project", "<CMD>Telescope projects<CR>"),
-        dashboard.button("e", " " .. " Org Index", "<CMD> cd ~/org <BAR> e ./index.org<CR>"),
+        dashboard.button("e", " " .. " Org Index", "<CMD> cd ~/org <BAR> e ./index.org<CR>"),
         dashboard.button("m", " " .. " Agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5 })<CR>]]),
         dashboard.button("w", " " .. " Work agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+work" })<CR>]]),
         dashboard.button("W", " " .. " Personal agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+personal" })<CR>]]),
