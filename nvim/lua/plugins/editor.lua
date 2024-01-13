@@ -421,7 +421,7 @@ return {
         close_command = function(n) require("mini.bufremove").delete(n, false) end,
         right_mouse_command = nil,
         numbers = "ordinal",
-        always_show_bufferline = false,
+        always_show_bufferline = true,
         separator_style = "thick",
         show_tab_indicators = true,
         color_icons = true,
