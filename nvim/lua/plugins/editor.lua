@@ -655,4 +655,27 @@ return {
       { "<leader>bj", "<cmd>JABSOpen<cr>", desc = "JABS Open" },
     },
   },
+
+  -- Confirm before leaving Neovim
+  {
+    "yutkat/confirm-quit.nvim",
+    event = "CmdlineEnter",
+    opts = {
+      overwrite_q_command = false,
+    },
+    config = function(_, opts)
+      require("confirm-quit").setup(opts)
+      vim.cmd([[
+        function! s:solely_in_cmd(command)
+          return (getcmdtype() == ':' && getcmdline() ==# a:command)
+        endfunction
+
+        cnoreabbrev <expr> q <SID>solely_in_cmd('q') ? 'ConfirmQuit' : 'q'
+        cnoreabbrev <expr> qa <SID>solely_in_cmd('qa') ? 'ConfirmQuitAll' : 'qa'
+        cnoreabbrev <expr> qq <SID>solely_in_cmd('qq') ? 'quit' : 'qq'
+        cnoreabbrev <expr> wq <SID>solely_in_cmd('wq') ? 'w <bar> ConfirmQuit' : 'wq'
+        cnoreabbrev <expr> wqa <SID>solely_in_cmd('wqa') ? 'wall <bar> ConfirmQuitAll' : 'wqa'
+      ]])
+    end,
+  },
 }

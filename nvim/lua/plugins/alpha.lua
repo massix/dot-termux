@@ -68,5 +68,8 @@ return {
         end,
       })
     end,
+    keys = {
+      { "<leader>A", "<cmd>Alpha<cr>", desc = "Open Alpha" },
+    },
   },
 }
