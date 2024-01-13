@@ -620,4 +620,12 @@ return {
       { "<leader>cn", "<cmd>AerialNavToggle<cr>", desc = "Open float outline" },
     },
   },
+
+  -- Highlight ranges
+  {
+    "winston0410/range-highlight.nvim",
+    dependencies = { "winston0410/cmd-parser.nvim" },
+    event = { "BufEnter", "BufWinEnter" },
+    opts = {},
+  },
 }
