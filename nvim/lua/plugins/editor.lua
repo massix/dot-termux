@@ -65,7 +65,6 @@ return {
   -- mini.files is an excellent netrw replacement and file browser
   {
     "echasnovski/mini.files",
-    version = false,
     lazy = false,
     event = "VeryLazy",
     opts = {
@@ -291,7 +290,7 @@ return {
   {
     "echasnovski/mini.surround",
     lazy = false,
-    version = false,
+    version = "*",
     config = true,
     init = function()
       local wk = require("which-key")
@@ -328,7 +327,6 @@ return {
   -- completion engine
   {
     "hrsh7th/nvim-cmp",
-    version = false,
     event = "InsertEnter",
     dependencies = {
       { "hrsh7th/cmp-buffer" },
@@ -690,7 +688,7 @@ return {
   -- Trailspaces and stuff
   {
     "echasnovski/mini.trailspace",
-    version = '*',
+    version = "*",
     event = { "BufEnter", "BufWinEnter" },
     opts = {
       only_in_normal_buffers = true,

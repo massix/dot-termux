@@ -44,7 +44,7 @@ return {
   -- the highlighting.
   {
     "echasnovski/mini.indentscope",
-    version = false, -- wait till new 0.7.0 release to put it back on semver
+    version = "*",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       -- symbol = "▏",
@@ -117,7 +117,6 @@ return {
   -- Golden ratio split
   {
     "nvim-focus/focus.nvim",
-    version = false,
     enabled = true,
     lazy = false,
     init = function()

@@ -62,7 +62,6 @@ return {
   -- Git blame info
   {
     "f-person/git-blame.nvim",
-    version = false,
     config = true,
     event = { "BufReadPre", "BufNewFile" },
     keys = {
@@ -73,7 +72,6 @@ return {
   -- Git signs
   {
     "lewis6991/gitsigns.nvim",
-    version = false,
     config = true,
     event = { "BufReadPre", "BufNewFile" },
   },
