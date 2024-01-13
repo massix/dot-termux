@@ -678,4 +678,11 @@ return {
       ]])
     end,
   },
+
+  -- Better tab scoping
+  {
+    "tiagovla/scope.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
 }
