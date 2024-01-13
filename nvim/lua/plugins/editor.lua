@@ -726,8 +726,16 @@ return {
 
   -- Autopairs
   {
-    'echasnovski/mini.pairs',
-    version = '*',
+    "echasnovski/mini.pairs",
+    version = "*",
+    event = { "BufEnter", "BufWinEnter" },
+    opts = {},
+  },
+
+  -- Move selection
+  {
+    "echasnovski/mini.move",
+    version = "*",
     event = { "BufEnter", "BufWinEnter" },
     opts = {},
   },
