@@ -716,7 +716,7 @@ return {
         group = group,
         pattern = "*",
         callback = function()
-          if vim.g.remove_trailspaces then
+          if vim.g.remove_trailspaces and vim.bo.buftype == "" then
             MiniTrailspace.trim()
           end
         end,
