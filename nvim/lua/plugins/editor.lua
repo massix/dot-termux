@@ -628,4 +628,31 @@ return {
     event = { "BufEnter", "BufWinEnter" },
     opts = {},
   },
+
+  -- buffer switcher
+  {
+    "matbme/JABS.nvim",
+    cmd = "JABSOpen",
+    main = "jabs",
+    opts = {
+      relative = "cursor",
+      border = "rounded",
+      split_filename = true,
+      symbols = {
+        current = "󰄾",
+        split = "",
+        alternate = "⫝",
+        hidden = "󰘓",
+        locked = "",
+        ro = "",
+        edited = "",
+        terminal = "",
+        default_file = "",
+        terminal_symbol = ""
+      },
+    },
+    keys = {
+      { "<leader>bj", "<cmd>JABSOpen<cr>", desc = "JABS Open" },
+    },
+  },
 }
