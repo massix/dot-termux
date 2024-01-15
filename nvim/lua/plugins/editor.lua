@@ -72,6 +72,9 @@ return {
         preview = true,
         width_preview = 30,
       },
+      options = {
+        use_as_default_explorer = false,
+      },
     },
     keys = {
       {
@@ -88,6 +91,7 @@ return {
   {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
     init = function()
       local wk = require("which-key")
       wk.register({
@@ -95,11 +99,11 @@ return {
       })
     end,
     opts = {
+      default_file_explorer = true,
+      constrain_cursor = "name",
       columns = {
         "icon",
         "permissions",
-        "size",
-        "mtime"
       },
     },
     keys = {
