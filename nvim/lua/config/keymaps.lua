@@ -14,7 +14,13 @@ end
 function _G.Toggle_conceal()
   local level = vim.o.conceallevel > 0 and 0 or 3
   vim.o.conceallevel = level
-  vim.notify("conceallevel set to" .. level)
+  vim.notify("conceallevel set to " .. level)
+end
+
+function _G.Toggle_concealcursor()
+  local cursor = vim.o.concealcursor ~= "vinc" and "vinc" or ""
+  vim.o.concealcursor = cursor
+  vim.notify("concealcursor set to " .. cursor)
 end
 
 -- better up/down
@@ -23,6 +29,7 @@ map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true
 
 -- toggle conceal
 map("n", "<leader>uc", "<cmd>lua Toggle_conceal()<cr>", { desc = "Toggle conceal" })
+map("n", "<leader>uC", "<cmd>lua Toggle_concealcursor()<cr>", { desc = "Toggle conceal cursorl" })
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
