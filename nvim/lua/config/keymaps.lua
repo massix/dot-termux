@@ -11,9 +11,18 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+function _G.Toggle_conceal()
+  local level = vim.o.conceallevel > 0 and 0 or 3
+  vim.o.conceallevel = level
+  vim.notify("conceallevel set to" .. level)
+end
+
 -- better up/down
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- toggle conceal
+map("n", "<leader>uc", "<cmd>lua Toggle_conceal()<cr>", { desc = "Toggle conceal" })
 
 -- Move to window using the <ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
