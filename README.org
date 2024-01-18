@@ -1,7 +1,7 @@
 #+title: Termux Configuration
 
 * Termux
-Termux is an opensource, GNU/Linux environment for Android which is available 
+Termux is an opensource, GNU/Linux environment for Android which is available
 for install on either the *Play Store* or the alternative *F-Droid* applications
 repository.
 
@@ -106,9 +106,8 @@ which adds a functionality similar to the ~!!~ pattern in ~bash~.
 * NeoVim
 This is the biggest and by far the most curated module in this repository
 and probably the one which will see the most evolutions. This module
-creates a working ~NeoVim~ installation using 
-[[https://github.com/folke/lazy.nvim][Lazy.nvim]] and some plugins for
-productivity, including (list not exhaustive):
+creates a working ~NeoVim~ installation using [[https://github.com/folke/lazy.nvim][Lazy.nvim]] and some
+plugins for productivity, including (list not exhaustive):
 - ~orgmode~ to work with ~.org~ files
 - ~nvim-cmp~ to provide basic completion for most common stuff
 - ~nvim-treesitter~ for syntax highlighting
@@ -117,15 +116,6 @@ productivity, including (list not exhaustive):
 - ~telescope~ fuzzy finder
 - ~which-key~ to guide your next keystroke
 - ~venn.nvim~ to design beautiful diagrams like the one below
-
-#+begin_example
-    ┌────────────┐    ┌──────┐
-    │VENN Diagram├───►│Task 3│
-    └───────┬────┘    └──────┘
- ┌──────┐   │      ┌──────┐
- │Task 2│◄──┴─────►│Task 1│
- └──────┘          └──────┘
-#+end_example
 
 This is basically a tuned-down configuration of my main repository
 [[https://github.com/massix/nixos][here]].
