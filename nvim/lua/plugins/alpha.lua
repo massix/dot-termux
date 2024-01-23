@@ -28,7 +28,6 @@ return {
       -- stylua: ignore
       dashboard.section.buttons.val = {
         dashboard.button("f", " " .. " Find file", "<CMD> Telescope find_files<CR>"),
-        dashboard.button("e", " " .. " Open org", [[<CMD> cd ~/org <BAR> e ./index.org<CR>]]),
         dashboard.button("L", "󰒲 " .. " Lazy", "<CMD> Lazy<CR>"),
         dashboard.button("h", " " .. " Project", "<CMD>Telescope projects<CR>"),
         dashboard.button("e", " " .. " Org Folder", "<CMD> cd ~/org <BAR> e .<CR>"),
