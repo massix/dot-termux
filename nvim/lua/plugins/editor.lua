@@ -679,6 +679,7 @@ return {
     event = "CmdlineEnter",
     opts = {
       overwrite_q_command = false,
+      quit_message = "U sure?",
     },
     config = function(_, opts)
       require("confirm-quit").setup(opts)
