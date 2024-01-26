@@ -42,20 +42,19 @@ return {
     },
   },
 
-  -- Git blame info
-  {
-    "f-person/git-blame.nvim",
-    config = true,
-    event = { "BufReadPre", "BufNewFile" },
-    keys = {
-      { "<leader>gB", "<cmd>GitBlameToggle<cr>", desc = "Toggle Git blame" },
-    },
-  },
-
   -- Git signs
   {
     "lewis6991/gitsigns.nvim",
-    config = true,
+    opts = {
+      current_line_blame = true,
+    },
     event = { "BufReadPre", "BufNewFile" },
+    keys = {
+      {
+        "<leader>gB",
+        "<cmd>Gitsigns toggle_current_line_blame<cr>",
+        desc = "Toggle Git blame"
+      },
+    },
   },
 }
