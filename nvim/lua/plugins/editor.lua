@@ -756,4 +756,23 @@ return {
     event = { "BufEnter", "BufWinEnter" },
     opts = {},
   },
+
+  -- Better headlines
+  {
+    "lukas-reineke/headlines.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {
+      markdown = {
+        fat_headlines = false,
+      },
+      org = {
+        fat_headlines = false,
+      },
+      norg = {
+        fat_headlines = false,
+      },
+    },
+    ft = { "markdown", "org", "norg", "neorg" },
+  },
+
 }

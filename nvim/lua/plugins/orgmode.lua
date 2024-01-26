@@ -7,7 +7,6 @@ return {
     lazy = false,
     dependencies = {
       { "akinsho/org-bullets.nvim", config = true, lazy = false },
-      { "lukas-reineke/headlines.nvim", config = true, lazy = false },
       { "nvim-treesitter/nvim-treesitter", lazy = true },
       { "joaomsa/telescope-orgmode.nvim", lazy = false },
     },
@@ -43,7 +42,8 @@ return {
       },
       org_default_notes_file = "~/org/refile.org",
       org_agenda_text_search_extra_files = { "agenda-archives" },
-      org_indent_mode = "noindent",
+      org_startup_indented = true,
+      org_adapt_indentatiom = false,
       org_tags_column = 0,
       win_split_mode = "horizontal",
       win_border = "rounded",
