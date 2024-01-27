@@ -57,4 +57,11 @@ return {
       },
     },
   },
+
+  -- Easily copy shareable links for different platforms
+  {
+    "linrongbin16/gitlinker.nvim",
+    cmd = { "GitLink" },
+    opts = {},
+  },
 }
