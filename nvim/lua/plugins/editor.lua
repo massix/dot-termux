@@ -775,4 +775,14 @@ return {
     ft = { "markdown", "org", "norg", "neorg" },
   },
 
+  -- Arrow for bookmarks
+  {
+    "otavioschwanck/arrow.nvim",
+    event = "VeryLazy",
+    opts = {
+      show_icons = true,
+      leader_key = ";",
+    },
+  },
 }
+
