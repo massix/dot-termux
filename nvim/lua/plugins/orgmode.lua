@@ -43,7 +43,7 @@ return {
       org_default_notes_file = "~/org/refile.org",
       org_agenda_text_search_extra_files = { "agenda-archives" },
       org_startup_indented = true,
-      org_adapt_indentatiom = false,
+      org_adapt_indentation = false,
       org_tags_column = 0,
       win_split_mode = "horizontal",
       win_border = "rounded",
