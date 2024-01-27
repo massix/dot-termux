@@ -117,6 +117,16 @@ return {
       require("telescope").load_extension("orgmode")
       require("telescope").load_extension("projects")
     end,
+    opts = function()
+      -- change default theme
+      return {
+        defaults = vim.tbl_extend(
+          "force",
+          require("telescope.themes").get_ivy(),
+          {}
+        ),
+      }
+    end,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
