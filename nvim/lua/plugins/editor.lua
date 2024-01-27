@@ -62,28 +62,23 @@ return {
     end,
   },
 
-  -- mini.files is an excellent netrw replacement and file browser
+  -- Triptych is a file browser inspired by ranger
   {
-    "echasnovski/mini.files",
-    lazy = false,
-    event = "VeryLazy",
+    "simonmclean/triptych.nvim",
+    cmd = { "Triptych" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
     opts = {
-      windows = {
-        preview = true,
-        width_preview = 30,
-      },
       options = {
-        use_as_default_explorer = true,
+        line_numbers = {
+          enabled = false,
+        },
       },
     },
     keys = {
-      {
-        "<leader>fo",
-        function()
-          MiniFiles.open()
-        end,
-        desc = "File Browser",
-      },
+      { "<leader>fo", "<cmd>Triptych<cr>", desc = "Triptych file browser" },
     },
   },
 
