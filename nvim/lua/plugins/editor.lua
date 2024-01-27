@@ -122,7 +122,7 @@ return {
       return {
         defaults = vim.tbl_extend(
           "force",
-          require("telescope.themes").get_ivy(),
+          require("telescope.themes").get_dropdown(),
           {}
         ),
       }
