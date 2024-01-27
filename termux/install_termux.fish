@@ -13,7 +13,7 @@ end
 info "Copying termux properties"
 cp $current_dir/termux.properties "$termux_dir/termux.properties"
 
-info "Copying Monaspace font"
+info "Copying patched font"
 cp $current_dir/font.ttf "$termux_dir/font.ttf"
 
 if command -q termux-reload-settings
