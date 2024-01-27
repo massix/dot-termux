@@ -78,6 +78,11 @@ return {
           org_backward_heading_same_level = "<leader>[",
         },
       },
+      notifications = {
+        enabled = true,
+        cron_enabled = false,
+        reminder_time = { 0, 5, 10, 15 },
+      },
     },
   },
 
