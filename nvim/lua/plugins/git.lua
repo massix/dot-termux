@@ -18,8 +18,8 @@ return {
       graph_style = "unicode",
       signs = {
         hunk = { "", "" },
-        item = { " ", " " },
-        section = { " ", " " },
+        item = { " ", " " },
+        section = { " ", " " },
       },
       integrations = {
         telescope = true,
