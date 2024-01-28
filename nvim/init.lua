@@ -49,7 +49,7 @@ require("lazy").setup({
       },
     },
   },
-}, opts)
+})
 
 -- Keymaps
 require("config.keymaps")
