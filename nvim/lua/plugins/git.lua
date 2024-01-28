@@ -55,6 +55,10 @@ return {
         "<cmd>Gitsigns toggle_current_line_blame<cr>",
         desc = "Toggle Git blame"
       },
+      { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview Hunk" },
+      { "<leader>gP", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "Preview Hunk (inline)" },
+      { "<leader>gS", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage Hunk" },
+      { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "Stage Hunk" },
     },
   },
 
