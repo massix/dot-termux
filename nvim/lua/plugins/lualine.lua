@@ -25,7 +25,21 @@ return {
         },
         sections = {
           lualine_a = {
-            { "mode" },
+            {
+              "mode",
+              fmt = function(str)
+                local convert = {
+                  [ "normal" ] = "NRM",
+                  [ "insert" ] = "INS",
+                  [ "visual" ] = "VIS",
+                  [ "v-line" ] = "VLN",
+                  [ "v-block" ] = "VBL",
+                  [ "command" ] = "CMD",
+                }
+
+                return convert[str:lower()]
+              end,
+            },
             {
               function()
                 local status = require("better_escape").waiting
