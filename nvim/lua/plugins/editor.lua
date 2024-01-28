@@ -142,7 +142,7 @@ return {
 
       -- git
       { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-      { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
+      { "<leader>gS", "<cmd>Telescope git_status<CR>", desc = "status" },
 
       -- search
       { '<leader>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
