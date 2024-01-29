@@ -36,6 +36,7 @@ return {
                   [ "v-block" ] = "VBL",
                   [ "command" ] = "CMD",
                   [ "terminal" ] = "TRM",
+                  [ "replace" ] = "RPL",
                 }
 
                 return convert[str:lower()]
