@@ -65,6 +65,7 @@ return {
       { "<leader>gP", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "Preview Hunk (inline)" },
       { "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage Hunk", mode = { "n", "v" } },
       { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "Undo stage Hunk", mode = { "n", "v" } },
+      { "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset Hunk", mode = { "n", "v" } },
     },
   },
 
