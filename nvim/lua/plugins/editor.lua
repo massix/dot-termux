@@ -391,12 +391,6 @@ return {
             auto_open = true,
           },
         },
-        matching = {
-          disallow_fuzzy_matching = false,
-          disallow_fullfuzzy_matching = false,
-          disallow_partial_matching = false,
-          disallow_prefix_unmatching = false,
-        },
         mapping = cmp.mapping.preset.insert({
           ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
           ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
