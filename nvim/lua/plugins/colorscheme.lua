@@ -91,4 +91,25 @@ return {
     enabled = true,
     config = false,
   },
+
+  {
+    "rafamadriz/neon",
+    lazy = false,
+    priority = 10000,
+    enabled = true,
+    init = function()
+      vim.o.termguicolors = true
+      vim.g.neon_style = "doom"
+      vim.g.neon_bold = true
+    end,
+    config = false,
+  },
+
+  {
+    "nyoom-engineering/oxocarbon.nvim",
+    lazy = false,
+    priority = 10000,
+    enabled = true,
+    config = false,
+  },
 }
