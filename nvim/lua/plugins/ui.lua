@@ -271,4 +271,12 @@ return {
       },
     },
   },
+
+  {
+    "rasulomaroff/reactive.nvim",
+    event = { "BufEnter", "WinEnter" },
+    opts = {
+      load = { "catppuccin-mocha-cursor", "catppuccin-mocha-cursorline" },
+    },
+  },
 }
