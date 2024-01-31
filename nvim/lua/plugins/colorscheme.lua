@@ -27,7 +27,7 @@ return {
     name = "catppuccin",
     enabled = true,
     opts = {
-      flavour = "frappe",
+      flavour = "mocha",
       term_colors = true,
       dim_inactive = {
         enabled = true,

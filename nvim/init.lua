@@ -54,4 +54,4 @@ require("lazy").setup({
 -- Keymaps
 require("config.keymaps")
 
-vim.cmd([[colorscheme oxocarbon]])
+vim.cmd([[colorscheme catppuccin]])
