@@ -29,7 +29,7 @@ require("lazy").setup({
 
   -- Install a colorscheme
   install = {
-    colorscheme = { "catppuccin" }
+    colorscheme = { "catppuccin" },
   },
 
   -- Enable checker for updating plugins

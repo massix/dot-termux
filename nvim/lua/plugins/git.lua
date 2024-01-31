@@ -4,8 +4,8 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
-      { "sindrets/diffview.nvim", lazy = false, },
-      { "ibhagwan/fzf-lua", lazy = false, },
+      { "sindrets/diffview.nvim", lazy = false },
+      { "ibhagwan/fzf-lua", lazy = false },
     },
     opts = {
       disable_hint = false,
@@ -51,7 +51,7 @@ return {
     init = function()
       local wk = require("which-key")
       wk.register({
-        [ "<leader>g" ] = { mode = "v", name = "+git" },
+        ["<leader>g"] = { mode = "v", name = "+git" },
       })
     end,
     event = { "BufReadPre", "BufNewFile" },
@@ -59,7 +59,7 @@ return {
       {
         "<leader>gB",
         "<cmd>Gitsigns toggle_current_line_blame<cr>",
-        desc = "Toggle Git blame"
+        desc = "Toggle Git blame",
       },
       { "<leader>gp", "<cmd>Gitsigns preview_hunk<cr>", desc = "Preview Hunk" },
       { "<leader>gP", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "Preview Hunk (inline)" },

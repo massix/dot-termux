@@ -29,14 +29,14 @@ return {
               "mode",
               fmt = function(str)
                 local convert = {
-                  [ "normal" ] = "NRM",
-                  [ "insert" ] = "INS",
-                  [ "visual" ] = "VIS",
-                  [ "v-line" ] = "VLN",
-                  [ "v-block" ] = "VBL",
-                  [ "command" ] = "CMD",
-                  [ "terminal" ] = "TRM",
-                  [ "replace" ] = "RPL",
+                  ["normal"] = "NRM",
+                  ["insert"] = "INS",
+                  ["visual"] = "VIS",
+                  ["v-line"] = "VLN",
+                  ["v-block"] = "VBL",
+                  ["command"] = "CMD",
+                  ["terminal"] = "TRM",
+                  ["replace"] = "RPL",
                 }
 
                 return convert[str:lower()]

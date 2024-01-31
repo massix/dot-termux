@@ -95,7 +95,7 @@ return {
     init = function()
       local wk = require("which-key")
       wk.register({
-        [ "<leader>fm" ] = { name = "+oil" },
+        ["<leader>fm"] = { name = "+oil" },
       })
     end,
     opts = {
@@ -125,7 +125,7 @@ return {
     opts = function()
       -- change default theme
       return {
-        defaults = vim.tbl_extend( "force", require("telescope.themes").get_dropdown(), {
+        defaults = vim.tbl_extend("force", require("telescope.themes").get_dropdown(), {
           prompt_prefix = " ",
           selection_caret = " ",
         }),
@@ -355,7 +355,7 @@ return {
       cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = "buffer" }
+          { name = "buffer" },
         }),
       })
 
@@ -620,7 +620,7 @@ return {
 
   -- Code outline and navigation
   {
-    'stevearc/aerial.nvim',
+    "stevearc/aerial.nvim",
     opts = {
       layout = {
         default_direction = "prefer_left",
@@ -633,7 +633,7 @@ return {
     -- Optional dependencies
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
+      "nvim-tree/nvim-web-devicons",
     },
     keys = {
       { "<leader>co", "<cmd>AerialToggle<cr>", desc = "Open outline" },
@@ -668,7 +668,7 @@ return {
         edited = "",
         terminal = "",
         default_file = "",
-        terminal_symbol = ""
+        terminal_symbol = "",
       },
     },
     keys = {
@@ -729,7 +729,12 @@ return {
         end
       end
 
-      vim.api.nvim_set_keymap( "n", "<leader>cw", ":lua Toggle_trailspaces()<CR>", { noremap = true, desc = "Toggle Trailspaces" })
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>cw",
+        ":lua Toggle_trailspaces()<CR>",
+        { noremap = true, desc = "Toggle Trailspaces" }
+      )
 
       local group = vim.api.nvim_create_augroup("TrimWhitespaces", { clear = true })
       vim.api.nvim_create_autocmd({ "InsertLeave" }, {
@@ -788,4 +793,3 @@ return {
     },
   },
 }
-
