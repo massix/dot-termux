@@ -3,17 +3,12 @@ return {
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
-    init = function()
-      vim.ui.select = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.select(...)
-      end
-
-      vim.ui.input = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.input(...)
-      end
-    end,
+    opts = {
+      select = {
+        telescope = require("telescope.themes").get_dropdown(),
+        backend = { "telescope" },
+      },
+    },
   },
 
   -- indent guides for Neovim
