@@ -72,7 +72,7 @@ return {
         preview = true,
         width_preview = 35,
         width_focus = 35,
-        width_nofocus = 15
+        width_nofocus = 15,
       },
       options = {
         use_as_default_explorer = true,
