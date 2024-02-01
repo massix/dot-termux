@@ -282,6 +282,7 @@ return {
       require("reactive").setup(opts)
 
       -- issue: https://github.com/nvim-telescope/telescope.nvim/issues/2027#issuecomment-1561836585
+      -- FIXME: this has some impacts on project.nvim too
       vim.api.nvim_create_autocmd("WinLeave", {
         callback = function()
           if vim.bo.ft == "TelescopePrompt" and vim.fn.mode() == "i" then
