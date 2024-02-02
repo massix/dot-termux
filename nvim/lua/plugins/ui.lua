@@ -291,7 +291,32 @@ return {
         end,
       })
     end,
+  },
 
+  {
+    "b0o/incline.nvim",
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+    },
+    opts = function()
+      return {
+        hide = {
+          only_win = true,
+        },
+        render = function(props)
+          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          local ft_icon, ft_color = require("nvim-web-devicons").get_icon_color(filename)
+          local modified = vim.bo[props.buf].modified
 
+          return {
+            ft_icon and { " ", ft_icon, " " } or "",
+            " ",
+            { filename, gui = modified and "bold,italic" or "bold" },
+            " ",
+          }
+        end,
+      }
+    end,
+    event = { "VeryLazy" },
   },
 }
