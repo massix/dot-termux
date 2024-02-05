@@ -18,7 +18,7 @@ return {
     opts = function()
       return {
         options = {
-          theme = "auto",
+          theme = "catppuccin",
           globalstatus = true,
           disabled_filetypes = { statusline = { "dashboard", "alpha" } },
           icons_enabled = true,
