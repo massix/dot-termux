@@ -112,7 +112,7 @@ return {
   -- Golden ratio split
   {
     "nvim-focus/focus.nvim",
-    enabled = true,
+    enabled = false,
     lazy = false,
     init = function()
       -- Do not resize `nofile' buffers
