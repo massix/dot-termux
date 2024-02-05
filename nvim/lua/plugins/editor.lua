@@ -288,31 +288,39 @@ return {
   -- completion engine
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = "VeryLazy",
     dependencies = {
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-cmdline" },
+      { "hrsh7th/cmp-emoji" },
+      { "hrsh7th/cmp-calc" },
       { "davidsierradz/cmp-conventionalcommits" },
     },
     config = function(_, opts)
       local cmp = require("cmp")
       cmp.setup(opts)
 
-      -- cmdline
-      cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "buffer" },
-        }),
-      })
-
       cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = "path" },
           { name = "cmdline" },
+          { name = "path" },
         }),
+      })
+
+      -- Setup conventionalcommits for gitcommit files
+      local group = vim.api.nvim_create_augroup("CmpExtra", { clear = true })
+      vim.api.nvim_create_autocmd("Filetype", {
+        pattern = { "gitcommit", "NeogitCommitMessage" },
+        group = group,
+        callback = function()
+          require("cmp").setup.buffer({
+            sources = require("cmp").config.sources({
+              { name = "conventionalcommits" },
+            }),
+          })
+        end,
       })
     end,
     opts = function()
@@ -353,9 +361,10 @@ return {
           { name = "orgmode" },
           { name = "mkdnflow" },
           { name = "path" },
+          { name = "emoji" },
+          { name = "calc" },
         }, {
           { name = "buffer" },
-          { name = "conventionalcommits" },
         }),
         preselect = cmp.PreselectMode.None,
         sorting = defaults.sorting,
