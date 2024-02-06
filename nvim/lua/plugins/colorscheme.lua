@@ -59,7 +59,7 @@ return {
         treesitter = true,
         flash = true,
         gitsigns = true,
-        headlines = true,
+        headlines = false,
         markdown = true,
         telescope = {
           enabled = true,
@@ -70,7 +70,6 @@ return {
           colored_indent_levels = true,
         },
         lsp_saga = true,
-        which_key = true,
       },
     },
   },
