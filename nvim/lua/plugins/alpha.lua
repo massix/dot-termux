@@ -4,7 +4,8 @@ return {
     "goolord/alpha-nvim",
     event = "VimEnter",
     opts = function()
-      local dashboard = require("alpha.themes.dashboard")
+      local dashboard = require("alpha.themes.theta")
+      local api = require("alpha.themes.dashboard")
       -- stylua: ignore
       -- luacheck: ignore
       local logo = [[
@@ -24,31 +25,25 @@ return {
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠋⠛⠋⠛⠙⠛⠙⠛⠙⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
       ]]
 
-      dashboard.section.header.val = vim.split(logo, "\n")
+      dashboard.header.val = vim.split(logo, "\n")
+
       -- stylua: ignore
-      dashboard.section.buttons.val = {
-        dashboard.button("f", " " .. " Find file", "<CMD> Telescope find_files<CR>"),
-        dashboard.button("L", "󰒲 " .. " Lazy", "<CMD> Lazy<CR>"),
-        dashboard.button("h", " " .. " Project", "<CMD>Telescope projects<CR>"),
-        dashboard.button("e", " " .. " Org Folder", "<CMD> cd ~/org <BAR> e .<CR>"),
-        dashboard.button("E", " " .. " Org Index", "<CMD> cd ~/org <BAR> e ./index.org<CR>"),
-        dashboard.button("m", " " .. " Agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5 })<CR>]]),
-        dashboard.button("w", " " .. " Work agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+work" })<CR>]]),
-        dashboard.button("W", " " .. " Personal agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+personal" })<CR>]]),
-        dashboard.button("l", "✓ " .. " Todos", [[<CMD> lua require("orgmode.api.agenda").todos()<CR>]]),
-        dashboard.button("t", " " .. " Work todos", [[<CMD> lua require("orgmode.api.agenda").todos( { filters = "+work" })<CR>]]),
-        dashboard.button("T", " " .. " Personal todos", [[<CMD> lua require("orgmode.api.agenda").todos( { filters = "+personal" })<CR>]]),
-        dashboard.button("q", " " .. " Quit", "<CMD> qa<CR>"),
+      dashboard.buttons.val = {
+        { type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
+        { type = "padding", val = 1 },
+        api.button("SPC .", " " .. " Find file"),
+        api.button("SPC s p", " " .. " Open project"),
+        api.button("SPC o a", " " .. " Org Agenda (Menu)"),
+        api.button("w", " " .. " Work agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+work" })<CR>]]),
+        api.button("W", " " .. " Personal agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+personal" })<CR>]]),
+        api.button("l", "✓ " .. " Todos", [[<CMD> lua require("orgmode.api.agenda").todos()<CR>]]),
+        api.button("t", " " .. " Work todos", [[<CMD> lua require("orgmode.api.agenda").todos( { filters = "+work" })<CR>]]),
+        api.button("T", " " .. " Personal todos", [[<CMD> lua require("orgmode.api.agenda").todos( { filters = "+personal" })<CR>]]),
+        api.button("e", " " .. " Org Folder", "<CMD> cd ~/org <BAR> e .<CR>"),
+        api.button("E", " " .. " Org Index", "<CMD> cd ~/org <BAR> e ./index.org<CR>"),
+        api.button("q", " " .. " Quit", "<CMD> qa<CR>"),
       }
 
-      for _, button in ipairs(dashboard.section.buttons.val) do
-        button.opts.hl = "AlphaButtons"
-        button.opts.hl_shortcut = "AlphaShortcut"
-      end
-
-      dashboard.section.header.opts.hl = "AlphaHeader"
-      dashboard.section.buttons.opts.hl = "AlphaButtons"
-      dashboard.section.footer.opts.hl = "AlphaFooter"
       return dashboard
     end,
 
@@ -63,7 +58,7 @@ return {
         })
       end
 
-      require("alpha").setup(dashboard.opts)
+      require("alpha").setup(dashboard.config)
 
       vim.api.nvim_create_autocmd("User", {
         pattern = "LazyVimStarted",
@@ -71,7 +66,9 @@ return {
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
 
-          dashboard.section.footer.val = "NeoVim started in " .. ms .. "ms"
+          dashboard.footer = {
+            val = "NeoVim started in " .. ms .. "ms",
+          }
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
