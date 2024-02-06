@@ -26,6 +26,7 @@ return {
       ]]
 
       dashboard.header.val = vim.split(logo, "\n")
+      dashboard.header.opts.hl = "AlphaHeader"
 
       -- stylua: ignore
       dashboard.buttons.val = {
@@ -72,7 +73,7 @@ return {
         val = "",
         opts = {
           position = "center",
-          hl = "Number",
+          hl = "AlphaFooter",
         }
       }
 
