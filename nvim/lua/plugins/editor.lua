@@ -375,10 +375,12 @@ return {
   -- Fancy tabs and buffers
   {
     "akinsho/bufferline.nvim",
-    event = "VeryLazy",
+    event = { "BufEnter", "BufWinEnter" },
     keys = {
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
+      { "<leader>bC", "<CMD>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
+      { "<leader>b<CR>", "<CMD>BufferLinePick<CR>", desc = "Pick buffer" },
     },
     dependencies = {
       -- buffer remove
@@ -391,22 +393,25 @@ return {
         },
       },
     },
-    opts = {
-      options = {
-        -- stylua: ignore
-        close_command = function(n) require("mini.bufremove").delete(n, false) end,
-        right_mouse_command = nil,
-        numbers = "ordinal",
-        always_show_bufferline = true,
-        separator_style = "thick",
-        show_tab_indicators = true,
-        color_icons = true,
-        indicator = {
-          icon = "▎",
-          style = "icon",
+    opts = function()
+      return {
+        highlights = require("catppuccin.groups.integrations.bufferline").get(),
+        options = {
+          -- stylua: ignore
+          close_command = function(n) require("mini.bufremove").delete(n, false) end,
+          right_mouse_command = nil,
+          numbers = "ordinal",
+          always_show_bufferline = true,
+          separator_style = "thick",
+          show_tab_indicators = true,
+          color_icons = true,
+          indicator = {
+            icon = "▎",
+            style = "icon",
+          },
         },
-      },
-    },
+      }
+    end,
   },
 
   -- Better folding
