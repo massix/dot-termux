@@ -272,6 +272,7 @@ return {
     },
   },
 
+  -- Cool cursor effects
   {
     "rasulomaroff/reactive.nvim",
     event = { "BufEnter", "WinEnter" },
@@ -293,6 +294,7 @@ return {
     end,
   },
 
+  -- Internal statusline
   {
     "b0o/incline.nvim",
     dependencies = {
