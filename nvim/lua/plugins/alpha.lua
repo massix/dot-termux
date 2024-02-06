@@ -44,6 +44,60 @@ return {
         api.button("q", " " .. " Quit", "<CMD> qa<CR>"),
       }
 
+      local section_mru = {
+        type = "group",
+        val = {
+          {
+            type = "text",
+            val = "Recent files",
+            opts = {
+              hl = "SpecialComment",
+              shrink_margin = false,
+              position = "center",
+            },
+          },
+          { type = "padding", val = 1 },
+          {
+            type = "group",
+            val = function()
+              return { dashboard.mru(0, vim.fn.getcwd()) }
+            end,
+            opts = { shrink_margin = false },
+          },
+        },
+      }
+
+      dashboard.footer = {
+        type = "text",
+        val = "",
+        opts = {
+          position = "center",
+          hl = "Number",
+        }
+      }
+
+      local fortune = {
+        val = require("alpha.fortune")(),
+        type = "text",
+        opts = {
+          position = "center",
+          hl = "Exception",
+        },
+      }
+
+      dashboard.config.layout = {
+        { type = "padding", val = 2 },
+        dashboard.header,
+        { type = "padding", val = 2 },
+        section_mru,
+        { type = "padding", val = 2 },
+        dashboard.buttons,
+        { type = "padding", val = 2 },
+        fortune,
+        { type = "padding", val = 2 },
+        dashboard.footer,
+      }
+
       return dashboard
     end,
 
@@ -65,10 +119,8 @@ return {
         callback = function()
           local stats = require("lazy").stats()
           local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+          dashboard.footer.val = "NeoVim started in " .. ms .. "ms"
 
-          dashboard.footer = {
-            val = "NeoVim started in " .. ms .. "ms",
-          }
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
