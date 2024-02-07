@@ -767,7 +767,9 @@ return {
         p.camel_case,
         p.upper_case,
         p.number,
-        p.hex_color)
+        p.hex_color,
+        "\\v\\.+",
+        "\\v,+")
 
       vim.keymap.set({ "n", "x", "o" }, "w", subword_hops.forward_start)
       vim.keymap.set({ "n", "x", "o" }, "e", subword_hops.forward_end)
