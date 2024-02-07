@@ -20,7 +20,6 @@ return {
         options = {
           theme = "catppuccin",
           globalstatus = true,
-          disabled_filetypes = { statusline = { "dashboard", "alpha" } },
           icons_enabled = true,
           section_separators = { left = "", right = "" },
           component_separators = { left = "", right = "" },
