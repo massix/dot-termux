@@ -26,23 +26,27 @@ return {
       ]]
 
       dashboard.header.val = vim.split(logo, "\n")
-      dashboard.header.opts.hl = "AlphaHeader"
+      dashboard.header.opts.hl = "Exception"
 
       -- stylua: ignore
       dashboard.buttons.val = {
-        { type = "text", val = "Quick links", opts = { hl = "SpecialComment", position = "center" } },
+        { type = "text", val = "Quick actions", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
-        api.button("SPC .", " " .. " Find file"),
+        api.button("SPC f f", " " .. " Find file"),
+        api.button("SPC s g", " " .. " Live Grep"),
         api.button("SPC s p", " " .. " Open project"),
-        api.button("SPC o a", " " .. " Org Agenda (Menu)"),
-        api.button("w", " " .. " Work agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+work" })<CR>]]),
-        api.button("W", " " .. " Personal agenda", [[<CMD> lua require("orgmode.api.agenda").agenda({ span = 5, filters = "+personal" })<CR>]]),
-        api.button("l", "✓ " .. " Todos", [[<CMD> lua require("orgmode.api.agenda").todos()<CR>]]),
-        api.button("t", " " .. " Work todos", [[<CMD> lua require("orgmode.api.agenda").todos( { filters = "+work" })<CR>]]),
-        api.button("T", " " .. " Personal todos", [[<CMD> lua require("orgmode.api.agenda").todos( { filters = "+personal" })<CR>]]),
-        api.button("e", " " .. " Org Folder", "<CMD> cd ~/org <BAR> e .<CR>"),
-        api.button("E", " " .. " Org Index", "<CMD> cd ~/org <BAR> e ./index.org<CR>"),
-        api.button("q", " " .. " Quit", "<CMD> qa<CR>"),
+        api.button("SPC s h", " " .. " Search Help"),
+        api.button("SPC s O", " " .. " Search Org Header"),
+        api.button("SPC o a", " " .. " Org Agenda"),
+        api.button("SPC s j", "󱕸 " .. " Jumplist"),
+        api.button("SPC s M", "󰆍 " .. " Search man pages"),
+        api.button("SPC SPC", " " .. " Legendary"),
+        api.button("SPC g g", "󰊢 " .. " Neogit"),
+        api.button("SPC S o", "󰊠 " .. " Spectre"),
+        api.button("SPC p p", "󱎫 " .. " Pomodoro"),
+        api.button("SPC l l", "󰒲 " .. " Lazy UI"),
+        { type = "padding", val = 1 },
+        api.button("SPC q q", " " .. " Quit"),
       }
 
       local section_mru = {
