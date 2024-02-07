@@ -774,5 +774,33 @@ return {
       vim.keymap.set({ "n", "x", "o" }, "b", subword_hops.backward_start)
       vim.keymap.set({ "n", "x", "o" }, "ge", subword_hops.backward_end)
     end,
-  }
+  },
+
+  -- Legendary keybindings
+  {
+    "mrjones2014/legendary.nvim",
+    lazy = false,
+    priority = 10000,
+    opts = {
+      include_builtin = true,
+      include_legendary_cmds = true,
+      extensions = {
+        lazy_nvim = true,
+        which_key = {
+          auto_register = true,
+          do_binding = true,
+          use_groups = true,
+        },
+      },
+      scratchpad = {
+        view = 'float',
+        results_view = 'float',
+        float_border = 'rounded',
+        keep_contents = true,
+      },
+    },
+    keys = {
+      { "<leader><space>", [[<CMD>Legendary<CR>]], desc = "Legendary" },
+    },
+  },
 }
