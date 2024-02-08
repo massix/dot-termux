@@ -36,7 +36,9 @@ return {
       indent = { enable = true },
       ensure_installed = {
         "bash",
+        "c",
         "c_sharp",
+        "cpp",
         "dhall",
         "dockerfile",
         "elvish",

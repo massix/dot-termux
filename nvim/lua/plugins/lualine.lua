@@ -60,6 +60,38 @@ return {
           lualine_b = {
             { "branch" },
             {
+              function()
+                local msg = "No LSP"
+                local bufnr = vim.api.nvim_get_current_buf()
+                local bufft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+                local clients = {}
+
+                -- filter out null-ls
+                for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = bufnr })) do
+                  if client.name ~= "null-ls" then
+                    table.insert(clients, client)
+                  end
+                end
+
+                if next(clients) == nil then
+                  return msg
+                end
+
+                for _, client in ipairs(clients) do
+                  local filetypes = client.config.filetypes
+                  if filetypes and vim.fn.index(filetypes, bufft) ~= -1 then
+                    local ret = client.name
+                    if #clients > 1 then
+                      ret = ret .. "+"
+                    end
+                    return ret
+                  end
+                end
+                return msg
+              end,
+              icon = " ",
+            },
+            {
               -- FIXME: this can be done in a better way probably
               function()
                 ---@diagnostic disable-next-line: undefined-global
@@ -92,6 +124,10 @@ return {
             },
           },
           lualine_x = {
+            {
+              "overseer",
+              colored = true,
+            },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             {
               function()

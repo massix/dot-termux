@@ -14,6 +14,8 @@ return {
         "Makefile",
         "package.json",
         "index.org",
+        "compile_flags.txt",
+        "compile_commands.json",
       },
       show_hidden = false,
       silent_chdir = true,
