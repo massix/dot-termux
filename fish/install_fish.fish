@@ -44,7 +44,7 @@ check_install rg ripgrep
 check_install bat bat
 check_install fd fd
 check_install fzf fzf
-check_install tldr tealdeee
+check_install tldr tealdeer
 check_install broot broot
 check_install age age
 check_install uuidgen uuid-utils
