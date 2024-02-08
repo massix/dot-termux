@@ -38,7 +38,7 @@ return {
       show_end_of_buffer = false,
       transparent_background = false, -- does not make sense in termux
       integrations = {
-        alpha = true,
+        alpha = false,
         mini = {
           enabled = true,
           indentscope_color = "mauve",
@@ -49,7 +49,7 @@ return {
         ufo = true,
         cmp = true,
         neogit = true,
-        noice = false,
+        noice = true,
         notify = true,
         window_picker = false,
         which_key = true,
