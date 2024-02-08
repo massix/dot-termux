@@ -104,11 +104,11 @@ similar to the one which exists for ~zsh~
 [[https://github.com/oh-my-fish/plugin-bang-bang][Bang bang]] is a plugin
 which adds a functionality similar to the ~!!~ pattern in ~bash~.
 
-* NeoVim
+*** NeoVim
 This is the biggest and by far the most curated module in this repository
 and probably the one which will see the most evolutions. This module
 creates a working ~NeoVim~ installation using [[https://github.com/folke/lazy.nvim][Lazy.nvim]] and some
-plugins for productivity, including (list not exhaustive):
+plugins for productivity, including (list *seriously* not exhaustive):
 - ~orgmode~ to work with ~.org~ files
 - ~nvim-cmp~ to provide basic completion for most common stuff
 - ~nvim-treesitter~ for syntax highlighting
@@ -117,6 +117,14 @@ plugins for productivity, including (list not exhaustive):
 - ~telescope~ fuzzy finder
 - ~which-key~ to guide your next keystroke
 - ~venn.nvim~ to design beautiful diagrams like the one below
+- ~nvimlsp-config~ to configure the ~LSP~ for Neovim
 
 This is basically a tuned-down configuration of my main repository
 [[https://github.com/massix/nixos][here]].
+
+*** Coding
+This module allows for some basic development on Android devices, for now only
+the following languages are supported (with ~LSP~ where available):
+- ~C~, ~C++~ and derivates
+- ~Javascript~ and ~Typescript~
+
