@@ -57,6 +57,13 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       lspconfig.clangd.setup({
+        cmd = {
+          "clangd",
+          "--all-scopes-completion",
+          "--clang-tidy",
+          "--enable-config",
+          "--completion-style=detailed",
+        },
         capabilities = capabilities,
       })
     end,
@@ -275,4 +282,40 @@ return {
     end,
   },
 
+  -- Formatter
+  {
+    "stevearc/conform.nvim",
+    event = "BufEnter",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+      },
+      format_on_save = function(_)
+        return { lsp_fallback = true }
+      end,
+      format_after_save = function(_)
+        return { lsp_fallback = true, async = true }
+      end,
+    },
+    init = function() end,
+    keys = {
+      {
+        "<leader>cF",
+        function()
+          require("conform").format({ lsp_fallback = true })
+        end,
+        desc = "Format Document",
+      },
+    },
+  },
+
+  -- Autogenerate compile_commands.json
+  {
+    "massix/gcompilecommands.nvim",
+    branch = "feat/configure-tmp-file",
+    ft = { "c", "cpp" },
+    opts = {
+      tmp_file_path = "$HOME/tmp/compilecommandsNEOVIM.json",
+    },
+  },
 }

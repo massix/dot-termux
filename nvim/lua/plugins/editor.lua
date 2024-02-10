@@ -314,6 +314,7 @@ return {
           close_command = function(n) require("mini.bufremove").delete(n, false) end,
           right_mouse_command = nil,
           numbers = "ordinal",
+          diagnostics = "nvim_lsp",
           always_show_bufferline = true,
           separator_style = "thick",
           show_tab_indicators = true,
