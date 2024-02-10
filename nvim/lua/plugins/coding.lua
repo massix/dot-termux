@@ -311,8 +311,7 @@ return {
 
   -- Autogenerate compile_commands.json
   {
-    "massix/gcompilecommands.nvim",
-    branch = "feat/configure-tmp-file",
+    "leosmaia21/gcompilecommands.nvim",
     ft = { "c", "cpp" },
     opts = {
       tmp_file_path = "$HOME/tmp/compilecommandsNEOVIM.json",
