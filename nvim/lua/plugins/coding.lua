@@ -72,35 +72,44 @@ return {
   -- Snippet engine
   {
     "L3MON4D3/LuaSnip",
+    event = "VeryLazy",
     dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
+      { "rafamadriz/friendly-snippets" },
+      { "honza/vim-snippets" },
     },
-    opts = {
-      history = true,
-      delete_check_events = "TextChanged",
-    },
+    config = function(_, opts)
+      require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_snipmate").lazy_load()
+      require("luasnip").config.set_config(opts)
+    end,
+    opts = function()
+      local types = require("luasnip.util.types")
+      return {
+        enable_autosnippets = true,
+        history = true,
+        updateevents = { "TextChanged", "TextChangedI" },
+        ext_opts = {
+          [types.choiceNode] = {
+            active = {
+              virt_text = { { "󱦱", "Error" } },
+            },
+          },
+        },
+      }
+    end,
     keys = {
       {
-        "<C-tab>",
+        "<C-j>",
         function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<C-Tab>"
+          local ls = require("luasnip")
+          if ls.expand_or_jumpable() then
+            ls.expand_or_jump()
+          end
         end,
-        expr = true,
-        silent = true,
-        mode = "i",
+        mode = { "s", "i" },
       },
       {
-        "<tab>",
-        function()
-          require("luasnip").jump(1)
-        end,
-        mode = "s",
-      },
-      {
-        "<s-tab>",
+        "<C-k>",
         function()
           require("luasnip").jump(-1)
         end,
@@ -112,8 +121,10 @@ return {
   -- completion engine
   {
     "hrsh7th/nvim-cmp",
-    event = "VeryLazy",
+    event = { "VeryLazy" },
     dependencies = {
+      { "L3MON4D3/LuaSnip" },
+      { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lsp-document-symbol" },
       { "hrsh7th/cmp-nvim-lsp-signature-help" },
@@ -200,6 +211,7 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "nvim_lsp_signature_help" },
+          { name = "luasnip" },
           { name = "orgmode" },
           { name = "mkdnflow" },
           { name = "path" },
