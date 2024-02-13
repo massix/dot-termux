@@ -49,6 +49,7 @@ check_install broot broot
 check_install age age
 check_install uuidgen uuid-utils
 check_install eza eza
+check_install htop htop
 tldr --update > /dev/null
 
 # Load fisher
@@ -68,6 +69,7 @@ symlink_file ./functions/find.fish
 symlink_file ./functions/decrypt.fish
 symlink_file ./functions/encrypt.fish
 symlink_file ./functions/ls.fish
+symlink_file ./functions/top.fish
 
 info "Finalizing installation"
 fisher update > /dev/null

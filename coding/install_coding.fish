@@ -9,4 +9,5 @@ info "Installing coding goodies"
 check_install gcc clang
 check_install pkg-config pkg-config
 check_install node nodejs
+check_install lua-language-server lua-language-server
 

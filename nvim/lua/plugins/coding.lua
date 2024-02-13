@@ -31,7 +31,7 @@ return {
           else
             local ok, err = pcall(vim.cmd.cnext)
             if not ok then
-              vim.notify(err, vim.log.levels.ERROR)
+              vim.notify(err .. "", vim.log.levels.ERROR)
             end
           end
         end,
@@ -48,13 +48,20 @@ return {
     dependencies = {
       -- Similar to .vscode things
       { "folke/neoconf.nvim" },
+      { "folke/neodev.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
     },
     config = function()
-      -- Make sure we load neoconf and neodev before configuring the lsp
+      -- Make sure we load neoconf before loading lspconfig
       require("neoconf").setup()
+      require("neodev").setup()
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+      })
 
       lspconfig.clangd.setup({
         cmd = {
@@ -62,7 +69,11 @@ return {
           "--all-scopes-completion",
           "--clang-tidy",
           "--enable-config",
+          "--header-insertion=iwyu",
+          "--import-insertions",
           "--completion-style=detailed",
+          "--background-index",
+          "--pch-storage=memory",
         },
         capabilities = capabilities,
       })
