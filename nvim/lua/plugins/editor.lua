@@ -214,7 +214,7 @@ return {
       { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
       { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+      { "<C-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
   },
 
@@ -682,8 +682,16 @@ return {
         p.upper_case,
         p.number,
         p.hex_color,
+        "\\v:+",
+        "\\v;",
         "\\v\\.+",
-        "\\v,+")
+        "\\v,+",
+        "\\v\\(+",
+        "\\v\\)+",
+        "\\v\\{+",
+        "\\v\\}+",
+        "\\v$+"
+      )
 
       vim.keymap.set({ "n", "x", "o" }, "w", subword_hops.forward_start)
       vim.keymap.set({ "n", "x", "o" }, "e", subword_hops.forward_end)
@@ -709,9 +717,9 @@ return {
         },
       },
       scratchpad = {
-        view = 'float',
-        results_view = 'float',
-        float_border = 'rounded',
+        view = "float",
+        results_view = "float",
+        float_border = "rounded",
         keep_contents = true,
       },
     },
