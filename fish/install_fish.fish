@@ -62,7 +62,6 @@ symlink_file ./fish_plugins
 
 info "Copying functions"
 mkdir -p $fish_config_root/functions/
-symlink_file ./functions/orgmode.fish
 symlink_file ./functions/cat.fish
 symlink_file ./functions/grep.fish
 symlink_file ./functions/find.fish

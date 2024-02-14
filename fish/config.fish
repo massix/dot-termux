@@ -1,11 +1,9 @@
 set -U fish_greeting
 
 if status is-interactive
-  # git
   abbr -a g git
-
-  # just
   abbr -a j just
+  abbr -a mk make
 
   # pkg
   abbr -a pi pkg install
