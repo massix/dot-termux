@@ -11,4 +11,6 @@ check_install gcc clang
 check_install pkg-config pkg-config
 check_install node nodejs
 check_install lua-language-server lua-language-server
+check_install make make
+check_install xmake xmake
 
