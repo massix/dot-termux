@@ -165,6 +165,16 @@ return {
                 return package.loaded["nomodoro"] and require("nomodoro").status() ~= nil
               end,
             },
+            {
+              function()
+                return require("termux").get_volume_statusline()
+              end
+            },
+            {
+              function()
+                return require("termux").get_battery_statusline()
+              end
+            },
             { function() return " " .. os.date("%R") end, },
           },
         },
