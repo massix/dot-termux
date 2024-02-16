@@ -94,7 +94,7 @@ return {
                 local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
                 return next(clients) ~= nil
               end,
-              icon = " ",
+              icon = " ",
             },
             {
               -- FIXME: this can be done in a better way probably
