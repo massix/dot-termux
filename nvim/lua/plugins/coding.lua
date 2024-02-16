@@ -51,6 +51,32 @@ return {
       { "folke/neodev.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
     },
+    init = function()
+      -- Create autocommand for LSP configurations
+      local group_id = vim.api.nvim_create_augroup("AutoCmdForLsp", { clear = true })
+
+      -- Add local buffer keymap for certain LSPs
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = group_id,
+        callback = function(args)
+          local wk = require("which-key")
+          local bufnr = args.buf
+
+          --- @type lsp.Client
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+          if client.name == "clangd" then
+            wk.register({
+              ["<leader>cS"] = {
+                "<cmd>ClangdSwitchSourceHeader<cr>",
+                "Switch source and headers (C/C++)",
+                { buffer = bufnr, mode = "n" },
+              },
+            })
+          end
+        end,
+      })
+    end,
     config = function()
       -- Make sure we load neoconf before loading lspconfig
       require("neoconf").setup()
