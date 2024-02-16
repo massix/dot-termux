@@ -40,6 +40,18 @@ return {
     },
   },
 
+  -- yaml and json ls companion
+  {
+    "someone-stole-my-name/yaml-companion.nvim",
+    dependencies = {
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    event = { "VeryLazy" },
+    config = false,
+  },
+
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -50,40 +62,34 @@ return {
       { "folke/neoconf.nvim" },
       { "folke/neodev.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
+      { "b0o/schemastore.nvim" },
+      { "someone-stole-my-name/yaml-companion.nvim" },
     },
-    init = function()
-      -- Create autocommand for LSP configurations
-      local group_id = vim.api.nvim_create_augroup("AutoCmdForLsp", { clear = true })
-
-      -- Add local buffer keymap for certain LSPs
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = group_id,
-        callback = function(args)
-          local wk = require("which-key")
-          local bufnr = args.buf
-
-          --- @type lsp.Client
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-          if client.name == "clangd" then
-            wk.register({
-              ["<leader>cS"] = {
-                "<cmd>ClangdSwitchSourceHeader<cr>",
-                "Switch source and headers (C/C++)",
-                { buffer = bufnr, mode = "n" },
-              },
-            })
-          end
-        end,
-      })
-    end,
     config = function()
-      -- Make sure we load neoconf before loading lspconfig
       require("neoconf").setup()
       require("neodev").setup()
+      require("telescope").load_extension("yaml_schema")
+
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+      local global_npm_path = vim.fn.expand("$HOME/../../files/usr/lib/node_modules")
+      local cfg = require("yaml-companion").setup({
+        lspconfig = {
+          capabilities = capabilities,
+          cmd = {
+            "node",
+            global_npm_path .. "/yaml-language-server/out/server/src/server.js",
+            "--stdio",
+          },
+          ---@param bufnr integer
+          on_attach = function(_, bufnr)
+            local wk = require("which-key")
+            wk.register({
+              ["<leader>cS"] = { "<cmd>Telescope yaml_schema<CR>", "Switch YAML schema", { buffer = bufnr } },
+            })
+          end,
+        },
+      })
 
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
@@ -102,7 +108,39 @@ return {
           "--pch-storage=memory",
         },
         capabilities = capabilities,
+        ---@param bufnr integer
+        on_attach = function(_, bufnr)
+          local wk = require("which-key")
+          wk.register({
+            ["<leader>cS"] = {
+              "<cmd>ClangdSwitchSourceHeader<cr>",
+              "Switch source and headers (C/C++)",
+              { buffer = bufnr, mode = "n" },
+            },
+          })
+        end,
       })
+
+      lspconfig.jsonls.setup({
+        capabilities = capabilities,
+        cmd = {
+          "node",
+          global_npm_path .. "/vscode-langservers-extracted/lib/json-language-server/node/jsonServerMain.js",
+          "--stdio",
+        },
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+          jsonc = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      })
+
+      lspconfig.yamlls.setup(cfg)
     end,
   },
 
