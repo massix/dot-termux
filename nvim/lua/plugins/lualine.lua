@@ -89,6 +89,11 @@ return {
                 end
                 return msg
               end,
+              cond = function()
+                local bufnr = vim.api.nvim_get_current_buf()
+                local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+                return next(clients) ~= nil
+              end,
               icon = " ",
             },
             {
