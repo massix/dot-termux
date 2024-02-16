@@ -71,6 +71,7 @@ return {
       require("telescope").load_extension("yaml_schema")
 
       local lspconfig = require("lspconfig")
+      local all_configs = require("lspconfig.configs")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       local global_npm_path = vim.fn.expand("$HOME/../../files/usr/lib/node_modules")
       local cfg = require("yaml-companion").setup({
@@ -90,6 +91,27 @@ return {
           end,
         },
       })
+
+      -- Inject my own LSP
+      all_configs.vscodemarkdown = {
+        default_config = {
+          cmd = {
+            "node",
+            global_npm_path .. "/vscode-langservers-extracted/lib/markdown-language-server/node/main.js",
+            "--stdio",
+          },
+          filetypes = { "markdown" },
+          root_dir = function(fname)
+            local lsp_util = require("lspconfig.util")
+            lsp_util.find_git_ancestor(fname)
+          end,
+          single_file_support = true,
+        },
+        docs = {
+          description = "Markdown LSP used in VSCode",
+          default_config = "",
+        },
+      }
 
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
@@ -141,6 +163,10 @@ return {
       })
 
       lspconfig.yamlls.setup(cfg)
+
+      lspconfig.vscodemarkdown.setup({
+        capabilities = capabilities,
+      })
     end,
   },
 
