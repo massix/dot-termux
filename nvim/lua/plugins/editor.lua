@@ -92,7 +92,10 @@ return {
   -- Oil
   {
     "stevearc/oil.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+      { "SirZenith/oil-vcs-status" },
+    },
     event = "VeryLazy",
     init = function()
       local wk = require("which-key")
@@ -106,6 +109,9 @@ return {
       columns = {
         "icon",
         "permissions",
+      },
+      win_options = {
+        signcolumn = "number",
       },
     },
     keys = {
@@ -498,6 +504,7 @@ return {
   {
     "stevearc/aerial.nvim",
     opts = {
+      backends = { "lsp", "treesitter", "markdown", "man" },
       layout = {
         default_direction = "prefer_left",
         placement = "edge",
