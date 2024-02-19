@@ -130,3 +130,6 @@ map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
 map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+map("n", "<C-[>", "<cmd>tabprevious<cr>", { desc = "Previous Tab", silent = true })
+map("n", "<C-]>", "<cmd>tabnext<cr>", { desc = "Next Tab", silent = true })
