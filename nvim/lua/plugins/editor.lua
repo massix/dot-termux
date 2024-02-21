@@ -105,7 +105,8 @@ return {
     end,
     opts = {
       default_file_explorer = false,
-      constrain_cursor = "name",
+      constrain_cursor = "editable",
+      experimental_watch_for_changes = true,
       columns = {
         "icon",
         "permissions",
