@@ -323,6 +323,9 @@ return {
         }),
         preselect = cmp.PreselectMode.None,
         sorting = defaults.sorting,
+        experimental = {
+          ghost_text = true,
+        },
       }
     end,
   },
