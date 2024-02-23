@@ -11,6 +11,13 @@ return {
       { "nvim-treesitter/nvim-treesitter", lazy = true },
       { "joaomsa/telescope-orgmode.nvim", lazy = false },
       { "danilshvalov/org-modern.nvim", config = false },
+      {
+        "massix/org-checkbox.nvim",
+        opts = {},
+        config = function()
+          require("orgcheckbox").setup()
+        end,
+      },
     },
     event = "VeryLazy",
     config = function(_, opts)
