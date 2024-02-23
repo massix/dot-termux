@@ -40,6 +40,13 @@ return {
                   ["replace"] = "RPL",
                 }
 
+                if vim.g.venn_enabled then
+                  return "VNN"
+                ---@diagnostic disable-next-line: undefined-field
+                elseif vim.b.table_mode_active == 1 then
+                  return "TBL"
+                end
+
                 return convert[str:lower()]
               end,
             },
