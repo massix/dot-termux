@@ -656,12 +656,15 @@ return {
     opts = {
       markdown = {
         fat_headlines = false,
+        codeblock_highlight = false,
       },
       org = {
         fat_headlines = false,
+        codeblock_highlight = false,
       },
       norg = {
         fat_headlines = false,
+        codeblock_highlight = false,
       },
     },
     ft = { "markdown", "org", "norg" },
@@ -734,5 +737,18 @@ return {
     keys = {
       { "<leader><space>", [[<CMD>Legendary<CR>]], desc = "Legendary" },
     },
+  },
+
+  -- Table mode for creating tables
+  {
+    "dhruvasagar/vim-table-mode",
+    event = { "BufEnter", "BufWinEnter" },
+    init = function()
+      vim.g.table_mode_syntax = 0
+      require("which-key").register({
+        ["<leader>t"] = { name = "+table" },
+      })
+    end,
+    config = false,
   },
 }
