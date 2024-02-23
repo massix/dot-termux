@@ -10,87 +10,182 @@ return {
       { "akinsho/org-bullets.nvim", config = true, lazy = false },
       { "nvim-treesitter/nvim-treesitter", lazy = true },
       { "joaomsa/telescope-orgmode.nvim", lazy = false },
+      { "danilshvalov/org-modern.nvim", config = false },
     },
     event = "VeryLazy",
     config = function(_, opts)
       require("orgmode").setup_ts_grammar()
       require("orgmode").setup(opts)
-
-      -- Disable column in orgagenda
-      vim.api.nvim_create_autocmd("Filetype", {
-        pattern = { "orgagenda" },
-        callback = function()
-          vim.opt_local.foldcolumn = "0"
-          vim.opt_local.number = false
-          vim.opt_local.relativenumber = false
-          vim.opt_local.signcolumn = "no"
-        end,
-      })
     end,
-    opts = {
-      org_agenda_files = {
-        "~/org/*.org",
-      },
-      org_todo_keywords = {
-        "TODO(t)",
-        "NEXT(n)",
-        "PROGRESS(p)",
-        "WAITING(w)",
-        "MEET(m)",
-        "|",
-        "DONE(d)",
-        "CANCELLED(c)",
-        "DELEGATED(l)",
-      },
-      org_default_notes_file = "~/org/refile.org",
-      org_agenda_text_search_extra_files = { "agenda-archives" },
-      org_startup_indented = true,
-      org_adapt_indentation = false,
-      org_tags_column = 0,
-      win_split_mode = "horizontal",
-      win_border = "rounded",
-      org_hide_leading_stars = true,
-      org_hide_emphasis_markers = true,
-      org_log_into_drawer = "LOGBOOK",
-      org_startup_folded = "inherit",
-      org_capture_templates = {
-        t = {
-          description = "Task",
-          template = "* TODO %?\n%u",
-          headline = "Tasks",
-          target = "~/org/refile.org",
+    opts = function()
+      local Menu = require("org-modern.menu")
+      return {
+        ui = {
+          menu = {
+            handler = function(data)
+              local org = require("orgmode").instance()
+
+              local custom_items = {
+                {
+                  label = "Agenda for current week",
+                  key = "a",
+                  action = function()
+                    org.agenda:agenda({
+                      span = "week",
+                    })
+                  end,
+                },
+                {
+                  label = "Agenda for Today",
+                  key = "d",
+                  action = function()
+                    org.agenda:agenda({
+                      span = "day",
+                    })
+                  end,
+                },
+                {
+                  label = "Personal To-Do",
+                  key = "p",
+                  action = function()
+                    org.agenda:tags({
+                      todo_only = true,
+                      search = "+personal-project-recurring-habit/-MEET-WAITING",
+                    })
+                  end,
+                },
+                {
+                  label = "Personal Projects",
+                  key = "P",
+                  action = function()
+                    org.agenda:tags({
+                      todo_only = true,
+                      search = "+personal+project-recurring-habit/-MEET-WAITING",
+                    })
+                  end,
+                },
+                {
+                  label = "Work To-Do",
+                  key = "w",
+                  action = function()
+                    org.agenda:tags({
+                      todo_only = true,
+                      search = "+work-project-recurring-habit/-MEET-WAITING",
+                    })
+                  end,
+                },
+                {
+                  label = "Work Projects",
+                  key = "W",
+                  action = function()
+                    org.agenda:tags({
+                      todo_only = true,
+                      search = "+work+project-recurring-habit/-MEET-WAITING",
+                    })
+                  end,
+                },
+                {
+                  label = "Search for To-Dos",
+                  key = "s",
+                  action = function()
+                    org.agenda:tags({
+                      todo_only = true,
+                    })
+                  end,
+                },
+                {
+                  label = "Search all headings",
+                  key = "S",
+                  action = function()
+                    org.agenda:tags()
+                  end,
+                },
+              }
+
+              Menu:new({ window = { margin = { 1, 1, 1, 1 } } }):open({
+                prompt = data.prompt,
+                title = data.title,
+                items = data.title == "Select a capture template" and data.items or custom_items,
+              })
+            end,
+          },
         },
-        r = {
-          description = "Note",
-          template = "* %?\n%u",
-          headline = "Notes",
-          target = "~/org/refile.org",
+        org_agenda_files = {
+          "~/org/*.org",
         },
-        c = {
-          description = "Work calendar entry",
-          template = "* MEET %?\nSCHEDULED: %T\n",
-          headline = "Calendar",
-          target = "~/org/work.org",
+        org_todo_keywords = {
+          "TODO(t)",
+          "NEXT(n)",
+          "PROGRESS(p)",
+          "WAITING(w)",
+          "MEET(m)",
+          "|",
+          "DONE(d)",
+          "CANCELLED(c)",
+          "DELEGATED(l)",
         },
-      },
-      mappings = {
-        org = {
-          org_toggle_checkbox = "<C-p>",
-          org_forward_heading_same_level = "<leader>]",
-          org_backward_heading_same_level = "<leader>[",
+        org_default_notes_file = "~/org/refile.org",
+        org_agenda_text_search_extra_files = { "agenda-archives" },
+        org_startup_indented = true,
+        org_adapt_indentation = false,
+        org_tags_column = 0,
+        win_split_mode = "horizontal",
+        win_border = "rounded",
+        org_hide_leading_stars = true,
+        org_hide_emphasis_markers = true,
+        org_log_into_drawer = "LOGBOOK",
+        org_startup_folded = "inherit",
+        org_capture_templates = {
+          r = {
+            description = "Refilable Task",
+            template = "* TODO %?\n%u",
+            headline = "Tasks",
+            target = "~/org/refile.org",
+          },
+          t = {
+            description = "Personal Task",
+            template = "* TODO %?\n%u",
+            headline = "Tasks",
+            target = "~/org/index.org",
+          },
+          T = {
+            description = "Work Task",
+            template = "* TODO %?\n%u",
+            headline = "Tasks",
+            target = "~/org/work.org",
+          },
+          c = {
+            description = "Personal calendar entry",
+            template = "* MEET %?\nSCHEDULED: %T\n",
+            headline = "Calendar",
+            target = "~/org/index.org",
+          },
+          C = {
+            description = "Work calendar entry",
+            template = "* MEET %?\nSCHEDULED: %T\n",
+            headline = "Calendar",
+            target = "~/org/work.org",
+          },
         },
-      },
-      notifications = {
-        enabled = true,
-        cron_enabled = false,
-        reminder_time = { 0, 5, 10, 15 },
-      },
-      org_todo_keyword_faces = {
-        WAITING = ":foreground #ffee93",
-        MEET = ":foreground #fce1e4 :weight bold :underline on",
-        NEXT = ":foreground #d4afb9",
-      },
-    },
+        mappings = {
+          org = {
+            org_toggle_checkbox = "<C-p>",
+            org_forward_heading_same_level = "<leader>]",
+            org_backward_heading_same_level = "<leader>[",
+          },
+        },
+        notifications = {
+          enabled = true,
+          cron_enabled = false,
+          reminder_time = { 0, 5, 10, 15 },
+        },
+        org_todo_keyword_faces = {
+          WAITING = ":foreground #ffee93",
+          MEET = ":foreground #fce1e4 :weight bold :underline on",
+          NEXT = ":foreground #d4afb9",
+        },
+      }
+    end,
   },
 
   -- markdown navigation for 2nd brain
