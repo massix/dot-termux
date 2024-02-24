@@ -472,6 +472,7 @@ return {
       language_config = {
         org = { disabled = true },
         markdown = { disabled = true },
+        help = { disabled = true },
       },
     },
     keys = {
