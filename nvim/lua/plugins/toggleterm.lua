@@ -1,6 +1,16 @@
 return {
   {
     "akinsho/toggleterm.nvim",
+    dependencies = {
+      {
+        "chomosuke/term-edit.nvim",
+        ft = { "toggleterm" },
+        version = "1.*",
+        opts = {
+          prompt_end = { "❯ ", "%$ ", "> " },
+        },
+      },
+    },
     version = "*",
     opts = {
       float_opts = { border = "double" },
