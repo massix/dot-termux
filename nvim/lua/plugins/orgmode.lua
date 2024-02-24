@@ -177,8 +177,6 @@ return {
         mappings = {
           org = {
             org_toggle_checkbox = "<C-p>",
-            org_forward_heading_same_level = "<leader>]",
-            org_backward_heading_same_level = "<leader>[",
           },
         },
         notifications = {
