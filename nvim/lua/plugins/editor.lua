@@ -752,4 +752,11 @@ return {
     end,
     config = false,
   },
+
+  -- Smart tab, similar to Helix's
+  {
+    "boltlessengineer/smart-tab.nvim",
+    opts = {},
+    event = { "BufEnter", "BufWinEnter" },
+  },
 }
