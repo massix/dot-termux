@@ -300,6 +300,7 @@ return {
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
     },
+    cond = vim.g.neovide ~= nil,
     opts = function()
       return {
         hide = {
