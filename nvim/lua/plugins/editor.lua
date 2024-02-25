@@ -408,7 +408,17 @@ return {
     "folke/twilight.nvim",
     lazy = false,
     opts = {
-      context = 2,
+      context = 10,
+      expand = {
+        "function",
+        "method",
+        "table",
+        "if_statement",
+        "preproc_function_def",
+        "function_definition",
+        "paragraph",
+        "list",
+      },
     },
     keys = {
       { "<leader>zt", "<CMD>Twilight<CR>", desc = "Toggle Twilight" },
