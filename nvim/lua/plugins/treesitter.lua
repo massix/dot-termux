@@ -51,6 +51,7 @@ return {
         "json",
         "just",
         "kdl",
+        "ledger",
         "lua",
         "luadoc",
         "luap",
