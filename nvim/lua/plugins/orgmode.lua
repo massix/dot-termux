@@ -2,8 +2,7 @@ return {
 
   -- orgmode
   {
-    "massix/orgmode",
-    branch = "feat/repeat_to_state",
+    "nvim-orgmode/orgmode",
     enabled = true,
     lazy = false,
     dependencies = {
