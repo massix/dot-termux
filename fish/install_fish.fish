@@ -50,6 +50,7 @@ check_install age age
 check_install uuidgen uuid-utils
 check_install eza eza
 check_install htop htop
+check_install ledger ledger
 tldr --update > /dev/null
 
 # Load fisher

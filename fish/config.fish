@@ -13,5 +13,6 @@ if status is-interactive
   # Set environment variables
   set -x PAGER "bat"
   set -x EDITOR "nvim"
+  set -x LEDGER_FILE "$HOME/org/.hledger.journal"
 end
 
