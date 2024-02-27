@@ -128,7 +128,6 @@ return {
     cmd = "Telescope",
     config = function(_, opts)
       require("telescope").setup(opts)
-      require("telescope").load_extension("orgmode")
       require("telescope").load_extension("projects")
     end,
     opts = function()
@@ -172,7 +171,7 @@ return {
       { "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
       { "<leader>sj", "<cmd>Telescope jumplist<cr>", desc = "Jumplist" },
       { "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      { "<leader>sO", "<cmd>Telescope orgmode search_headings<cr>", desc = "Org Headings" },
+      -- { "<leader>sO", "<cmd>Telescope orgmode search_headings<cr>", desc = "Org Headings" },
       { "<leader>sp", "<cmd>Telescope projects<cr>", desc = "Change project" },
       { "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
     },
@@ -339,7 +338,7 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     dependencies = { "kevinhwang91/promise-async" },
-    event = "BufEnter",
+    event = { "BufEnter", "BufWinEnter" },
     opts = {
       open_fold_hl_timeout = 150,
       close_fold_kinds = { "imports", "comment" },

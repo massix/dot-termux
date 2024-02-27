@@ -9,7 +9,15 @@ return {
     dependencies = {
       { "akinsho/org-bullets.nvim", config = true, lazy = false },
       { "nvim-treesitter/nvim-treesitter", lazy = true },
-      { "joaomsa/telescope-orgmode.nvim", lazy = false },
+      {
+        "joaomsa/telescope-orgmode.nvim",
+        config = function()
+          require("telescope").load_extension("orgmode")
+        end,
+        keys = {
+          { "<leader>sO", "<cmd>Telescope orgmode search_headings<CR>", desc = "Search org headings" },
+        },
+      },
       { "danilshvalov/org-modern.nvim", config = false },
       {
         "massix/org-checkbox.nvim",
