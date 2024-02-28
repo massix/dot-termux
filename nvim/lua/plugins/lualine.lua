@@ -68,6 +68,27 @@ return {
             { "branch" },
             {
               function()
+                local orgmode = require("orgmode").instance()
+                local clocked_headline = orgmode.clock.clocked_headline
+                ---@diagnostic disable-next-line: need-check-nil
+                local effort = clocked_headline:get_property("effort")
+                ---@diagnostic disable-next-line: need-check-nil
+                local active = clocked_headline:get_logbook():get_total_with_active():to_string()
+
+                if effort then
+                  return string.format("[%s/%s]", active, effort)
+                else
+                  return string.format("[%s]", active)
+                end
+              end,
+              cond = function()
+                local orgmode = require("orgmode").instance()
+                return orgmode and orgmode.clock:has_clocked_headline()
+              end,
+              icon = "󱫠",
+            },
+            {
+              function()
                 local msg = "No LSP"
                 local bufnr = vim.api.nvim_get_current_buf()
                 local bufft = vim.api.nvim_buf_get_option(bufnr, "filetype")

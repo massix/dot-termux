@@ -2,7 +2,8 @@ return {
 
   -- orgmode
   {
-    "nvim-orgmode/orgmode",
+    "massix/orgmode",
+    branch = "feat/faster-statusline",
     enabled = true,
     lazy = false,
     dependencies = {
