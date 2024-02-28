@@ -2,10 +2,8 @@ return {
 
   -- orgmode
   {
-    "massix/orgmode",
-    branch = "feat/faster-statusline",
-    enabled = true,
-    lazy = false,
+    "nvim-orgmode/orgmode",
+    event = "VeryLazy",
     dependencies = {
       { "akinsho/org-bullets.nvim", config = true, lazy = false },
       { "nvim-treesitter/nvim-treesitter", lazy = true },
@@ -25,7 +23,6 @@ return {
         main = "orgcheckbox",
       },
     },
-    event = "VeryLazy",
     config = function(_, opts)
       require("orgmode").setup_ts_grammar()
       require("orgmode").setup(opts)
@@ -197,6 +194,10 @@ return {
         },
       }
     end,
+    keys = {
+      -- stylua: ignore
+      { "<leader>oR", function() require("orgmode").instance().clock:init() end, desc = "org reset cloc" },
+    },
   },
 
   -- markdown navigation for 2nd brain
