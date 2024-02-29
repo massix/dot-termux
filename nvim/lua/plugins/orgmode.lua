@@ -3,12 +3,12 @@ return {
   -- orgmode
   {
     "nvim-orgmode/orgmode",
-    event = "VeryLazy",
+    ft = { "org", "orgagenda" },
     dependencies = {
       { "akinsho/org-bullets.nvim", config = true, lazy = false },
       { "nvim-treesitter/nvim-treesitter", lazy = true },
       {
-        "joaomsa/telescope-orgmode.nvim",
+        "lyz-code/telescope-orgmode.nvim",
         config = function()
           require("telescope").load_extension("orgmode")
         end,
@@ -194,9 +194,11 @@ return {
         },
       }
     end,
+    -- stylua: ignore
     keys = {
-      -- stylua: ignore
-      { "<leader>oR", function() require("orgmode").instance().clock:init() end, desc = "org reset cloc" },
+      { "<leader>oR", function() require("orgmode").instance().clock:init() end, desc = "org reset clock" },
+      { "<leader>oa", function() require("orgmode").action("agenda.prompt") end, desc = "org agenda" },
+      { "<leader>oc", function() require("orgmode").action("capture.prompt") end, desc = "org capture" },
     },
   },
 
