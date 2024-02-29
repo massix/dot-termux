@@ -42,6 +42,14 @@ return {
     },
   },
 
+  -- fugitive
+  {
+    "tpope/vim-fugitive",
+    opts = {},
+    config = function() end,
+    cmd = { "Git", "G", "Gstatus" },
+  },
+
   -- Git signs
   {
     "lewis6991/gitsigns.nvim",
