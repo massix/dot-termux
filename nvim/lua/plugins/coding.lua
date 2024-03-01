@@ -167,6 +167,15 @@ return {
       lspconfig.vscodemarkdown.setup({
         capabilities = capabilities,
       })
+
+      lspconfig.bashls.setup({
+        cmd = {
+          "node",
+          global_npm_path .. "/bash-language-server/out/cli.js",
+          "start",
+        },
+        capabilities = capabilities,
+      })
     end,
   },
 
