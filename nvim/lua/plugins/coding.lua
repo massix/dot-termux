@@ -258,11 +258,24 @@ return {
       -- Setup conventionalcommits for gitcommit files
       local group = vim.api.nvim_create_augroup("CmpExtra", { clear = true })
       vim.api.nvim_create_autocmd("Filetype", {
-        pattern = { "gitcommit", "NeogitCommitMessage" },
+        pattern = { "NeogitCommitMessage" },
         group = group,
         callback = function()
-          require("cmp").setup.buffer({
-            sources = require("cmp").config.sources({
+          if vim.g.cmp_conventionalcommits_source_id ~= nil then
+            cmp.unregister_source(vim.g.cmp_conventionalcommits_source_id)
+          end
+
+          local source = require("cmp-conventionalcommits").new()
+
+          ---@diagnostic disable-next-line: duplicate-set-field
+          source.is_available = function()
+            return vim.bo.filetype == "gitcommit" or vim.bo.filetype == "NeogitCommitMessage"
+          end
+
+          vim.g.cmp_conventionalcommits_source_id = cmp.register_source("conventionalcommits", source)
+
+          cmp.setup.buffer({
+            sources = cmp.config.sources({
               { name = "conventionalcommits" },
             }),
           })
