@@ -33,7 +33,10 @@ require("lazy").setup({
   },
 
   -- Enable checker for updating plugins
-  checker = { enabled = true },
+  checker = {
+    enabled = true,
+    notify = false,
+  },
 
   -- Disable some problematic native plugins of nvim
   performance = {
