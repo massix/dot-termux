@@ -262,6 +262,18 @@ return {
           { name = "cmdline" },
           { name = "path" },
         }),
+        enabled = function()
+          local disabled_commands = {
+            IncRename = true,
+            G = true,
+            Git = true,
+            ["G!"] = true,
+            ["Git!"] = true,
+          }
+
+          local current_cmd = vim.fn.getcmdline():match("%S+")
+          return not disabled_commands[current_cmd] or cmp.close()
+        end,
       })
 
       -- Setup conventionalcommits for gitcommit files
