@@ -26,19 +26,12 @@ return {
         diffview = true,
       },
     },
-
+    cmd = { "Neogit" },
     -- stylua: ignore
     keys = {
-      {
-        "<leader>gg",
-        function() require("neogit").open() end,
-        desc = "Open Neogit",
-      },
-      {
-        "<leader>gC",
-        function() require("neogit").open({ "commit" }) end,
-        desc = "Open Neogit commit",
-      },
+      { "<leader>gg", function() require("neogit").open({ kind = "auto" }) end, desc = "Open Neogit in new split" },
+      { "<leader>gt", function() require("neogit").open({ kind = "tab" }) end, desc = "Open Neogit in new tab" },
+      { "<leader>gC", function() require("neogit").open({ "commit" }) end, desc = "Open Neogit commit" },
     },
   },
 
