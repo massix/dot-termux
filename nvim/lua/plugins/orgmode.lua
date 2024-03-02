@@ -24,8 +24,67 @@ return {
       },
     },
     config = function(_, opts)
-      require("orgmode").setup_ts_grammar()
-      require("orgmode").setup(opts)
+      local orgmode = require("orgmode")
+      orgmode.setup_ts_grammar()
+      orgmode.setup(opts)
+
+      local orgmode_group = vim.api.nvim_create_augroup("OrgMode", { clear = true })
+
+      -- Automatically refresh orgagenda when updating org files
+      vim.api.nvim_create_autocmd("BufWritePost", {
+        pattern = "*.org",
+        group = orgmode_group,
+        callback = function()
+          local current_window = vim.api.nvim_get_current_win()
+          local current_buffer = vim.api.nvim_get_current_buf()
+
+          -- If we're already in the agenda, skip everything (for example when clocking)
+          if vim.api.nvim_buf_get_option(current_buffer, "ft") == "orgagenda" then
+            return
+          end
+
+          ---@type number[]
+          local orgagenda = vim.tbl_filter(function(w)
+            local buffer = vim.api.nvim_win_get_buf(w)
+            return vim.api.nvim_buf_get_option(buffer, "ft") == "orgagenda"
+          end, vim.api.nvim_list_wins())
+
+          local _, oa_window = next(orgagenda)
+
+          if oa_window ~= nil then
+            local first_line = vim.api.nvim_buf_get_lines(vim.api.nvim_win_get_buf(oa_window), 0, 1, true)
+
+            -- If we have the word "agenda" in the very first line, then it's the agenda!
+            if first_line[1]:match("agenda") then
+              orgmode.instance().agenda:redo(false)
+
+              -- Schedule the callback to run after the orgmode buffer is modified
+              vim.defer_fn(function()
+                vim.api.nvim_set_current_win(current_window)
+              end, 500)
+            end
+          end
+        end,
+      })
+
+      -- Set conceal stuff automatically when in org files
+      vim.api.nvim_create_autocmd("Filetype", {
+        group = orgmode_group,
+        pattern = "org",
+        callback = function()
+          vim.wo.concealcursor = "vnic"
+          vim.wo.conceallevel = 3
+
+          local toggle_conceal = function()
+            -- vim.wo.conceallevel = vim.wo.conceallevel == 0 and 3 or 0
+          end
+
+          require("which-key").register({
+            -- stylua: ignore
+            ["<C-e>"] = { function() toggle_conceal() end, "Toggle Conceal" },
+          }, { mode = { "i", "n" }, buffer = 0 })
+        end,
+      })
     end,
     opts = function()
       local Menu = require("org-modern.menu")
@@ -136,12 +195,12 @@ return {
         },
         org_default_notes_file = "~/org/refile.org",
         org_agenda_text_search_extra_files = { "agenda-archives" },
-        org_startup_indented = true,
-        org_adapt_indentation = false,
-        org_tags_column = 0,
+        org_startup_indented = false, -- only for nightly
+        org_adapt_indentation = true,
+        org_tags_column = 80,
         win_split_mode = "horizontal",
         win_border = "rounded",
-        org_hide_leading_stars = true,
+        org_hide_leading_stars = false,
         org_hide_emphasis_markers = true,
         org_log_into_drawer = "LOGBOOK",
         org_startup_folded = "inherit",
