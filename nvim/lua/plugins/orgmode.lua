@@ -76,7 +76,11 @@ return {
           vim.wo.conceallevel = 3
 
           local toggle_conceal = function()
-            -- vim.wo.conceallevel = vim.wo.conceallevel == 0 and 3 or 0
+            if vim.wo.conceallevel > 0 then
+              vim.wo.conceallevel = 0
+            else
+              vim.wo.conceallevel = 3
+            end
           end
 
           require("which-key").register({
