@@ -207,7 +207,7 @@ return {
         org_hide_leading_stars = false,
         org_hide_emphasis_markers = true,
         org_log_into_drawer = "LOGBOOK",
-        org_startup_folded = "inherit",
+        org_startup_folded = "content",
         org_capture_templates = {
           r = {
             description = "Refilable Task",
