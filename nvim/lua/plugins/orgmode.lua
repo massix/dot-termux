@@ -30,43 +30,6 @@ return {
 
       local orgmode_group = vim.api.nvim_create_augroup("OrgMode", { clear = true })
 
-      -- Automatically refresh orgagenda when updating org files
-      vim.api.nvim_create_autocmd("BufWritePost", {
-        pattern = "*.org",
-        group = orgmode_group,
-        callback = function()
-          local current_window = vim.api.nvim_get_current_win()
-          local current_buffer = vim.api.nvim_get_current_buf()
-
-          -- If we're already in the agenda, skip everything (for example when clocking)
-          if vim.api.nvim_buf_get_option(current_buffer, "ft") == "orgagenda" then
-            return
-          end
-
-          ---@type number[]
-          local orgagenda = vim.tbl_filter(function(w)
-            local buffer = vim.api.nvim_win_get_buf(w)
-            return vim.api.nvim_buf_get_option(buffer, "ft") == "orgagenda"
-          end, vim.api.nvim_list_wins())
-
-          local _, oa_window = next(orgagenda)
-
-          if oa_window ~= nil then
-            local first_line = vim.api.nvim_buf_get_lines(vim.api.nvim_win_get_buf(oa_window), 0, 1, true)
-
-            -- If we have the word "agenda" in the very first line, then it's the agenda!
-            if first_line[1]:match("agenda") then
-              orgmode.instance().agenda:redo(false)
-
-              -- Schedule the callback to run after the orgmode buffer is modified
-              vim.defer_fn(function()
-                vim.api.nvim_set_current_win(current_window)
-              end, 500)
-            end
-          end
-        end,
-      })
-
       -- Set conceal stuff automatically when in org files
       vim.api.nvim_create_autocmd("Filetype", {
         group = orgmode_group,
@@ -74,6 +37,10 @@ return {
         callback = function()
           vim.wo.concealcursor = "vnic"
           vim.wo.conceallevel = 3
+
+          -- Make sure we only advance one step at a time
+          vim.opt_local.tabstop = 1
+          vim.opt_local.shiftwidth = 1
 
           local toggle_conceal = function()
             if vim.wo.conceallevel > 0 then
@@ -202,7 +169,7 @@ return {
         org_startup_indented = false, -- only for nightly
         org_adapt_indentation = true,
         org_tags_column = 80,
-        win_split_mode = "horizontal",
+        win_split_mode = "bot 20sp",
         win_border = "rounded",
         org_hide_leading_stars = false,
         org_hide_emphasis_markers = true,
