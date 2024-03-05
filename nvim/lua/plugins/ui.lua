@@ -309,4 +309,11 @@ return {
     end,
     event = { "VeryLazy" },
   },
+
+  -- Foldsign
+  {
+    "yaocccc/nvim-foldsign",
+    opts = {},
+    event = { "BufEnter", "BufWinEnter" },
+  },
 }
