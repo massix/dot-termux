@@ -10,6 +10,12 @@ if status is-interactive
   abbr -a pu pkg update
   abbr -a puu "pkg update && pkg upgrade"
 
+  # zellij
+  abbr -a zj zellij
+  abbr -a zja zellij attach
+  abbr -a zjd zellij delete-session
+  abbr -a zjda zellij delete-all-sessions
+
   # Set environment variables
   set -x PAGER "bat"
   set -x EDITOR "nvim"
