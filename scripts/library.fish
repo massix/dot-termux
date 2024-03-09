@@ -54,3 +54,20 @@ function check_install
   end
 end
 
+function check_install_npm
+  set -l cmd $argv[1]
+  set -l pkg $argv[2]
+
+  if ! type -q npm then
+    error "You must install npm first"
+    return
+  end
+
+  if ! type -q $cmd then
+    info "Installing $pkg from npm"
+    npm i -g $pkg
+  else
+    info "$cmd from npm $pkg already installed"
+  end
+end
+

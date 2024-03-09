@@ -128,6 +128,7 @@ return {
           "--completion-style=detailed",
           "--background-index",
           "--pch-storage=memory",
+          "--offset-encoding=utf-16",
         },
         capabilities = capabilities,
         ---@param bufnr integer
@@ -257,7 +258,17 @@ return {
       })
 
       cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = cmp.mapping.preset.cmdline({
+          ["<C-i>"] = {
+            c = function()
+              if cmp.visible() then
+                cmp.select_next_item()
+              else
+                cmp.complete()
+              end
+            end,
+          },
+        }),
         sources = cmp.config.sources({
           { name = "cmdline" },
           { name = "path" },
@@ -471,5 +482,25 @@ return {
     opts = {
       tmp_file_path = "$HOME/tmp/compilecommandsNEOVIM.json",
     },
+  },
+
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = {
+      "ThePrimeagen/refactoring.nvim",
+    },
+    name = "null-ls",
+    opts = {},
+    config = function()
+      local nls = require("null-ls")
+      nls.setup({
+        sources = {
+          nls.builtins.diagnostics.cppcheck,
+          nls.builtins.diagnostics.fish,
+          nls.builtins.code_actions.refactoring,
+        },
+      })
+    end,
+    event = { "BufEnter", "BufWinEnter" },
   },
 }

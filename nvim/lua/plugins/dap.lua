@@ -79,9 +79,7 @@ return {
     opts = {},
     config = function()
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-      -- setup dap config by VsCode launch.json file
       local dap = require("dap")
-      require("dap.ext.vscode").load_launchjs(nil, json_transforms)
 
       for name, sign in pairs(require("utils.defaults").icons.dap) do
         sign = type(sign) == "table" and sign or { sign }
@@ -96,6 +94,9 @@ return {
         command = "/data/data/com.termux/files/usr/bin/lldb-vscode",
         name = "lldb",
       }
+
+      -- setup dap config by VsCode launch.json file
+      require("dap.ext.vscode").load_launchjs(nil, json_transforms)
     end,
   },
 }
