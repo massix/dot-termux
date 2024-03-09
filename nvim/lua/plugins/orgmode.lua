@@ -52,7 +52,7 @@ return {
 
           require("which-key").register({
             -- stylua: ignore
-            ["<C-e>"] = { function() toggle_conceal() end, "Toggle Conceal" },
+            ["<C-k>"] = { function() toggle_conceal() end, "Toggle Conceal" },
           }, { mode = { "i", "n" }, buffer = 0 })
         end,
       })
