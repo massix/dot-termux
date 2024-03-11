@@ -30,6 +30,14 @@ return {
 
       local orgmode_group = vim.api.nvim_create_augroup("OrgMode", { clear = true })
 
+      _G.org_toggle_conceal = function()
+        if vim.wo.conceallevel > 0 then
+          vim.wo.conceallevel = 0
+        else
+          vim.wo.conceallevel = 3
+        end
+      end
+
       -- Set conceal stuff automatically when in org files
       vim.api.nvim_create_autocmd("Filetype", {
         group = orgmode_group,
@@ -42,18 +50,18 @@ return {
           vim.opt_local.tabstop = 1
           vim.opt_local.shiftwidth = 1
 
-          local toggle_conceal = function()
-            if vim.wo.conceallevel > 0 then
-              vim.wo.conceallevel = 0
+          -- stylua: ignore
+          local map = function(mode, lhs)
+            if type(mode) == "table" then
+              for _, m in ipairs(mode) do
+                vim.api.nvim_buf_set_keymap(0, m, lhs, "<cmd>lua org_toggle_conceal()<CR>", { desc = "Toggle conceal" })
+              end
             else
-              vim.wo.conceallevel = 3
+              vim.api.nvim_buf_set_keymap(0, mode, lhs, "<cmd>lua org_toggle_conceal()<CR>", { desc = "Toggle conceal" })
             end
           end
 
-          require("which-key").register({
-            -- stylua: ignore
-            ["<C-k>"] = { function() toggle_conceal() end, "Toggle Conceal" },
-          }, { mode = { "i", "n" }, buffer = 0 })
+          map({ "i", "n", "v" }, "<C-c>c")
         end,
       })
     end,
