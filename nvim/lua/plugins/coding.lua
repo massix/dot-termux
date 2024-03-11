@@ -456,6 +456,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         fish = { "fish_indent" },
+        c = { "clang_format" },
       },
       format_on_save = function(_)
         return { lsp_fallback = true }

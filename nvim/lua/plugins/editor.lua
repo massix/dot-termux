@@ -392,41 +392,6 @@ return {
     },
   },
 
-  -- Code biscuits
-  {
-    "code-biscuits/nvim-biscuits",
-    event = "BufEnter",
-    init = function()
-      local wk = require("which-key")
-      wk.register({
-        ["<leader>c"] = { name = "+code" },
-      })
-    end,
-    opts = {
-      show_on_start = false,
-      cursor_line_only = true,
-      on_events = { "CursorHoldI", "InsertLeave" },
-      trim_by_words = false,
-      default_config = {
-        prefix_string = " ",
-      },
-      language_config = {
-        org = { disabled = true },
-        markdown = { disabled = true },
-        help = { disabled = true },
-      },
-    },
-    keys = {
-      {
-        "<leader>cb",
-        function()
-          require("nvim-biscuits").toggle_biscuits()
-        end,
-        desc = "Toggle biscuits",
-      },
-    },
-  },
-
   -- Better escape
   {
     "max397574/better-escape.nvim",
@@ -500,30 +465,6 @@ return {
     keys = {
       { "<leader>bj", "<cmd>JABSOpen<cr>", desc = "JABS Open" },
     },
-  },
-
-  -- Confirm before leaving Neovim
-  {
-    "yutkat/confirm-quit.nvim",
-    event = "CmdlineEnter",
-    opts = {
-      overwrite_q_command = false,
-      quit_message = "U sure?",
-    },
-    config = function(_, opts)
-      require("confirm-quit").setup(opts)
-      vim.cmd([[
-        function! s:solely_in_cmd(command)
-          return (getcmdtype() == ':' && getcmdline() ==# a:command)
-        endfunction
-
-        cnoreabbrev <expr> q <SID>solely_in_cmd('q') ? 'ConfirmQuit' : 'q'
-        cnoreabbrev <expr> qa <SID>solely_in_cmd('qa') ? 'ConfirmQuitAll' : 'qa'
-        cnoreabbrev <expr> qq <SID>solely_in_cmd('qq') ? 'quit' : 'qq'
-        cnoreabbrev <expr> wq <SID>solely_in_cmd('wq') ? 'w <bar> ConfirmQuit' : 'wq'
-        cnoreabbrev <expr> wqa <SID>solely_in_cmd('wqa') ? 'wall <bar> ConfirmQuitAll' : 'wqa'
-      ]])
-    end,
   },
 
   -- Better tab scoping
@@ -610,16 +551,6 @@ return {
       },
     },
     ft = { "markdown", "org", "norg" },
-  },
-
-  -- Arrow for bookmarks
-  {
-    "otavioschwanck/arrow.nvim",
-    event = "VeryLazy",
-    opts = {
-      show_icons = true,
-      leader_key = ";",
-    },
   },
 
   -- Better e, w and friends

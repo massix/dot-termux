@@ -104,7 +104,7 @@
      [[https://github.com/oh-my-fish/plugin-bang-bang][Bang bang]] is a plugin
      which adds a functionality similar to the ~!!~ pattern in ~bash~.
 
-*** NeoVim
+*** Neovim
     This is the biggest and by far the most curated module in this repository
     and probably the one which will see the most evolutions. This module
     creates a working ~NeoVim~ installation using [[https://github.com/folke/lazy.nvim][Lazy.nvim]] and some
