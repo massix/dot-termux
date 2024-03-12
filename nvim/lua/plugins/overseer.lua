@@ -1,8 +1,9 @@
 return {
   {
     "stevearc/overseer.nvim",
-    opts = {},
-    lazy = false,
+    opts = {
+      dap = false,
+    },
     event = "VeryLazy",
     init = function()
       local wk = require("which-key")

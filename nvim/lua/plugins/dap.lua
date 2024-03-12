@@ -17,7 +17,6 @@ return {
     end,
 
     dependencies = {
-
       -- fancy UI for the debugger
       {
         "rcarriga/nvim-dap-ui",
@@ -34,10 +33,10 @@ return {
           local dap = require("dap")
           local dapui = require("dapui")
           dapui.setup(opts)
-
           dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open({})
           end
+
           dap.listeners.before.event_terminated["dapui_config"] = function()
             dapui.close({})
           end
@@ -66,8 +65,8 @@ return {
       { "<C-c>dj", function() require("dap").down() end, desc = "Down" },
       { "<C-c>dk", function() require("dap").up() end, desc = "Up" },
       { "<C-c>dl", function() require("dap").run_last() end, desc = "Run Last" },
-      { "<C-c>do", function() require("dap").step_out() end, desc = "Step Out" },
-      { "<C-c>dO", function() require("dap").step_over() end, desc = "Step Over" },
+      { "<C-c>dO", function() require("dap").step_out() end, desc = "Step Out" },
+      { "<C-c>do", function() require("dap").step_over() end, desc = "Step Over" },
       { "<C-c>dp", function() require("dap").pause() end, desc = "Pause" },
       { "<C-c>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
       { "<C-c>ds", function() require("dap").session() end, desc = "Session" },
@@ -80,6 +79,8 @@ return {
     config = function()
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
       local dap = require("dap")
+      require("dap.ext.vscode").json_decode = require("overseer.json").decode
+      require("overseer").patch_dap(true)
 
       for name, sign in pairs(require("utils.defaults").icons.dap) do
         sign = type(sign) == "table" and sign or { sign }

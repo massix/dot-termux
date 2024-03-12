@@ -180,6 +180,7 @@ return {
             {
               "overseer",
               colored = true,
+              unique = true,
             },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             {
