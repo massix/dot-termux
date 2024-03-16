@@ -133,3 +133,5 @@ map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 map("n", "<C-[>", "<cmd>tabprevious<cr>", { desc = "Previous Tab", silent = true })
 map("n", "<C-]>", "<cmd>tabnext<cr>", { desc = "Next Tab", silent = true })
+
+map("c", "<Tab>", "<C-z>", { silent = false }) -- to fix cmp
