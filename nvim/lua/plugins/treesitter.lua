@@ -5,18 +5,9 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+    event = { "VeryLazy" },
     dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        init = function()
-          -- disable rtp plugin, as we only need its queries for mini.ai
-          -- In case other textobject modules are enabled, we will load them
-          -- once nvim-treesitter is loaded
-          require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-          load_textobjects = true
-        end,
-      },
+      { "nvim-treesitter/nvim-treesitter-textobjects", config = false },
       {
         "IndianBoy42/tree-sitter-just",
         lazy = false,
@@ -31,7 +22,6 @@ return {
     opts = {
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = { "org" },
       },
       indent = { enable = true },
       ensure_installed = {
@@ -67,6 +57,7 @@ return {
         "rust",
         "terraform",
         "typescript",
+        "typst",
         "vim",
         "vimdoc",
         "yaml",

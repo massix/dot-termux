@@ -177,6 +177,10 @@ return {
         },
         capabilities = capabilities,
       })
+
+      lspconfig.typst_lsp.setup({
+        capabilities = capabilities,
+      })
     end,
   },
 
