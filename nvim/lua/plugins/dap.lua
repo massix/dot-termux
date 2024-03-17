@@ -64,6 +64,7 @@ return {
     config = function()
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
       local dap = require("dap")
+
       require("dap.ext.vscode").json_decode = require("overseer.json").decode
       require("overseer").patch_dap(true)
 
