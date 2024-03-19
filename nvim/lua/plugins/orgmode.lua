@@ -2,8 +2,7 @@ return {
 
   -- orgmode
   {
-    "massix/orgmode",
-    branch = "fix/highlights",
+    "nvim-orgmode/orgmode",
     ft = { "org", "orgagenda" },
     dependencies = {
       { "akinsho/org-bullets.nvim", config = true, lazy = false },
