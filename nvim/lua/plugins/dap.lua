@@ -20,6 +20,9 @@ return {
       -- fancy UI for the debugger
       {
         "rcarriga/nvim-dap-ui",
+        dependencies = {
+          { "nvim-neotest/nvim-nio" },
+        },
         -- stylua: ignore
         keys = {
           ---@diagnostic disable-next-line: missing-fields
@@ -28,7 +31,28 @@ return {
           ---@diagnostic disable-next-line: missing-fields
           { "<C-c>de", function() require("dapui").eval() end, desc = "Eval", mode = {"n", "v"} },
         },
-        opts = {},
+        opts = {
+          layouts = {
+            {
+              elements = {
+                "repl",
+                "console",
+              },
+              size = 20,
+              position = "bottom",
+            },
+            {
+              elements = {
+                { id = "scopes", size = 0.25 },
+                { id = "breakpoints", size = 0.25 },
+                { id = "stacks", size = 0.25 },
+                { id = "watches", size = 0.25 },
+              },
+              size = 50,
+              position = "right",
+            },
+          },
+        },
       },
 
       -- virtual text for the debugger
