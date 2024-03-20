@@ -34,6 +34,7 @@ return {
         "elvish",
         "fish",
         "haskell",
+        "hjson",
         "html",
         "java",
         "javascript",

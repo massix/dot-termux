@@ -73,3 +73,11 @@ symlink_file ./functions/top.fish
 
 info "Finalizing installation"
 fisher update >/dev/null
+
+info "Configuring broot"
+mkdir -p ~/.config/broot
+
+rm -f ~/.config/broot/conf.hjson
+rm -f ~/.config/broot/verbs.hjson
+ln -s $current_dir/broot/conf.hjson ~/.config/broot/conf.hjson
+ln -s $current_dir/broot/verbs.hjson ~/.config/broot/verbs.hjson

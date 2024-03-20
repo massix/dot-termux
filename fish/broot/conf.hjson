@@ -1,0 +1,14 @@
+modal: true
+show_selection_mark: true
+icon_theme: nerdfont
+
+special_paths: {
+    "/media" : "no-enter" // comment it if desired
+}
+
+content_search_max_file_size: 10MB
+
+imports: [
+    verbs.hjson
+    skins/catppuccin-mocha.hjson
+]
