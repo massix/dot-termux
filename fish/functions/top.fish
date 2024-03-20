@@ -1,3 +1,3 @@
 function top
-  htop $argv
+    htop $argv
 end

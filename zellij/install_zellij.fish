@@ -14,4 +14,3 @@ mkdir -p $config_dir
 
 rm -f $config_dir/config.kdl
 ln -s $current_dir/zellij.kdl $config_dir/config.kdl
-

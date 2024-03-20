@@ -1,3 +1,3 @@
 function grep
-  rg $argv
+    rg $argv
 end

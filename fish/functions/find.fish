@@ -1,3 +1,3 @@
 function find
-  fd $argv
+    fd $argv
 end

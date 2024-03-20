@@ -1,3 +1,3 @@
 function cat
-  bat -pp $argv
+    bat -pp $argv
 end

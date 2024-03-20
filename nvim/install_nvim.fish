@@ -11,29 +11,28 @@ check_install gcc clang
 check_install rg ripgrep
 
 function symlink
-  info "symlinking"
-  ln -s $current_dir $file_path
+    info symlinking
+    ln -s $current_dir $file_path
 end
 
 if test -L $file_path
-  warning "nvim already set up as a symbolic link"
+    warning "nvim already set up as a symbolic link"
 
-  # Check if it points to where we want it to point
-  set points (stat $file_path | head -n1 | cut -d ' ' -f6)
+    # Check if it points to where we want it to point
+    set points (stat $file_path | head -n1 | cut -d ' ' -f6)
 
-  if test $points = $current_dir
-    info "already pointing here, nothing to do"
-  else
-    warning "not pointing here, making it point here"
-    rm $file_path
-    symlink
-  end
+    if test $points = $current_dir
+        info "already pointing here, nothing to do"
+    else
+        warning "not pointing here, making it point here"
+        rm $file_path
+        symlink
+    end
 else if test -d $file_path
-  # Backup existing folder
-  set -l backup_dest "$backup_dir/nvim-$(date +'%s')"
-  backup_file $file_path $backup_dest
-  symlink
+    # Backup existing folder
+    set -l backup_dest "$backup_dir/nvim-$(date +'%s')"
+    backup_file $file_path $backup_dest
+    symlink
 else
-  symlink
+    symlink
 end
-
