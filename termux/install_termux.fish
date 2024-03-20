@@ -6,37 +6,32 @@ source "$current_dir/../scripts/library.fish"
 
 set termux_dir "$HOME/.termux"
 set -l cache_dir "$HOME/.cache/installer"
-mkdir -p $cache_dir
+mkdir -p {$cache_dir}/font
 
-set -l font_url "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Agave.zip"
+set -l font_url "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/0xProto.zip"
+
 check_install curl curl
 
-if test -f $termux_dir/termux.properties
-  backup_file "$termux_dir/termux.properties" "$backup_dir/termux-$(date +'%s').properties"
+if test -f {$termux_dir}/termux.properties
+    backup_file "$termux_dir/termux.properties" "$backup_dir/termux-$(date +'%s').properties"
 end
 
 info "Copying termux properties"
-cp $current_dir/termux.properties "$termux_dir/termux.properties"
+cp {$current_dir}/termux.properties "$termux_dir/termux.properties"
 
-if ! test -f "$cache_dir/font.zip"
-  info "Downloading font"
-  curl -sL "$font_url" -o "$cache_dir/font.zip"
-end
+info "Downloading font"
+curl -sL "$font_url" -o "$cache_dir/font.zip"
 
 info "Unpacking font"
-unzip -qq -o -x "$cache_dir/font.zip" -d "$cache_dir"
+unzip -qq -o -x "$cache_dir/font.zip" -d "$cache_dir/font/"
 
 info "Copying patched font"
-cp $cache_dir/*Mono-Regular.ttf $termux_dir/font.ttf
+cp {$cache_dir}/font/0xProtoNerdFont-Regular.ttf {$termux_dir}/font.ttf
 
 info "Cleaning cache folder"
-rm -f $cache_dir/*.ttf
-rm -f $cache_dir/*.md
-rm -f $cache_dir/LICENSE*
-rm -f $cache_dir/*.txt
+rm -rf {$cache_dir}/font/*
 
 if command -q termux-reload-settings
-  info "Reloading termux configuration"
-  termux-reload-settings
+    info "Reloading termux configuration"
+    termux-reload-settings
 end
-

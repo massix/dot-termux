@@ -63,7 +63,7 @@
 
 *** Termux
     This simple module will create a sane ~termux.properties~ file and copy
-    over the [[https://www.nerdfonts.com/font-downloads][Agave]] patched font from NerdFonts.
+    over the [[https://www.nerdfonts.com/font-downloads][0xProto]] patched font from NerdFonts.
 
 *** Git
     Simple module that simply creates a ~.gitconfig~ file and stores it in
