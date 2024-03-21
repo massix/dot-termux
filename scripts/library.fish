@@ -48,7 +48,7 @@ function check_install
     set -l pkg_name $argv[2]
     if not command -q $cmd
         info "$cmd not installed, installing it"
-        pkg install -y $pkg_name >/dev/null
+        pkg install -y $pkg_name >/dev/null 2>/dev/null
     else
         info "$cmd (package $pkg_name) already installed"
     end
