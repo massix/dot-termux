@@ -57,6 +57,15 @@
     $ ln -s ./storage/org
     #+end_src
 
+*** Termux API
+    One of the Neovim's plugin I use ([[https://github.com/massix/termux.nvim]]) needs
+    to interact with the Android's APIs, those APIs are exposed in the Termux
+    environment using [[https://f-droid.org/en/packages/com.termux.api/][Termux:API]], you can download it for free on the F-Droid store,
+    afterwards you just need to run the command:
+    #+begin_src shell
+    $ termux-setup-api
+    #+end_src
+
 ** Modules
    Some modules are handled, for each of them an installation script is
    provided, together with a corresponding ~install_module.fish~.
