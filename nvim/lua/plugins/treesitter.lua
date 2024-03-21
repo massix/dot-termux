@@ -36,6 +36,7 @@ return {
         "haskell",
         "hjson",
         "html",
+        "ini",
         "java",
         "javascript",
         "jsdoc",

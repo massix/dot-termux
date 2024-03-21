@@ -1,0 +1,15 @@
+[core]
+output = table
+collect_telemetry = false
+first_run = yes
+
+[defaults]
+location = westeurope
+
+[cloud]
+name = AzureCloud
+
+[extension]
+use_dynamic_install = yes_prompt
+run_after_dynamic_install = True
+

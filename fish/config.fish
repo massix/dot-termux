@@ -16,6 +16,11 @@ if status is-interactive
     abbr -a zjd zellij delete-session
     abbr -a zjda zellij delete-all-sessions
 
+    # kubernetes
+    abbr -a k kubectl
+    abbr -a kg kubectl get
+    abbr -a kk k9s
+
     # Set environment variables
     set -x PAGER bat
     set -x EDITOR nvim

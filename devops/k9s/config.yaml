@@ -1,0 +1,9 @@
+k9s:
+  liveViewAutoRefresh: true
+  noExitOnCtrlC: true
+  ui:
+    enableMouse: true
+    reactive: true
+    skin: catppuccin-mocha
+  logger:
+    buffer: 10000
