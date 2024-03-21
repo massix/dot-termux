@@ -8,6 +8,7 @@ if status is-interactive
     # pkg
     abbr -a pi pkg install
     abbr -a pu pkg update
+    abbr -a ps pkg search
     abbr -a puu "pkg update && pkg upgrade"
 
     # zellij
