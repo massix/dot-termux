@@ -82,6 +82,12 @@
     - ~fzf~
     - ~uuid-utils~, used by ~orgmode~
     - ~tldr~ using ~tealdeer~
+    - ~broot~
+
+    On top of that, it will also configure some useful environment variables to
+    interact with the different tools. It also configures ~broot~ to use modal
+    mode by default and a colorscheme which matches the overall style of the
+    configuration (catppuccin-mocha).
 
 **** Fisher
      [[https://github.com/jorgebucaran/fisher][fisher]] is a plugin manager
@@ -121,6 +127,13 @@
 
     This is basically a tuned-down configuration of my main repository
     [[https://github.com/massix/nixos][here]].
+
+*** DevOps
+    This module installs some useful tools to work on DevOps environments
+    from the comfort of your smartphone. It installs ~azure-cli~ using the
+    embedded ~libsodium~ library, it configures it with some defaults (take
+    a look at [[./devops/azure/config][the configuration file]]) and it also installs ~kubectl~ and
+    ~k9s~ with a delightful catppuccin-mocha colorscheme.
 
 *** Coding
     This module allows for some basic development on Android devices, for now only
