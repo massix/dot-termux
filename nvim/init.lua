@@ -86,6 +86,7 @@ for _, rhs in ipairs(all_rhs) do
   vim.keymap.set("n", rhs, function() _G.neovide_config() end, { desc = "Only works in neovide" })
 end
 
+-- Autoreload buffer when the file is modified
 local group = vim.api.nvim_create_augroup("AutoReload", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "CursorHold", "CursorHoldI" }, {
   pattern = "*",
@@ -94,6 +95,25 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "CursorHold", "CursorHo
     if vim.api.nvim_get_mode().mode ~= "c" then
       vim.cmd.checktime()
     end
+  end,
+})
+
+-- Close some windows with q
+vim.api.nvim_create_autocmd("Filetype", {
+  group = vim.api.nvim_create_augroup("CloseWithQ", { clear = true }),
+  pattern = {
+    "fugitive",
+    "git",
+    "help",
+    "neotest-output",
+    "neotest-output-panel",
+    "neotest-summary",
+    "qf",
+    "aerial-nav",
+    "dap-float",
+  },
+  callback = function(args)
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = args.buf, silent = true })
   end,
 })
 
