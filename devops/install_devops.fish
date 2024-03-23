@@ -17,6 +17,10 @@ check_install curl curl
 
 # Needed to compile pycrypto
 info "Installing azure-cli dependencies"
+
+# If the package was installed before launching this script, then do not
+# remove it afterwards, as it means it was installed by the user
+set -l prev_rust (has_package rust)
 check_install rustc rust
 check_install aarch64-linux-android-ld binutils-is-llvm
 
@@ -47,7 +51,10 @@ curl -sL {$catppuccin}/k9s/archive/main.tar.gz | tar xz -C "$k9s_dir/skins" --st
 
 # Remove packages used for building azure-cli
 info "Cleaning up"
-pkg remove -y rust >/dev/null 2>/dev/null
+if not $prev_rust
+    pkg remove -y rust >/dev/null 2>/dev/null
+end
+
 pkg remove -y libsodium >/dev/null 2>/dev/null
 pkg remove -y aarch64-linux-android-ld >/dev/null 2>/dev/null
 pkg remove -y binutils-is-llvm >/dev/null 2>/dev/null

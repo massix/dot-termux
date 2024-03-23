@@ -40,6 +40,14 @@ function backup_file -a src dst
     mv "$src" "$dst"
 end
 
+function has_package -d "Checks if a package is installed" -a pkg
+    if dpkg -L {$pkg} >/dev/null 2>/dev/null
+        echo true
+    else
+        echo false
+    end
+end
+
 function check_install -a cmd pkg
     if not command -q $cmd
         info "$cmd not installed, installing it"
