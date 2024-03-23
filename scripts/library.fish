@@ -30,10 +30,7 @@ function error
     log error $argv
 end
 
-function backup_file
-    set src $argv[1]
-    set dst $argv[2]
-
+function backup_file -a src dst
     if not test -d $backup_dir
         info "$backup_dir does not exist, creating it"
         mkdir -p $backup_dir
@@ -43,21 +40,16 @@ function backup_file
     mv "$src" "$dst"
 end
 
-function check_install
-    set -l cmd $argv[1]
-    set -l pkg_name $argv[2]
+function check_install -a cmd pkg
     if not command -q $cmd
         info "$cmd not installed, installing it"
-        pkg install -y $pkg_name >/dev/null 2>/dev/null
+        pkg install -y $pkg >/dev/null 2>/dev/null
     else
-        info "$cmd (package $pkg_name) already installed"
+        info "$cmd (package $pkg) already installed"
     end
 end
 
-function check_install_npm
-    set -l cmd $argv[1]
-    set -l pkg $argv[2]
-
+function check_install_npm -a cmd pkg
     if ! type -q npm then
         error "You must install npm first"
         return
