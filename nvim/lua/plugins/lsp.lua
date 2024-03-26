@@ -12,6 +12,7 @@ return {
       { "hrsh7th/cmp-nvim-lsp" },
       { "b0o/schemastore.nvim" },
       { "someone-stole-my-name/yaml-companion.nvim" },
+      { "p00f/clangd_extensions.nvim", opts = {} },
     },
     config = function()
       require("neoconf").setup()
@@ -89,6 +90,8 @@ return {
               { buffer = bufnr, mode = "n" },
             },
           })
+          require("clangd_extensions.inlay_hints").setup_autocmd()
+          require("clangd_extensions.inlay_hints").set_inlay_hints()
         end,
       })
 
