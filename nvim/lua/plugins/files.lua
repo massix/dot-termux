@@ -80,6 +80,9 @@ return {
       win_options = {
         signcolumn = "number",
       },
+      keymaps = {
+        q = "actions.close",
+      },
     },
     keys = {
       { "<leader>fo", "<cmd>Oil<cr>", desc = "Oil" },
