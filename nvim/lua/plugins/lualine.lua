@@ -1,14 +1,8 @@
-function fg(name)
+local fg = function(name)
   local hl = vim.api.nvim_get_hl and vim.api.nvim_get_hl(0, { name = name }) or vim.api.nvim_get_hl_by_name(name, true)
   local fg = hl and hl.fg or hl.foreground
   return fg and { fg = string.format("#%06x", fg) }
 end
-
-local git_icons = {
-  added = " ",
-  modified = " ",
-  removed = " ",
-}
 
 return {
   -- statusline
@@ -30,14 +24,14 @@ return {
               "mode",
               fmt = function(str)
                 local convert = {
-                  ["normal"] = "NRM",
-                  ["insert"] = "INS",
-                  ["visual"] = "VIS",
-                  ["v-line"] = "VLN",
-                  ["v-block"] = "VBL",
-                  ["command"] = "CMD",
-                  ["terminal"] = "TRM",
-                  ["replace"] = "RPL",
+                  ["normal"] = "N",
+                  ["insert"] = "I",
+                  ["visual"] = "V",
+                  ["v-line"] = "V",
+                  ["v-block"] = "V",
+                  ["command"] = "C",
+                  ["terminal"] = "T",
+                  ["replace"] = "R",
                 }
 
                 if vim.g.venn_enabled then
@@ -141,7 +135,7 @@ return {
                 for _, client in ipairs(clients) do
                   local filetypes = client.config.filetypes
                   if filetypes and vim.fn.index(filetypes, bufft) ~= -1 then
-                    local ret = client.name
+                    local ret = " "
                     if #clients > 1 then
                       ret = ret .. "+"
                     end
@@ -155,7 +149,6 @@ return {
                 local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
                 return next(clients) ~= nil
               end,
-              icon = " ",
             },
           },
           lualine_c = {
@@ -198,14 +191,6 @@ return {
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
               color = fg("Constant"),
             },
-            {
-              "diff",
-              symbols = {
-                added = git_icons.added,
-                modified = git_icons.modified,
-                removed = git_icons.removed,
-              },
-            },
           },
           lualine_y = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
@@ -218,11 +203,6 @@ return {
               cond = function()
                 return package.loaded["nomodoro"] and require("nomodoro").status() ~= nil
               end,
-            },
-            {
-              function()
-                return require("termux").get_volume_statusline()
-              end
             },
             {
               function()

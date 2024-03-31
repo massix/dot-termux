@@ -7,6 +7,7 @@ return {
     event = "VimEnter",
     opts = {
       volume = {
+        enabled = false,
         streams = { "music", "ring" },
       },
     },
