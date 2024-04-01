@@ -25,7 +25,6 @@ return {
     },
     config = function(_, opts)
       local orgmode = require("orgmode")
-      orgmode.setup_ts_grammar()
       orgmode.setup(opts)
 
       local orgmode_group = vim.api.nvim_create_augroup("OrgMode", { clear = true })

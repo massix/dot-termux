@@ -51,7 +51,6 @@ return {
         "markdown_inline",
         "nix",
         "norg",
-        "org",
         "purescript",
         "query",
         "racket",
