@@ -6,7 +6,6 @@ return {
     commit = "050ed170b413872015b5f005b45fde1b7cd5cd22",
     ft = { "org", "orgagenda" },
     dependencies = {
-      { "akinsho/org-bullets.nvim", config = true, lazy = false },
       { "nvim-treesitter/nvim-treesitter", lazy = true },
       {
         "lyz-code/telescope-orgmode.nvim",
