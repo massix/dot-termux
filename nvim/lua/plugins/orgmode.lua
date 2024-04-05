@@ -3,7 +3,6 @@ return {
   -- orgmode
   {
     "nvim-orgmode/orgmode",
-    commit = "050ed170b413872015b5f005b45fde1b7cd5cd22",
     ft = { "org", "orgagenda" },
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", lazy = true },
@@ -26,7 +25,6 @@ return {
     config = function(_, opts)
       local orgmode = require("orgmode")
       orgmode.setup(opts)
-      orgmode.setup_ts_grammar()
 
       local orgmode_group = vim.api.nvim_create_augroup("OrgMode", { clear = true })
 
