@@ -438,34 +438,25 @@ return {
     ft = { "markdown", "org", "norg" },
   },
 
-  -- Better e, w and friends
+  -- Better w, e, b and friends
   {
-    "backdround/neowords.nvim",
-    event = "VeryLazy",
+    "chrisgrieser/nvim-spider",
+    event = { "BufEnter" },
     config = function()
-      local neowords = require("neowords")
-      local p = neowords.pattern_presets
-      local subword_hops = neowords.get_word_hops(
-        p.snake_case,
-        p.camel_case,
-        p.upper_case,
-        p.number,
-        p.hex_color,
-        "\\v:+",
-        "\\v;",
-        "\\v\\.+",
-        "\\v,+",
-        "\\v\\(+",
-        "\\v\\)+",
-        "\\v\\{+",
-        "\\v\\}+",
-        "\\v$+"
-      )
+      require("spider").setup({
+        skipInsignificantPunctuation = true,
+        subwordMovement = true,
+        customPatterns = {},
+      })
 
-      vim.keymap.set({ "n", "x", "o" }, "w", subword_hops.forward_start)
-      vim.keymap.set({ "n", "x", "o" }, "e", subword_hops.forward_end)
-      vim.keymap.set({ "n", "x", "o" }, "b", subword_hops.backward_start)
-      vim.keymap.set({ "n", "x", "o" }, "ge", subword_hops.backward_end)
+      local map_spider = function(key)
+        vim.keymap.set({ "x", "n", "o" }, key, [[<cmd>lua require("spider").motion("]] .. key .. [[")<cr>]])
+      end
+
+      map_spider("w")
+      map_spider("e")
+      map_spider("b")
+      map_spider("ge")
     end,
   },
 
