@@ -3,8 +3,9 @@ return {
   {
     "folke/trouble.nvim",
     branch = "dev",
-    cmd = { "TroubleToggle", "Trouble" },
+    cmd = { "Trouble" },
     opts = {},
+    event = { "LspAttach" },
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Document Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle<cr>", desc = "Workspace Diagnostics (Trouble)" },

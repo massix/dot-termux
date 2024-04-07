@@ -19,6 +19,20 @@ return {
       require("neodev").setup()
       require("telescope").load_extension("yaml_schema")
 
+      ---@param bufnr integer
+      ---@param client lsp.Client
+      local attach_trouble = function(client, bufnr)
+        if client.server_capabilities.documentSymbolProvider then
+          vim.api.nvim_buf_set_keymap(
+            bufnr,
+            "n",
+            "<leader>co",
+            "<cmd>Trouble symbols toggle focus=true win.position=left pinned=true<CR>",
+            { desc = "LSP Symbols" }
+          )
+        end
+      end
+
       local lspconfig = require("lspconfig")
       local all_configs = require("lspconfig.configs")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -32,11 +46,16 @@ return {
             "--stdio",
           },
           ---@param bufnr integer
-          on_attach = function(_, bufnr)
-            local wk = require("which-key")
-            wk.register({
-              ["<leader>cS"] = { "<cmd>Telescope yaml_schema<CR>", "Switch YAML schema", { buffer = bufnr } },
-            })
+          on_attach = function(client, bufnr)
+            vim.api.nvim_buf_set_keymap(
+              bufnr,
+              "n",
+              "<leader>cS",
+              "<cmd>Telescope yaml_schema<CR>",
+              { desc = "Switch YAML Schema " }
+            )
+
+            attach_trouble(client, bufnr)
           end,
         },
       })
@@ -64,6 +83,7 @@ return {
 
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
+        on_attach = attach_trouble,
       })
 
       lspconfig.clangd.setup({
@@ -81,15 +101,17 @@ return {
         },
         capabilities = capabilities,
         ---@param bufnr integer
-        on_attach = function(_, bufnr)
-          local wk = require("which-key")
-          wk.register({
-            ["<leader>cS"] = {
-              "<cmd>ClangdSwitchSourceHeader<cr>",
-              "Switch source and headers (C/C++)",
-              { buffer = bufnr, mode = "n" },
-            },
-          })
+        on_attach = function(client, bufnr)
+          vim.api.nvim_buf_set_keymap(
+            bufnr,
+            "n",
+            "<leader>cS",
+            "<cmd>ClangdSwitchSourceHeader<CR>",
+            { desc = "Switch source and headers (C/C++)" }
+          )
+
+          attach_trouble(client, bufnr)
+
           require("clangd_extensions.inlay_hints").setup_autocmd()
           require("clangd_extensions.inlay_hints").set_inlay_hints()
         end,
@@ -97,6 +119,7 @@ return {
 
       lspconfig.jsonls.setup({
         capabilities = capabilities,
+        on_attach = attach_trouble,
         cmd = {
           "node",
           global_npm_path .. "/vscode-langservers-extracted/lib/json-language-server/node/jsonServerMain.js",
@@ -131,6 +154,7 @@ return {
 
       lspconfig.typst_lsp.setup({
         capabilities = capabilities,
+        on_attach = attach_trouble,
       })
     end,
   },

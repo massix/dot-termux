@@ -41,6 +41,7 @@ return {
         "javascript",
         "jsdoc",
         "json",
+        "jsonc",
         "just",
         "kdl",
         "ledger",
