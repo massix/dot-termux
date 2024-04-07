@@ -40,7 +40,7 @@ return {
       vim.api.nvim_create_autocmd("Filetype", {
         group = orgmode_group,
         pattern = "org",
-        callback = function()
+        callback = function(args)
           vim.wo.concealcursor = "vnic"
           vim.wo.conceallevel = 3
 
@@ -52,18 +52,9 @@ return {
           vim.opt_local.modeline = true
           vim.opt_local.modelines = 30
 
-          -- stylua: ignore
-          local map = function(mode, lhs)
-            if type(mode) == "table" then
-              for _, m in ipairs(mode) do
-                vim.api.nvim_buf_set_keymap(0, m, lhs, "<cmd>lua org_toggle_conceal()<CR>", { desc = "Toggle conceal" })
-              end
-            else
-              vim.api.nvim_buf_set_keymap(0, mode, lhs, "<cmd>lua org_toggle_conceal()<CR>", { desc = "Toggle conceal" })
-            end
-          end
-
-          map({ "i", "n", "v" }, "<C-c>c")
+          require("which-key").register({
+            ["<C-c>c"] = { org_toggle_conceal, "Toggle conceal", mode = { "n", "i", "v" }, buffer = args.buf },
+          })
         end,
       })
     end,
@@ -188,31 +179,31 @@ return {
         org_capture_templates = {
           r = {
             description = "Refilable Task",
-            template = "* TODO %?\n%u",
+            template = "* TODO %?\n  %u",
             headline = "Tasks",
             target = "~/org/refile.org",
           },
           t = {
             description = "Personal Task",
-            template = "* TODO %?\n%u",
+            template = "* TODO %?\n  %u",
             headline = "Tasks",
             target = "~/org/index.org",
           },
           T = {
             description = "Work Task",
-            template = "* TODO %?\n%u",
+            template = "* TODO %?\n  %u",
             headline = "Tasks",
             target = "~/org/work.org",
           },
           c = {
             description = "Personal calendar entry",
-            template = "* MEET %?\nSCHEDULED: %T\n",
+            template = "* MEET %?\n  SCHEDULED: %T",
             headline = "Calendar",
             target = "~/org/index.org",
           },
           C = {
             description = "Work calendar entry",
-            template = "* MEET %?\nSCHEDULED: %T\n",
+            template = "* MEET %?\n  SCHEDULED: %T",
             headline = "Calendar",
             target = "~/org/work.org",
           },
