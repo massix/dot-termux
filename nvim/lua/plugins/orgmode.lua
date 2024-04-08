@@ -197,13 +197,13 @@ return {
           },
           c = {
             description = "Personal calendar entry",
-            template = "* MEET %?\n  SCHEDULED: %T",
+            template = "* MEET %?\n  SCHEDULED: %^{Meeting Date}T",
             headline = "Calendar",
             target = "~/org/index.org",
           },
           C = {
             description = "Work calendar entry",
-            template = "* MEET %?\n  SCHEDULED: %T",
+            template = "* MEET %?\n  SCHEDULED: %^{Meeting Date}T",
             headline = "Calendar",
             target = "~/org/work.org",
           },
