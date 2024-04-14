@@ -117,4 +117,12 @@ vim.api.nvim_create_autocmd("Filetype", {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = vim.api.nvim_create_augroup("TypstFileType", { clear = true }),
+  pattern = "*.typ",
+  callback = function()
+    vim.bo.filetype = "typst"
+  end,
+})
+
 vim.cmd([[colorscheme catppuccin]])
