@@ -6,10 +6,10 @@ if status is-interactive
     abbr -a mk make
 
     # pkg
-    abbr -a pi pkg install
-    abbr -a pu pkg update
-    abbr -a ps pkg search
-    abbr -a puu "pkg update && pkg upgrade"
+    abbr -a pki pkg install
+    abbr -a pku pkg update
+    abbr -a pks pkg search
+    abbr -a pkuu "pkg update && pkg upgrade"
 
     # zellij
     abbr -a zj zellij
