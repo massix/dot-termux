@@ -156,6 +156,11 @@ return {
         capabilities = capabilities,
         on_attach = attach_trouble,
       })
+
+      lspconfig.gopls.setup({
+        capabilities = capabilities,
+        on_attach = attach_trouble,
+      })
     end,
   },
 

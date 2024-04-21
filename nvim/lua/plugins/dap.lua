@@ -1,6 +1,7 @@
 -- Debug adapters for NeoVim
 local json_transforms = {
   ["lldb"] = { "c", "cpp" },
+  ["delve"] = { "go" },
 }
 
 --- @type LazyPluginSpec[]
@@ -104,6 +105,19 @@ return {
         type = "executable",
         command = "/data/data/com.termux/files/usr/bin/lldb-vscode",
         name = "lldb",
+      }
+
+      dap.adapters.delve = {
+        type = "server",
+        port = "${port}",
+        executable = {
+          command = "dlv",
+          args = { "dap", "--only-same-user=false", "-l", "127.0.0.1:${port}" },
+          detached = true,
+        },
+        options = {
+          initialize_timeout_sec = 20,
+        },
       }
 
       -- setup dap config by VsCode launch.json file

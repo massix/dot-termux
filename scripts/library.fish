@@ -58,15 +58,30 @@ function check_install -a cmd pkg
 end
 
 function check_install_npm -a cmd pkg
-    if ! type -q npm then
+    if ! type -q npm
         error "You must install npm first"
         return
     end
 
-    if ! type -q $cmd then
+    if ! type -q $cmd
         info "Installing $pkg from npm"
         npm i -g $pkg
     else
         info "$cmd from npm $pkg already installed"
+    end
+end
+
+function check_install_go -a binary gopkg --description "Install a Go Package"
+    if ! type -q go
+        error "You must install go first"
+        return
+    end
+
+    set -l GO_BIN_PATH {$HOME}/go/bin
+    if ! type -q $binary and ! test -f {$GO_BIN_PATH}/$binary
+        info "Installing $binary from $gopkg in $GO_BIN_PATH"
+        go install $gopkg
+    else
+        info "$binary (gopkg $gopkg) already installed"
     end
 end

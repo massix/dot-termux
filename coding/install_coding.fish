@@ -18,6 +18,9 @@ check_install cppcheck cppcheck
 check_install npm nodejs
 check_install typst typst
 check_install typst-lsp typst-lsp
+check_install go golang
+check_install gopls gopls
+check_install dlv delve
 check_install_npm yaml-language-server yaml-language-server
 check_install_npm vscode-json-language-server vscode-langservers-extracted
 check_install_npm bash-language-server bash-language-server

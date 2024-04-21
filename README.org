@@ -149,4 +149,6 @@
     the following languages are supported (with ~LSP~ where available):
     - ~C~, ~C++~ and derivates
     - ~Javascript~ and ~Typescript~
+    - =typst= for document writing
+    - =go= with =delve= debugger
 

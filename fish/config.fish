@@ -26,4 +26,7 @@ if status is-interactive
     set -x PAGER bat
     set -x EDITOR nvim
     set -x LEDGER_FILE "$HOME/org/.hledger.journal"
+
+    # Add go path
+    test -d {$HOME}/go/bin; and fish_add_path --path {$HOME}/go/bin
 end

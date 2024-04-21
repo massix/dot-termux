@@ -35,6 +35,7 @@ return {
         lua = { "stylua" },
         fish = { "fish_indent" },
         c = { "clang_format" },
+        go = { "gofmt" },
       },
       format_on_save = function(_)
         return { lsp_fallback = true }

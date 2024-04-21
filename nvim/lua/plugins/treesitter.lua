@@ -33,6 +33,7 @@ return {
         "dockerfile",
         "elvish",
         "fish",
+        "go",
         "haskell",
         "hjson",
         "html",
