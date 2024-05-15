@@ -35,7 +35,11 @@ return {
 
       local lspconfig = require("lspconfig")
       local all_configs = require("lspconfig.configs")
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = false,
+      }
       local global_npm_path = vim.fn.expand("$HOME/../../files/usr/lib/node_modules")
       local cfg = require("yaml-companion").setup({
         lspconfig = {
