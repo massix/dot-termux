@@ -16,6 +16,8 @@ return {
         "index.org",
         "compile_flags.txt",
         "compile_commands.json",
+        "go.mod",
+        "go.sum",
       },
       show_hidden = false,
       silent_chdir = true,

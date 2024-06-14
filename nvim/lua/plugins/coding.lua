@@ -66,22 +66,27 @@ return {
   },
 
   {
-    "nvimtools/none-ls.nvim",
-    dependencies = {
-      "ThePrimeagen/refactoring.nvim",
-    },
-    name = "null-ls",
+    "ThePrimeagen/refactoring.nvim",
+    opts = {},
+    config = false,
+    event = "BufEnter",
+  },
+
+  {
+    "mfussenegger/nvim-lint",
     opts = {},
     config = function()
-      local nls = require("null-ls")
-      nls.setup({
-        sources = {
-          nls.builtins.diagnostics.cppcheck,
-          nls.builtins.diagnostics.fish,
-          nls.builtins.code_actions.refactoring,
-        },
+      require("lint").linters_by_ft = {
+        c = { "cppcheck" },
+        cpp = { "cppcheck" },
+        fish = { "fish" },
+      }
+
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          require("lint").try_lint()
+        end,
       })
     end,
-    event = { "BufEnter", "BufWinEnter" },
   },
 }
