@@ -13,7 +13,7 @@ check_install node nodejs
 check_install lua-language-server lua-language-server
 check_install make make
 check_install xmake xmake
-check_install lldb-vscode lldb
+check_install lldb-dap lldb
 check_install cppcheck cppcheck
 check_install npm nodejs
 check_install typst typst
@@ -22,6 +22,8 @@ check_install go golang
 check_install gopls gopls
 check_install dlv delve
 check_install_go gofumpt mvdan.cc/gofumpt@latest
+check_install_go golangci-lint github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+check_install_go impl github.com/josharian/impl@latest
 check_install_npm yaml-language-server yaml-language-server
 check_install_npm vscode-json-language-server vscode-langservers-extracted
 check_install_npm bash-language-server bash-language-server

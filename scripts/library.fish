@@ -78,7 +78,7 @@ function check_install_go -a binary gopkg --description "Install a Go Package"
     end
 
     set -l GO_BIN_PATH {$HOME}/go/bin
-    if ! type -q $binary and ! test -f {$GO_BIN_PATH}/$binary
+    if ! test -f {$GO_BIN_PATH}/$binary
         info "Installing $binary from $gopkg in $GO_BIN_PATH"
         go install $gopkg
     else
