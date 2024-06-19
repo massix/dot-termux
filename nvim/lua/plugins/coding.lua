@@ -80,6 +80,7 @@ return {
         c = { "cppcheck" },
         cpp = { "cppcheck" },
         fish = { "fish" },
+        go = { "golangcilint" },
       }
 
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
