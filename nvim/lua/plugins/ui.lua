@@ -96,47 +96,6 @@ return {
     end,
   },
 
-  -- Golden ratio split
-  {
-    "nvim-focus/focus.nvim",
-    enabled = false,
-    lazy = false,
-    init = function()
-      -- Do not resize `nofile' buffers
-      local group = vim.api.nvim_create_augroup("FocusDisable", { clear = true })
-      local ignore_buftypes = { "nofile", "terminal", "prompt", "popup" }
-      local ignore_filetypes = { "NvimTree", "OverseerList" }
-      vim.api.nvim_create_autocmd("WinEnter", {
-        group = group,
-        callback = function(_)
-          if vim.tbl_contains(ignore_buftypes, vim.bo.buftype) then
-            vim.w.focus_disable = true
-          else
-            vim.w.focus_disable = false
-          end
-        end,
-        desc = "Disable focus for nofile buffers",
-      })
-
-      vim.api.nvim_create_autocmd("FileType", {
-        group = group,
-        callback = function(_)
-          if vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
-            vim.b.focus_disable = true
-          else
-            vim.b.focus_disable = false
-          end
-        end,
-        desc = "Disable focus for terminal, prompt, popup, and NvimTree",
-      })
-    end,
-    opts = {
-      ui = {
-        signcolumn = false,
-      },
-    },
-  },
-
   -- Noice
   {
     "folke/noice.nvim",
@@ -255,16 +214,6 @@ return {
     },
     config = function(_, opts)
       require("reactive").setup(opts)
-
-      -- issue: https://github.com/nvim-telescope/telescope.nvim/issues/2027#issuecomment-1561836585
-      -- FIXME: this has some impacts on project.nvim too
-      vim.api.nvim_create_autocmd("WinLeave", {
-        callback = function()
-          if vim.bo.ft == "TelescopePrompt" and vim.fn.mode() == "i" then
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "i", false)
-          end
-        end,
-      })
     end,
   },
 

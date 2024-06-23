@@ -12,12 +12,18 @@ return {
       { "hrsh7th/cmp-nvim-lsp" },
       { "b0o/schemastore.nvim" },
       { "someone-stole-my-name/yaml-companion.nvim" },
-      { "p00f/clangd_extensions.nvim", opts = {} },
     },
     config = function()
       require("neoconf").setup()
       require("neodev").setup()
       require("telescope").load_extension("yaml_schema")
+
+      -- Make sure hints are always enabled
+      vim.api.nvim_create_autocmd({ "LspAttach" }, {
+        callback = function()
+          vim.lsp.inlay_hint.enable()
+        end,
+      })
 
       ---@param bufnr integer
       ---@param client lsp.Client
@@ -115,9 +121,6 @@ return {
           )
 
           attach_trouble(client, bufnr)
-
-          require("clangd_extensions.inlay_hints").setup_autocmd()
-          require("clangd_extensions.inlay_hints").set_inlay_hints()
         end,
       })
 
@@ -164,6 +167,18 @@ return {
       lspconfig.gopls.setup({
         capabilities = capabilities,
         on_attach = attach_trouble,
+        settings = {
+          gopls = {
+            allExperiments = true,
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              constantValues = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+          },
+        },
       })
     end,
   },

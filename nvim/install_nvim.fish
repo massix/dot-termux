@@ -9,6 +9,7 @@ info "Installing nvim"
 check_install nvim neovim
 check_install gcc clang
 check_install rg ripgrep
+check_install luarocks luarocks
 
 function symlink
     info symlinking
