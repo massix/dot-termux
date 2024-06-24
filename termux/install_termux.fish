@@ -8,7 +8,7 @@ set termux_dir "$HOME/.termux"
 set -l cache_dir "$HOME/.cache/installer"
 mkdir -p {$cache_dir}/font
 
-set -l font_url "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/IBMPlexMono.zip"
+set -l font_url "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Go-Mono.zip"
 
 check_install curl curl
 
@@ -26,12 +26,13 @@ info "Unpacking font"
 unzip -qq -o -x "$cache_dir/font.zip" -d "$cache_dir/font/"
 
 info "Copying patched font"
-cp {$cache_dir}/font/BlexMonoNerdFont-Regular.ttf {$termux_dir}/font.ttf
+cp {$cache_dir}/font/GoMonoNerdFont-Regular.ttf {$termux_dir}/font.ttf
 
 info "Cleaning cache folder"
 rm -rf {$cache_dir}/font/*
 
 if command -q termux-reload-settings
     info "Reloading termux configuration"
+    sleep 3
     termux-reload-settings
 end
