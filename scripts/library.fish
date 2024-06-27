@@ -12,10 +12,9 @@ function log
             set color yellow
         case error
             set color red
-
     end
 
-    echo "[$(date +'%Y-%m-%d %T')]$(set_color $color) $msg$(set_color normal)"
+    echo "[$(date +'%T')] $(set_color $color)$level$(set_color normal) $msg"
 end
 
 function info
@@ -84,4 +83,15 @@ function check_install_go -a binary gopkg --description "Install a Go Package"
     else
         info "$binary (gopkg $gopkg) already installed"
     end
+end
+
+function shafile -a input -d "Calculates the sha256 of the file"
+    info "Calculating hash of $(basename $input)" >/dev/stderr
+
+    if ! test -f {$input}
+        error "File $input does not exist" >/dev/stderr
+        return
+    end
+
+    shasum {$input} | cut -d " " -f1
 end
