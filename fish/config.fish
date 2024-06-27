@@ -25,7 +25,6 @@ if status is-interactive
     # Set environment variables
     set -x PAGER bat
     set -x EDITOR nvim
-    set -x LEDGER_FILE "$HOME/org/.hledger.journal"
     set -x XDG_RUNTIME_DIR "$HOME/tmp"
 
     # Add go path

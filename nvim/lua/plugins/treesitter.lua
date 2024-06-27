@@ -45,7 +45,6 @@ return {
         "jsonc",
         "just",
         "kdl",
-        "ledger",
         "lua",
         "luadoc",
         "luap",
