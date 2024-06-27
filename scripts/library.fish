@@ -6,6 +6,8 @@ function log
     set color normal
 
     switch $level
+        case debug
+            set color magenta
         case info
             set color green
         case warning
@@ -14,7 +16,13 @@ function log
             set color red
     end
 
-    echo "[$(date +'%T')] $(set_color $color)$level$(set_color normal) $msg"
+    echo "[$(date +'%T')] $(set_color $color)$level$(set_color normal) $msg" >/dev/stderr
+end
+
+function debug
+    if test -n "$DOT_TERMUX_DEBUG"
+        log debug $argv
+    end
 end
 
 function info
@@ -30,6 +38,7 @@ function error
 end
 
 function backup_file -a src dst
+    debug "Backing up $src"
     if not test -d $backup_dir
         info "$backup_dir does not exist, creating it"
         mkdir -p $backup_dir
@@ -40,6 +49,8 @@ function backup_file -a src dst
 end
 
 function has_package -d "Checks if a package is installed" -a pkg
+    debug "Checking if package $pkg is installed"
+
     if dpkg -L {$pkg} >/dev/null 2>/dev/null
         echo true
     else
@@ -48,15 +59,17 @@ function has_package -d "Checks if a package is installed" -a pkg
 end
 
 function check_install -a cmd pkg
+    debug "Checking if $cmd is a command, otherwise install $pkg with termux"
     if not command -q $cmd
         info "$cmd not installed, installing it"
         pkg install -y $pkg >/dev/null 2>/dev/null
     else
-        info "$cmd (package $pkg) already installed"
+        debug "$cmd (package $pkg) already installed"
     end
 end
 
 function check_install_npm -a cmd pkg
+    debug "Check if $cmd is a command, otherwise install $pkg with npm"
     if ! type -q npm
         error "You must install npm first"
         return
@@ -66,30 +79,39 @@ function check_install_npm -a cmd pkg
         info "Installing $pkg from npm"
         npm i -g $pkg
     else
-        info "$cmd from npm $pkg already installed"
+        debug "$cmd from npm $pkg already installed"
     end
 end
 
 function check_install_go -a binary gopkg --description "Install a Go Package"
+    debug "Check if $binary is a command, otherwise install $gopkg with go"
+
     if ! type -q go
         error "You must install go first"
         return
     end
 
-    set -l GO_BIN_PATH {$HOME}/go/bin
+    set -l GO_BIN_PATH (go env GOPATH)/bin
+    debug "GO_BIN_PATH=$GO_BIN_PATH"
+
     if ! test -f {$GO_BIN_PATH}/$binary
         info "Installing $binary from $gopkg in $GO_BIN_PATH"
         go install $gopkg
     else
-        info "$binary (gopkg $gopkg) already installed"
+        debug "$binary (gopkg $gopkg) already installed"
     end
 end
 
 function shafile -a input -d "Calculates the sha256 of the file"
-    info "Calculating hash of $(basename $input)" >/dev/stderr
+    debug "Calculating hash of $(basename $input)" >/dev/stderr
+
+    if not type -q shasum
+        error "shasum is not installed, install it first"
+        return
+    end
 
     if ! test -f {$input}
-        error "File $input does not exist" >/dev/stderr
+        warning "File $input does not exist" >/dev/stderr
         return
     end
 

@@ -27,3 +27,5 @@ check_install_go impl github.com/josharian/impl@latest
 check_install_npm yaml-language-server yaml-language-server
 check_install_npm vscode-json-language-server vscode-langservers-extracted
 check_install_npm bash-language-server bash-language-server
+
+info "Done!"

@@ -25,6 +25,7 @@ check_install rustc rust
 check_install aarch64-linux-android-ld binutils-is-llvm
 
 # Need to install this first
+debug "Installing libsodium and pynacl"
 pkg install -y libsodium >/dev/null 2>/dev/null
 pip install pynacl >/dev/null
 

@@ -11,11 +11,6 @@ check_install gcc clang
 check_install rg ripgrep
 check_install luarocks luarocks
 
-function symlink
-    info symlinking
-    ln -s $current_dir $file_path
-end
-
 if test -L $file_path
     warning "nvim already set up as a symbolic link"
 
@@ -27,13 +22,15 @@ if test -L $file_path
     else
         warning "not pointing here, making it point here"
         rm $file_path
-        symlink
+        ln -s $current_dir $file_path
     end
 else if test -d $file_path
+    info "nvim config is a folder, backing it up and converting to a symbolic link"
     # Backup existing folder
     set -l backup_dest "$backup_dir/nvim-$(date +'%s')"
     backup_file $file_path $backup_dest
-    symlink
+    ln -s $current_dir $file_path
 else
-    symlink
+    info "nvim config does not exist, symlinking it"
+    ln -s $current_dir $file_path
 end
