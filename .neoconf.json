@@ -21,9 +21,7 @@
     "lua_ls": {
       "Lua.hint.enable": true,
       "Lua.hint.paramName": "All",
-      "Lua.hint.semicolon": "All",
       "Lua.codeLens.enable": true,
-      "Lua.hint.arrayIndex": "Enable",
       "Lua.semantic.enable": true,
       "Lua.typeFormat.config": {
         "format_line": "true",

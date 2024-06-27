@@ -167,8 +167,8 @@ return {
         },
         org_default_notes_file = "~/org/refile.org",
         org_agenda_text_search_extra_files = { "agenda-archives" },
-        org_startup_indented = false, -- only for nightly
-        org_adapt_indentation = true,
+        org_startup_indented = true, -- only for nightly
+        org_adapt_indentation = false,
         org_tags_column = 80,
         win_split_mode = "bot 20sp",
         win_border = "rounded",
@@ -230,31 +230,6 @@ return {
       { "<leader>oR", function() require("orgmode").instance().clock:init() end, desc = "org reset clock" },
       { "<leader>oa", function() require("orgmode").action("agenda.prompt") end, desc = "org agenda" },
       { "<leader>oc", function() require("orgmode").action("capture.prompt") end, desc = "org capture" },
-    },
-  },
-
-  -- markdown navigation for 2nd brain
-  {
-    "jakewvincent/mkdnflow.nvim",
-    ft = "markdown",
-    lazy = true,
-    opts = {
-      modules = {
-        cmp = true,
-      },
-      wrap = true,
-      links = {
-        style = "markdown",
-        transform_explicit = function(text)
-          text = text:gsub(" ", "-")
-          text = text:lower()
-          return text
-        end,
-      },
-      new_file_template = {
-        use_template = true,
-        template = "# {{ title }}",
-      },
     },
   },
 
