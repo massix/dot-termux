@@ -18,6 +18,7 @@ return {
         "compile_commands.json",
         "go.mod",
         "go.sum",
+        "index.norg",
       },
       show_hidden = false,
       silent_chdir = true,
