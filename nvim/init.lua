@@ -108,6 +108,7 @@ vim.api.nvim_create_autocmd("Filetype", {
     "neotest-output",
     "neotest-output-panel",
     "neotest-summary",
+    "neotest-attach",
     "qf",
     "aerial-nav",
     "dap-float",
