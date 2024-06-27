@@ -13,7 +13,6 @@ function symlink_file
     info "Symlinking $file to $dst"
 
     if test -L $dst
-        warning "$dst is a symbolic link"
         set -l points (stat $dst | head -n1 | cut -d ' ' -f6)
         if test $points = $file
             info "$dst already symlinked to $file"
@@ -35,7 +34,7 @@ end
 function download_fisher
     set -l tmpdir (mktemp -d)
     curl -sL $fisher_repo/fisher.fish -o $tmpdir/fisher.fish
-    # info "Downloaded fisher to $tmpdir/fisher.fish"
+    info "Downloaded fisher to $tmpdir/fisher.fish" >/dev/stderr
     echo "$tmpdir/fisher.fish"
 end
 
@@ -61,7 +60,7 @@ symlink_file ./config.fish
 symlink_file ./fish_plugins
 
 info "Copying functions"
-mkdir -p $fish_config_root/functions/
+mkdir -p {$fish_config_root}/functions/
 symlink_file ./functions/cat.fish
 symlink_file ./functions/grep.fish
 symlink_file ./functions/find.fish
@@ -76,7 +75,16 @@ fisher update >/dev/null
 info "Configuring broot"
 mkdir -p ~/.config/broot
 
-rm -f ~/.config/broot/conf.hjson
-rm -f ~/.config/broot/verbs.hjson
-ln -s $current_dir/broot/conf.hjson ~/.config/broot/conf.hjson
-ln -s $current_dir/broot/verbs.hjson ~/.config/broot/verbs.hjson
+if ! test -L ~/.config/broot/conf.hjson
+    rm -f ~/.config/broot/conf.hjson
+    ln -s $current_dir/broot/conf.hjson ~/.config/broot/conf.hjson
+else
+    warning "broot conf.hjson is already a symlink"
+end
+
+if ! test -L ~/.config/broot/verbs.hjson
+    rm -f ~/.config/broot/verbs.hjson
+    ln -s $current_dir/broot/verbs.hjson ~/.config/broot/verbs.hjson
+else
+    warning "broot verbs.hjson is already a symlink"
+end
