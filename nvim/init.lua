@@ -102,7 +102,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "CursorHold", "CursorHo
 vim.api.nvim_create_autocmd("Filetype", {
   group = vim.api.nvim_create_augroup("CloseWithQ", { clear = true }),
   pattern = {
-    "fugitive",
+    "gitsigns.blame",
     "git",
     "help",
     "neotest-output",

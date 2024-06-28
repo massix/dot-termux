@@ -29,19 +29,8 @@ return {
     cmd = { "Neogit" },
     -- stylua: ignore
     keys = {
-      { "<leader>gt", function() require("neogit").open({ kind = "tab" }) end, desc = "Open Neogit in new tab" },
+      { "<leader>gg", function() require("neogit").open() end, desc = "Open Neogit" },
       { "<leader>gC", function() require("neogit").open({ "commit" }) end, desc = "Open Neogit commit" },
-    },
-  },
-
-  -- fugitive
-  {
-    "tpope/vim-fugitive",
-    opts = {},
-    config = function() end,
-    cmd = { "Git", "G", "Gstatus" },
-    keys = {
-      { "<leader>gg", "<cmd>G<CR>", desc = "Fugitive" },
     },
   },
 
@@ -69,6 +58,7 @@ return {
       { "<leader>gs", "<cmd>Gitsigns stage_hunk<cr>", desc = "Stage Hunk", mode = { "n", "v" } },
       { "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<cr>", desc = "Undo stage Hunk", mode = { "n", "v" } },
       { "<leader>gr", "<cmd>Gitsigns reset_hunk<cr>", desc = "Reset Hunk", mode = { "n", "v" } },
+      { "<leader>gb", "<cmd>Gitsigns blame<cr>", desc = "Blame file" },
     },
   },
 
