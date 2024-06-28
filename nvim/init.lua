@@ -126,4 +126,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
+-- Sometimes for Markdown files the syntax is not set correctly
+local markdown_group = vim.api.nvim_create_augroup("MarkdownSyntax", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = markdown_group,
+  pattern = "markdown",
+  callback = function(args)
+    vim.api.nvim_set_option_value("syntax", "markdown", { buf = args.buf })
+  end,
+})
+
 vim.cmd([[colorscheme catppuccin]])
