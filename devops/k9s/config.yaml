@@ -6,4 +6,6 @@ k9s:
     reactive: true
     skin: catppuccin-mocha
   logger:
+    tail: 500
     buffer: 10000
+    sinceSeconds: 3600
