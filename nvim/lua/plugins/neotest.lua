@@ -1,15 +1,13 @@
 --- @type LazyPluginSpec[]
 return {
   {
-    -- FIXME: revert to upstream once https://github.com/nvim-neotest/neotest/pull/427 gets merged
-    "massix/neotest",
-    branch = "fix-cpu-info",
+    "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
-      "fredrikaverpil/neotest-golang",
+      { "fredrikaverpil/neotest-golang", version = "*" },
     },
     opts = function()
       return {
