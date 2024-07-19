@@ -8,14 +8,12 @@ return {
     dependencies = {
       -- Similar to .vscode things
       { "folke/neoconf.nvim" },
-      { "folke/neodev.nvim" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "b0o/schemastore.nvim" },
       { "someone-stole-my-name/yaml-companion.nvim" },
     },
     config = function()
       require("neoconf").setup()
-      require("neodev").setup()
       require("telescope").load_extension("yaml_schema")
 
       -- Make sure hints are always enabled

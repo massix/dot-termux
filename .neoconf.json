@@ -1,10 +1,4 @@
 {
-  "neodev": {
-    "library": {
-      "enabled": true,
-      "plugins": true
-    }
-  },
   "neoconf": {
     "live_reload": true,
     "filetype_jsonc": true,
@@ -21,6 +15,8 @@
     "lua_ls": {
       "Lua.hint.enable": true,
       "Lua.hint.paramName": "All",
+      "Lua.hint.arrayIndex": "Disable",
+      "Lua.hint.paramType": false,
       "Lua.codeLens.enable": true,
       "Lua.semantic.enable": true,
       "Lua.typeFormat.config": {
