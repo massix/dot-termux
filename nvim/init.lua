@@ -131,8 +131,18 @@ local markdown_group = vim.api.nvim_create_augroup("MarkdownSyntax", { clear = t
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = markdown_group,
   pattern = "markdown",
-  callback = function(args)
-    vim.api.nvim_set_option_value("syntax", "markdown", { buf = args.buf })
+  callback = function()
+    vim.opt_local.syntax = "markdown"
+  end,
+})
+
+-- Enable spell support on text and text-like files
+local spell_support = vim.api.nvim_create_augroup("SpellSupport", { clear = true })
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "org", "markdown", "norg" },
+  group = spell_support,
+  callback = function()
+    vim.opt_local.spell = true
   end,
 })
 

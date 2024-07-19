@@ -155,7 +155,7 @@ return {
             "toggleterm",
           }
 
-          local disabled_bts = { "prompt" }
+          local disabled_bts = { "prompt", "nofile" }
 
           local ftype = vim.api.nvim_buf_get_option(0, "filetype")
           local btype = vim.api.nvim_buf_get_option(0, "buftype")

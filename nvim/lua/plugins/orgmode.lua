@@ -7,7 +7,8 @@ return {
     dependencies = {
       { "nvim-treesitter/nvim-treesitter", lazy = true },
       {
-        "lyz-code/telescope-orgmode.nvim",
+        "nvim-orgmode/telescope-orgmode.nvim",
+        version = "1.1.0",
         config = function()
           require("telescope").load_extension("orgmode")
         end,
@@ -17,9 +18,63 @@ return {
       },
       { "danilshvalov/org-modern.nvim", config = false },
       {
+        "nvim-orgmode/org-bullets.nvim",
+        opts = {},
+      },
+      {
         "massix/org-checkbox.nvim",
         opts = {},
         main = "orgcheckbox",
+      },
+      -- org-roam
+      {
+        "chipsenkbeil/org-roam.nvim",
+        opts = {
+          directory = "~/org/roam",
+          bindings = { prefix = "<leader>on" },
+          database = {
+            persist = true,
+            update_on_save = true,
+          },
+        },
+        config = function(_, opts)
+          require("org-roam").setup(opts)
+          require("which-key").add({
+            { "<leader>on", group = "roam" },
+            { "<leader>ona", group = "alias" },
+            { "<leader>ond", group = "daily" },
+            { "<leader>ono", group = "origin" },
+          })
+
+          local group = vim.api.nvim_create_augroup("OrgRoam", { clear = true })
+          vim.api.nvim_create_autocmd({ "FileType" }, {
+            group = group,
+            pattern = "org",
+            callback = function(args)
+              local roam = require("org-roam")
+              local wk = require("which-key")
+
+              local prefix = "<C-c>n"
+
+              wk.add({
+                {
+                  mode = "i",
+                  buffer = args.buf,
+                  { prefix, group = "roam" },
+                  { prefix .. ".", roam.api.complete_node, desc = "Complete node" },
+                  { prefix .. "i", roam.api.insert_node, desc = "Insert node" },
+                  {
+                    prefix .. "m",
+                    function()
+                      roam.api.insert_node({ immediate = true })
+                    end,
+                    desc = "Insert node (immediate)",
+                  },
+                },
+              })
+            end,
+          })
+        end,
       },
     },
     config = function(_, opts)
@@ -52,8 +107,8 @@ return {
           vim.opt_local.modeline = true
           vim.opt_local.modelines = 30
 
-          require("which-key").register({
-            ["<C-c>c"] = { org_toggle_conceal, "Toggle conceal", mode = { "n", "i", "v" }, buffer = args.buf },
+          require("which-key").add({
+            { "<C-c><C-c>", org_toggle_conceal, desc = "Toggle conceal", mode = { "n", "i", "v" }, buffer = args.buf },
           })
         end,
       })
@@ -153,6 +208,8 @@ return {
         },
         org_agenda_files = {
           "~/org/*.org",
+          "~/org/roam/*.org",
+          "~/org/roam/daily/*.org",
         },
         org_todo_keywords = {
           "TODO(t)",
@@ -172,10 +229,14 @@ return {
         org_tags_column = 80,
         win_split_mode = "bot 20sp",
         win_border = "rounded",
+        calendar_week_start_day = 1,
+        org_agenda_start_day = 1,
         org_hide_leading_stars = false,
-        org_hide_emphasis_markers = true,
+        org_hide_emphasis_markers = false,
         org_log_into_drawer = "LOGBOOK",
         org_startup_folded = "content",
+        org_id_uuid_program = "uuidgen",
+        org_id_link_to_org_use_id = true,
         org_capture_templates = {
           r = {
             description = "Refilable Task",
@@ -211,6 +272,15 @@ return {
         mappings = {
           org = {
             org_toggle_checkbox = "<C-p>",
+          },
+          capture = {
+            org_capture_finalize = "<C-c>O<CR>",
+            org_capture_kill = { "<C-c>Ok", "q" },
+            org_capture_refile = "<C-c>Or",
+          },
+          note = {
+            org_note_finalize = "<C-c>O<CR>",
+            org_note_kill = { "<C-c>Ok", "q" },
           },
         },
         notifications = {
