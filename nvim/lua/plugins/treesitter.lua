@@ -20,10 +20,8 @@ return {
       { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     opts = {
-      highlight = {
-        enable = true,
-      },
-      indent = { enable = true },
+      highlight = { enable = true },
+      indent = { enable = false },
       ensure_installed = {
         "bash",
         "c",
