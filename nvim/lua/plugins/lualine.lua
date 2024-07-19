@@ -46,12 +46,8 @@ return {
             },
             {
               function()
-                local status = require("better_escape").waiting
-                if status then
-                  return "…"
-                else
-                  return ""
-                end
+                local ok, m = pcall(require, "better_escape")
+                return ok and m.waiting and "✺" or ""
               end,
               cond = function()
                 return package.loaded["better_escape"] and require("better_escape").waiting ~= nil

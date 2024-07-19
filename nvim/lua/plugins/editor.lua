@@ -220,11 +220,14 @@ return {
     "max397574/better-escape.nvim",
     event = "BufEnter",
     opts = {
-      mapping = { "jk", "jj" },
-      clear_empty_lines = true,
-      keys = function()
-        return vim.api.nvim_win_get_cursor(0)[2] > 1 and "<esc>l" or "<esc>"
-      end,
+      mappings = {
+        i = {
+          j = {
+            j = "<esc>",
+            k = "<esc>",
+          },
+        },
+      },
     },
     config = function(_, opts)
       require("better_escape").setup(opts)
