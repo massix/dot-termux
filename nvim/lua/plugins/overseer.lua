@@ -7,8 +7,8 @@ return {
     event = "VeryLazy",
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<C-c>o"] = { name = "+overseer" },
+      wk.add({
+        { "<C-c>o", group = "overseer" },
       })
     end,
     keys = {

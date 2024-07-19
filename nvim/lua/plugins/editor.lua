@@ -31,33 +31,29 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    version = "*",
     opts = {
-      key_labels = {
-        ["<space>"] = "SPC",
-        ["<cr>"] = "RET",
-        ["<tab>"] = "TAB",
-      },
+      preset = "helix",
     },
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       local wk = require("which-key")
-      wk.register({
+      wk.add({
         -- Lazy Handling
-        ["<leader>l"] = { name = "+lazy" },
-        ["<leader>ll"] = { "<cmd>Lazy<cr>", "UI" },
-        ["<leader>lh"] = { "<cmd>Lazy health<cr>", "HealthCheck" },
+        { "<leader>l", group = "lazy" },
+        { "<leader>ll", "<cmd>Lazy<cr>", desc = "UI" },
+        { "<leader>lh", "<cmd>Lazy health<cr>", desc = "HealthCheck" },
 
-        ["<leader>s"] = { name = "+search" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>f"] = { name = "+file" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>u"] = { name = "+misc" },
-        ["<leader>x"] = { name = "+list" },
-        ["<leader>q"] = { name = "+quit" },
-        ["<leader>w"] = { name = "+window" },
-        ["<leader><tab>"] = { name = "+tab" },
-        ["<leader>n"] = { name = "+nix" },
+        { "<leader>s", group = "search" },
+        { "<leader>g", group = "git" },
+        { "<leader>f", group = "file" },
+        { "<leader>b", group = "buffer" },
+        { "<leader>u", group = "misc" },
+        { "<leader>x", group = "list" },
+        { "<leader>q", group = "quit" },
+        { "<leader>w", group = "window" },
+        { "<leader><tab>", group = "tab" },
       })
     end,
   },
@@ -68,8 +64,8 @@ return {
     cmd = "Spectre",
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<leader>S"] = { name = "+spectre" },
+      wk.add({
+        { "<leader>S", group = "spectre" },
       })
     end,
     opts = {
@@ -118,8 +114,8 @@ return {
     },
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<leader>I"] = { name = "+icons" },
+      wk.add({
+        { "<leader>I", group = "+icons" },
       })
     end,
     keys = {
@@ -146,8 +142,8 @@ return {
     config = true,
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["gs"] = { name = "+surround" },
+      wk.add({
+        { "gs", group = "+surround" },
       })
     end,
     opts = {
@@ -486,8 +482,8 @@ return {
     event = { "BufEnter", "BufWinEnter" },
     init = function()
       vim.g.table_mode_syntax = 0
-      require("which-key").register({
-        ["<leader>t"] = { name = "+table" },
+      require("which-key").add({
+        { "<leader>t", group = "+table" },
       })
     end,
     config = false,

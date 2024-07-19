@@ -241,12 +241,12 @@ return {
     },
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<leader>c"] = { name = "+code" },
-        ["<leader>cd"] = { name = "+diagnostics" },
-        ["<leader>cp"] = { name = "+peek" },
-        ["<leader>cg"] = { name = "+goto" },
-        ["gp"] = { name = "+peek" },
+      wk.add({
+        { "<leader>c", group = "code" },
+        { "<leader>cd", group = "diagnostics" },
+        { "<leader>cp", group = "peek" },
+        { "<leader>cg", group = "goto" },
+        { "gp", group = "peek" },
       })
     end,
   },

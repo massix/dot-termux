@@ -11,9 +11,9 @@ return {
     lazy = true,
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<C-c>d"] = { name = "+debug" },
-        ["<C-c>da"] = { name = "+adapters" },
+      wk.add({
+        { "<C-c>d", group = "+debug" },
+        { "<C-c>da", group = "+adapters" },
       })
     end,
 

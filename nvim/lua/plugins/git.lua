@@ -42,8 +42,8 @@ return {
     },
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<leader>g"] = { mode = "v", name = "+git" },
+      wk.add({
+        { "<leader>g", mode = "v", group = "git" },
       })
     end,
     event = { "BufReadPre", "BufNewFile" },

@@ -10,8 +10,8 @@ return {
     },
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<leader>p"] = { name = "+pomodoro" },
+      wk.add({
+        { "<leader>p", group = "pomodoro" },
       })
     end,
     opts = {

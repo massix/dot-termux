@@ -24,8 +24,8 @@ return {
     cmd = { "ToggleTerm" },
     init = function()
       local wk = require("which-key")
-      wk.register({
-        ["<c-c>t"] = { name = "+terminal" },
+      wk.add({
+        { "<c-c>t", group = "+terminal" },
       })
 
       vim.api.nvim_create_autocmd("TermOpen", {
