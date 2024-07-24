@@ -194,7 +194,8 @@ return {
         extend_gitsigns = false,
       },
       lightbulb = {
-        virtual_text = true,
+        virtual_text = false,
+        sign = true,
       },
       outline = {
         win_position = "left",
@@ -203,6 +204,14 @@ return {
       },
       finder = {
         default = "ref+def+impl",
+      },
+      breadcrumbs = {
+        enable = true,
+      },
+      implement = {
+        enable = true,
+        sign = true,
+        virtual_text = true,
       },
       ui = {
         border = "single",

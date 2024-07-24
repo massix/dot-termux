@@ -34,17 +34,14 @@ return {
     version = "*",
     opts = {
       preset = "helix",
-    },
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-      local wk = require("which-key")
-      wk.add({
-        -- Lazy Handling
+      triggers = {
+        { "<auto>", mode = "nxsot" },
+        { "<C-c>", mode = "i" },
+      },
+      spec = {
         { "<leader>l", group = "lazy" },
         { "<leader>ll", "<cmd>Lazy<cr>", desc = "UI" },
         { "<leader>lh", "<cmd>Lazy health<cr>", desc = "HealthCheck" },
-
         { "<leader>s", group = "search" },
         { "<leader>g", group = "git" },
         { "<leader>f", group = "file" },
@@ -54,7 +51,11 @@ return {
         { "<leader>q", group = "quit" },
         { "<leader>w", group = "window" },
         { "<leader><tab>", group = "tab" },
-      })
+      },
+    },
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
     end,
   },
 
@@ -147,13 +148,14 @@ return {
       })
     end,
     opts = {
+      -- stylua: ignore
       mappings = {
-        add = "gsa", -- Add surrounding in Normal and Visual modes
-        delete = "gsd", -- Delete surrounding
-        find = "gsf", -- Find surrounding (to the right)
-        find_left = "gsF", -- Find surrounding (to the left)
-        highlight = "gsh", -- Highlight surrounding
-        replace = "gsr", -- Replace surrounding
+        add = "gsa",            -- Add surrounding in Normal and Visual modes
+        delete = "gsd",         -- Delete surrounding
+        find = "gsf",           -- Find surrounding (to the right)
+        find_left = "gsF",      -- Find surrounding (to the left)
+        highlight = "gsh",      -- Highlight surrounding
+        replace = "gsr",        -- Replace surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
     },
@@ -172,49 +174,6 @@ return {
     end,
   },
 
-  -- Fancy tabs and buffers
-  {
-    "akinsho/bufferline.nvim",
-    event = { "BufEnter", "BufWinEnter" },
-    keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<leader>bC", "<CMD>BufferLineCloseOthers<CR>", desc = "Close other buffers" },
-      { "<leader>b<CR>", "<CMD>BufferLinePick<CR>", desc = "Pick buffer" },
-    },
-    dependencies = {
-      -- buffer remove
-      {
-        "echasnovski/mini.bufremove",
-        -- stylua: ignore
-        keys = {
-          { "<leader>bd", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-          { "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
-        },
-      },
-    },
-    opts = function()
-      return {
-        highlights = require("catppuccin.groups.integrations.bufferline").get(),
-        options = {
-          -- stylua: ignore
-          close_command = function(n) require("mini.bufremove").delete(n, false) end,
-          right_mouse_command = nil,
-          numbers = "ordinal",
-          diagnostics = "nvim_lsp",
-          always_show_bufferline = true,
-          separator_style = "thick",
-          show_tab_indicators = true,
-          color_icons = true,
-          indicator = {
-            icon = "▎",
-            style = "icon",
-          },
-        },
-      }
-    end,
-  },
-
   -- Better escape
   {
     "max397574/better-escape.nvim",
@@ -229,9 +188,6 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("better_escape").setup(opts)
-    end,
   },
 
   -- Code outline and navigation
@@ -264,33 +220,6 @@ return {
     dependencies = { "winston0410/cmd-parser.nvim" },
     event = { "BufEnter", "BufWinEnter" },
     opts = {},
-  },
-
-  -- buffer switcher
-  {
-    "matbme/JABS.nvim",
-    cmd = "JABSOpen",
-    main = "jabs",
-    opts = {
-      relative = "cursor",
-      border = "rounded",
-      split_filename = true,
-      symbols = {
-        current = "󰄾",
-        split = "",
-        alternate = "⫝",
-        hidden = "󰘓",
-        locked = "",
-        ro = "",
-        edited = "",
-        terminal = "",
-        default_file = "",
-        terminal_symbol = "",
-      },
-    },
-    keys = {
-      { "<leader>bj", "<cmd>JABSOpen<cr>", desc = "JABS Open" },
-    },
   },
 
   -- Better tab scoping
@@ -330,7 +259,7 @@ return {
       )
 
       local group = vim.api.nvim_create_augroup("TrimWhitespaces", { clear = true })
-      vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+      vim.api.nvim_create_autocmd("BufWritePre", {
         group = group,
         pattern = "*",
         callback = function()
@@ -357,15 +286,15 @@ return {
     opts = {
       markdown = {
         fat_headlines = false,
-        codeblock_highlight = false,
+        codeblock_highlight = true,
       },
       org = {
         fat_headlines = false,
-        codeblock_highlight = false,
+        codeblock_highlight = true,
       },
       norg = {
         fat_headlines = false,
-        codeblock_highlight = false,
+        codeblock_highlight = true,
       },
     },
     ft = { "markdown", "org", "norg" },
@@ -391,34 +320,6 @@ return {
       map_spider("b")
       map_spider("ge")
     end,
-  },
-
-  -- Legendary keybindings
-  {
-    "mrjones2014/legendary.nvim",
-    lazy = false,
-    priority = 10000,
-    opts = {
-      include_builtin = true,
-      include_legendary_cmds = true,
-      extensions = {
-        lazy_nvim = true,
-        which_key = {
-          auto_register = true,
-          do_binding = true,
-          use_groups = true,
-        },
-      },
-      scratchpad = {
-        view = "float",
-        results_view = "float",
-        float_border = "rounded",
-        keep_contents = true,
-      },
-    },
-    keys = {
-      { "<leader><space>", [[<CMD>Legendary<CR>]], desc = "Legendary" },
-    },
   },
 
   -- Table mode for creating tables

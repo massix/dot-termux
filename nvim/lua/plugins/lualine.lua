@@ -4,11 +4,12 @@ local fg = function(name)
   return fg and { fg = string.format("#%06x", fg) }
 end
 
+--- @type LazyPluginSpec[]
 return {
-  -- statusline
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
+    dependencies = {},
     opts = function()
       return {
         options = {
@@ -26,9 +27,9 @@ return {
                 local convert = {
                   ["normal"] = "N",
                   ["insert"] = "I",
-                  ["visual"] = "V",
-                  ["v-line"] = "V",
-                  ["v-block"] = "V",
+                  ["visual"] = "VV",
+                  ["v-line"] = "VL",
+                  ["v-block"] = "VB",
                   ["command"] = "C",
                   ["terminal"] = "T",
                   ["replace"] = "R",
@@ -169,7 +170,6 @@ return {
               colored = true,
               unique = true,
             },
-            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
             {
               function()
                 return require("noice").api.status.command.get()
@@ -198,15 +198,41 @@ return {
                 return package.loaded["nomodoro"] and require("nomodoro").status() ~= nil
               end,
             },
-            {
-              function()
-                return require("termux").get_battery_statusline()
-              end
-            },
             { function() return " " .. os.date("%R") end, },
           },
         },
-        extensions = { "nvim-tree", "lazy", "trouble" },
+        tabline = {
+          lualine_a = {
+            {
+              "buffers",
+              show_filename_only = true,
+              mode = 4,
+              use_mode_colors = false,
+              filetype_names = {
+                oil = "Oil",
+                lazy = "Lazy",
+                minifiles = "MiniFiles",
+                OverseerList = "Overseer",
+              },
+            },
+          },
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {
+            { require("lazy.status").updates, cond = require("lazy.status").has_updates },
+          },
+          lualine_y = {
+            {
+              function()
+                return require("termux").get_battery_statusline()
+              end,
+            },
+          },
+          lualine_z = {
+            { "tabs" },
+          },
+        },
+        extensions = { "lazy", "trouble" },
       }
     end,
   },

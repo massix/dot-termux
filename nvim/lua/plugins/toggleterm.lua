@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec[]
 return {
   {
     "akinsho/toggleterm.nvim",
@@ -8,6 +9,11 @@ return {
         version = "1.*",
         opts = {
           prompt_end = { "❯ ", "%$ ", "> " },
+          mapping = {
+            n = {
+              i = "<C-i>",
+            },
+          },
         },
       },
     },
@@ -19,8 +25,8 @@ return {
       insert_mappings = false,
       shade_terminals = true,
       autochdir = true,
+      close_on_exit = false,
     },
-    lazy = false,
     cmd = { "ToggleTerm" },
     init = function()
       local wk = require("which-key")

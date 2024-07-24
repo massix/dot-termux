@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec[]
 return {
   -- Dashboard
   {
@@ -23,8 +24,6 @@ return {
     ⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀
     ⠀⠀⠀termux⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠋⠛⠋⠛⠙⠛⠙⠛⠙⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-
-                   stay safe
       ]]
 
       dashboard.header.val = vim.split(logo, "\n")
@@ -34,15 +33,16 @@ return {
       dashboard.buttons.val = {
         { type = "text", val = "Quick actions", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
-        api.button("SPC f f", " " .. " Find file"),
-        api.button("SPC s g", " " .. " Live Grep"),
+        api.button("SPC .", " " .. " Find file"),
+        api.button("SPC /", " " .. " Live Grep"),
         api.button("SPC s p", " " .. " Open project"),
         api.button("SPC s h", " " .. " Search Help"),
         api.button("SPC s O", " " .. " Search Org Header"),
         api.button("SPC o a", " " .. " Org Agenda"),
-        api.button("SPC s j", "󱕸 " .. " Jumplist"),
-        api.button("SPC s M", "󰆍 " .. " Search man pages"),
-        api.button("SPC SPC", " " .. " Legendary"),
+        api.button("SPC o n f", " " .. " Org Roam Find Node"),
+        api.button("SPC o n d n", " " .. " Org Roam Today's Note"),
+        api.button("SPC o n d y", " " .. " Org Roam Yesterday's Note"),
+        api.button("SPC o n d t", " " .. " Org Roam Tomorrow's Note"),
         api.button("SPC g g", "󰊢 " .. " Neogit"),
         api.button("SPC S o", "󰊠 " .. " Spectre"),
         api.button("SPC p p", "󱎫 " .. " Pomodoro"),

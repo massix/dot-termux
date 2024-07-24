@@ -57,6 +57,7 @@ return {
       { "saadparwaiz1/cmp_luasnip" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lsp-document-symbol" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-cmdline" },
@@ -194,6 +195,7 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "lazydev", group_index = 0 },
+          { name = "nvim_lsp_signature_help" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "neorg" },

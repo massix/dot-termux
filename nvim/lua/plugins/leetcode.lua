@@ -19,6 +19,9 @@ return {
           before = { "package main" },
         },
       },
+      plugins = {
+        non_standalone = true,
+      },
     },
     config = function(_, opts)
       require("leetcode").setup(opts)

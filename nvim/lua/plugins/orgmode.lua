@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec[]
 return {
 
   -- orgmode
@@ -26,7 +27,6 @@ return {
         opts = {},
         main = "orgcheckbox",
       },
-      -- org-roam
       {
         "chipsenkbeil/org-roam.nvim",
         opts = {
@@ -37,11 +37,16 @@ return {
             update_on_save = true,
           },
         },
+        init = function()
+          require("which-key").add({
+            { "<leader>on", group = "roam" },
+            { "<leader>ond", group = "daily" },
+          })
+        end,
         config = function(_, opts)
           require("org-roam").setup(opts)
           require("which-key").add({
-            { "<leader>on", group = "roam" },
-            { "<leader>ona", group = "alias" },
+            { "<leader>onA", group = "alias" },
             { "<leader>ond", group = "daily" },
             { "<leader>ono", group = "origin" },
           })
@@ -75,6 +80,43 @@ return {
             end,
           })
         end,
+        keys = {
+          {
+            "<leader>onf",
+            function()
+              require("org-roam").api.find_node()
+            end,
+            desc = "Find node",
+          },
+          {
+            "<leader>ondn",
+            function()
+              require("org-roam").ext.dailies.goto_today()
+            end,
+            desc = "Open today's note",
+          },
+          {
+            "<leader>ondy",
+            function()
+              require("org-roam").ext.dailies.goto_yesterday()
+            end,
+            desc = "Open yesterday's note",
+          },
+          {
+            "<leader>ondt",
+            function()
+              require("org-roam").ext.dailies.goto_tomorrow()
+            end,
+            desc = "Open tomorrow's note",
+          },
+          {
+            "<leader>ondd",
+            function()
+              require("org-roam").ext.dailies.goto_date()
+            end,
+            desc = "Open date chooser",
+          },
+        },
       },
     },
     config = function(_, opts)
@@ -82,14 +124,6 @@ return {
       orgmode.setup(opts)
 
       local orgmode_group = vim.api.nvim_create_augroup("OrgMode", { clear = true })
-
-      _G.org_toggle_conceal = function()
-        if vim.wo.conceallevel > 0 then
-          vim.wo.conceallevel = 0
-        else
-          vim.wo.conceallevel = 3
-        end
-      end
 
       -- Set conceal stuff automatically when in org files
       vim.api.nvim_create_autocmd("Filetype", {
@@ -107,8 +141,36 @@ return {
           vim.opt_local.modeline = true
           vim.opt_local.modelines = 30
 
+          -- Allow the cursor to go one char beyond EOL
+          vim.opt_local.virtualedit = "onemore"
+
           require("which-key").add({
-            { "<C-c><C-c>", org_toggle_conceal, desc = "Toggle conceal", mode = { "n", "i", "v" }, buffer = args.buf },
+            {
+              buffer = args.buf,
+              {
+                "<C-c>c",
+                function()
+                  if vim.wo.conceallevel > 0 then
+                    vim.wo.conceallevel = 0
+                    vim.notify("Conceal off", vim.log.levels.INFO)
+                  else
+                    vim.wo.conceallevel = 3
+                    vim.notify("Conceal on", vim.log.levels.INFO)
+                  end
+                end,
+                desc = "Toggle conceal",
+                mode = { "n", "i", "v" },
+              },
+              {
+                "<C-c><CR>",
+                function()
+                  require("orgmode").action("org_mappings.meta_return")
+                end,
+                mode = "i",
+                desc = "Org Meta Return",
+                silent = true,
+              },
+            },
           })
         end,
       })
@@ -226,7 +288,7 @@ return {
         org_agenda_text_search_extra_files = { "agenda-archives" },
         org_startup_indented = true, -- only for nightly
         org_adapt_indentation = false,
-        org_tags_column = 80,
+        org_tags_column = -80,
         win_split_mode = "bot 20sp",
         win_border = "rounded",
         calendar_week_start_day = 1,
@@ -237,6 +299,7 @@ return {
         org_startup_folded = "content",
         org_id_uuid_program = "uuidgen",
         org_id_link_to_org_use_id = true,
+        org_edit_src_content_indentation = 2,
         org_capture_templates = {
           r = {
             description = "Refilable Task",

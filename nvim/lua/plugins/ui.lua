@@ -1,3 +1,4 @@
+--- @type LazyPluginSpec[]
 return {
   -- Dressing (better vim ui)
   {
@@ -15,6 +16,7 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
+    enabled = false,
     opts = {
       indent = { char = "│" },
       scope = { enabled = false },
@@ -215,34 +217,5 @@ return {
     config = function(_, opts)
       require("reactive").setup(opts)
     end,
-  },
-
-  -- Internal statusline
-  {
-    "b0o/incline.nvim",
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-    },
-    cond = vim.g.neovide ~= nil,
-    opts = function()
-      return {
-        hide = {
-          only_win = true,
-        },
-        render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-          local ft_icon, _ = require("nvim-web-devicons").get_icon_color(filename)
-          local modified = vim.bo[props.buf].modified
-
-          return {
-            ft_icon and { " ", ft_icon, " " } or "",
-            " ",
-            { filename, gui = modified and "bold,italic" or "bold" },
-            " ",
-          }
-        end,
-      }
-    end,
-    event = { "VeryLazy" },
   },
 }
