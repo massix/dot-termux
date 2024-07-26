@@ -17,7 +17,7 @@ return {
           { "<leader>sO", "<cmd>Telescope orgmode search_headings<CR>", desc = "Search org headings" },
         },
       },
-      { "danilshvalov/org-modern.nvim", config = false },
+      { "danilshvalov/org-modern.nvim" },
       {
         "nvim-orgmode/org-bullets.nvim",
         opts = {},
@@ -51,8 +51,8 @@ return {
             { "<leader>ono", group = "origin" },
           })
 
-          local group = vim.api.nvim_create_augroup("OrgRoam", { clear = true })
-          vim.api.nvim_create_autocmd({ "FileType" }, {
+          local group = vim.api.nvim_create_augroup("OrgRoamCustom", { clear = true })
+          vim.api.nvim_create_autocmd("FileType", {
             group = group,
             pattern = "org",
             callback = function(args)

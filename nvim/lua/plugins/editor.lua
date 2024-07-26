@@ -251,22 +251,44 @@ return {
         end
       end
 
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>cw",
-        ":lua Toggle_trailspaces()<CR>",
-        { noremap = true, desc = "Toggle Trailspaces" }
-      )
+      require("which-key").add({
+        {
+          "<leader>cw",
+          function()
+            vim.g.remove_trailspaces = not vim.g.remove_trailspaces
+            vim.notify("Trailspaces: " .. (vim.g.remove_trailspaces and "enabled" or "disabled"), vim.log.levels.INFO)
+          end,
+          noremap = true,
+          desc = "Toggle Trailspaces",
+        },
+      })
 
       local group = vim.api.nvim_create_augroup("TrimWhitespaces", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = group,
         pattern = "*",
         callback = function()
-          if vim.g.remove_trailspaces and vim.bo.buftype == "" then
+          local ignored_filetypes = {
+            "oil",
+            "taskedit",
+            "term",
+            "alpha",
+          }
+
+          if
+            vim.g.remove_trailspaces
+            and vim.bo.buftype == ""
+            and not vim.tbl_contains(ignored_filetypes, vim.bo.filetype)
+          then
             MiniTrailspace.trim()
           end
         end,
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "taskedit",
+        group = group,
+        callback = function() end,
       })
     end,
   },
