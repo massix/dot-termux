@@ -19,6 +19,7 @@ return {
         "go.mod",
         "go.sum",
         "index.norg",
+        "gleam.toml",
       },
       show_hidden = false,
       silent_chdir = true,

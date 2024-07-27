@@ -178,6 +178,11 @@ return {
           },
         },
       })
+
+      lspconfig.gleam.setup({
+        capabilities = capabilities,
+        on_attach = attach_trouble,
+      })
     end,
   },
 
