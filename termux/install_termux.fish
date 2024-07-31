@@ -8,8 +8,8 @@ set termux_dir "$HOME/.termux"
 set -l cache_dir "$HOME/.cache/installer"
 mkdir -p {$cache_dir}/font
 
-set -l font_url "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Recursive.zip"
-set -l font_fn "RecMonoCasualNerdFontMono-Regular.ttf"
+set -l font_url "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/0xProto.zip"
+set -l font_fn "0xProtoNerdFont-Regular.ttf"
 
 check_install curl curl
 
