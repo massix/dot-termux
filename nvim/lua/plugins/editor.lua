@@ -308,15 +308,15 @@ return {
     opts = {
       markdown = {
         fat_headlines = false,
-        codeblock_highlight = true,
+        codeblock_highlight = "CodeBlock",
       },
       org = {
         fat_headlines = false,
-        codeblock_highlight = true,
+        codeblock_highlight = "CodeBlock",
       },
       norg = {
         fat_headlines = false,
-        codeblock_highlight = true,
+        codeblock_highlight = "CodeBlock",
       },
     },
     ft = { "markdown", "org", "norg" },
@@ -337,10 +337,9 @@ return {
         vim.keymap.set({ "x", "n", "o" }, key, [[<cmd>lua require("spider").motion("]] .. key .. [[")<cr>]])
       end
 
-      map_spider("w")
-      map_spider("e")
-      map_spider("b")
-      map_spider("ge")
+      for _, v in ipairs({ "w", "e", "b", "ge" }) do
+        map_spider(v)
+      end
     end,
   },
 

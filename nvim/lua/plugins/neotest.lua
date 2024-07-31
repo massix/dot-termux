@@ -1,12 +1,21 @@
 --- @type LazyPluginSpec[]
 return {
   {
+    "vim-test/vim-test",
+    dependencies = { "akinsho/toggleterm.nvim" },
+    event = "VeryLazy",
+    config = function()
+      vim.g["test#strategy"] = "toggleterm"
+    end,
+  },
+  {
     "nvim-neotest/neotest",
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "nvim-neotest/neotest-vim-test",
       { "fredrikaverpil/neotest-golang", version = "*" },
     },
     opts = function()
@@ -15,6 +24,9 @@ return {
           require("neotest-golang")({
             go_test_args = { "-v", "-count=1" },
             dap_go_enabled = false,
+          }),
+          require("neotest-vim-test")({
+            allow_file_types = { "gleam" },
           }),
         },
         output_panel = {

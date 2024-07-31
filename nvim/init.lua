@@ -113,6 +113,7 @@ vim.api.nvim_create_autocmd("Filetype", {
     "aerial-nav",
     "dap-float",
     "org-roam-node-buffer",
+    "spectre-panel",
   },
   callback = function(args)
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = args.buf, silent = true })
