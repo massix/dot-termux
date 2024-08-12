@@ -179,6 +179,7 @@ return {
     "max397574/better-escape.nvim",
     event = "BufEnter",
     opts = {
+      default_mappings = false,
       mappings = {
         i = {
           j = {

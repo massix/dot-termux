@@ -19,59 +19,86 @@ return {
     },
     version = "*",
     opts = {
-      float_opts = { border = "double" },
-      winbar = { enabled = true },
+      float_opts = { border = "single", title_pos = "left" },
+      winbar = { enabled = false },
       open_mapping = false,
       insert_mappings = false,
       shade_terminals = true,
       autochdir = true,
-      close_on_exit = false,
+      close_on_exit = true,
     },
     cmd = { "ToggleTerm" },
     init = function()
       local wk = require("which-key")
       wk.add({
         { "<c-c>t", group = "+terminal" },
+        { "<C-\\>", group = "terminal" },
       })
 
       vim.api.nvim_create_autocmd("TermOpen", {
         pattern = "term://*",
         group = vim.api.nvim_create_augroup("ToggleTermHandler", { clear = true }),
         callback = function()
-          local opts = { buffer = 0 }
-
-          -- Disable spellchecking on terminal buffers
-          vim.cmd([[setlocal nospell]])
-
-          -- Leave terminal mode
-          vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-
-          -- Move through windows
-          vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
-          vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
-          vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-          vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts)
-
-          -- Resize
-          vim.keymap.set("t", "<C-Up>", [[<C-\><C-n><C-Up>]], opts)
-          vim.keymap.set("t", "<C-Down>", [[<C-\><C-n><C-Down>]], opts)
-          vim.keymap.set("t", "<C-Left>", [[<C-\><C-n><C-Left>]], opts)
-          vim.keymap.set("t", "<C-Right>", [[<C-\><C-n><C-Right>]], opts)
-
-          -- Win command
-          vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
+          vim.opt_local.spell = false
         end,
       })
     end,
+    keys = function()
+      local starter = {
+        {
+          "<C-c>tt",
+          [[<cmd>execute v:count . "ToggleTerm direction=horizontal"<cr>]],
+          desc = "Toggle default terminal",
+          silent = true,
+        },
+        {
+          "<C-`>",
+          [[<cmd>execute v:count . "ToggleTerm direction=horizontal"<cr>]],
+          desc = "Toggle default terminal",
+          silent = true,
+        },
+        {
+          "<C-\\><C-\\>",
+          [[<cmd>execute v:count . "ToggleTerm direction=horizontal"<cr>]],
+          desc = "Toggle default terminal",
+          silent = true,
+        },
+      }
 
-    -- stylua: ignore
-    keys = {
-      { "<c-c>tt", [[<cmd>execute v:count . "ToggleTerm direction=horizontal"<CR>]], desc = "Toggle default terminal", silent = true },
-      { "<c-c>tf", [[<cmd>execute v:count . "ToggleTerm direction=float"<CR>]], desc = "Toggle floating terminal", silent = true },
-      { "<c-c>ta", "<cmd>ToggleTermToggleAll<CR>", desc = "Toggle all terminals", silent = true },
-      { "<c-c>ts", "<cmd>TermSelect<CR>", desc = "Select terminal", silent = true },
-      { "<c-c>tS", [[<cmd>execute "ToggleTermSendCurrentLine ". v:count<CR>]], desc = "Send current line to terminal" },
-      { "<c-c>tS", [[<cmd>execute "ToggleTermSendVisualSelection " . v:count<CR>]], mode = { "v" }, desc = "Send visual selection to terminal" },
-    },
+      ---@param prefix string
+      local create_keys = function(prefix)
+        return {
+          {
+            prefix .. "f",
+            [[<cmd>execute v:count . "ToggleTerm direction=float"<cr>]],
+            desc = "Toggle floating terminal",
+            silent = true,
+          },
+          { prefix .. "a", [[<cmd>ToggleTermToggleAll<cr>]], desc = "toggle all terminals", silent = true },
+          { prefix .. "s", [[<cmd>TermSelect<cr>]], desc = "select terminal", silent = true },
+          {
+            prefix .. "s",
+            [[<cmd>execute "ToggleTermSendCurrentLine ". v:count<cr>]],
+            desc = "Send current line to terminal",
+          },
+          {
+            prefix .. "s",
+            [[<cmd>execute "ToggleTermSendVisualSelection " . v:count<cr>]],
+            mode = { "v" },
+            desc = "Send visual selection to terminal",
+          },
+        }
+      end
+
+      for _, v in ipairs(create_keys("<C-\\>")) do
+        table.insert(starter, v)
+      end
+
+      for _, v in ipairs(create_keys("<C-c>t")) do
+        table.insert(starter, v)
+      end
+
+      return starter
+    end,
   },
 }

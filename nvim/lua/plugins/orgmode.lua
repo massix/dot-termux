@@ -140,6 +140,9 @@ return {
           -- Allow the cursor to go one char beyond EOL
           vim.opt_local.virtualedit = "onemore"
 
+          -- Set the 80th column marker
+          vim.opt_local.colorcolumn = "80"
+
           require("which-key").add({
             {
               buffer = args.buf,
@@ -299,31 +302,31 @@ return {
         org_capture_templates = {
           r = {
             description = "Refilable Task",
-            template = "* TODO %?\n  %u",
+            template = "* TODO %?\n%u",
             headline = "Tasks",
             target = "~/org/refile.org",
           },
           t = {
             description = "Personal Task",
-            template = "* TODO %?\n  %u",
+            template = "* TODO %?\n%u",
             headline = "Tasks",
             target = "~/org/index.org",
           },
           T = {
             description = "Work Task",
-            template = "* TODO %?\n  %u",
+            template = "* TODO %?\n%u",
             headline = "Tasks",
             target = "~/org/work.org",
           },
           c = {
             description = "Personal calendar entry",
-            template = "* MEET %?\n  SCHEDULED: %^{Meeting Date}T",
+            template = "* MEET %?\nSCHEDULED: %^{Meeting Date}T",
             headline = "Calendar",
             target = "~/org/index.org",
           },
           C = {
             description = "Work calendar entry",
-            template = "* MEET %?\n  SCHEDULED: %^{Meeting Date}T",
+            template = "* MEET %?\nSCHEDULED: %^{Meeting Date}T",
             headline = "Calendar",
             target = "~/org/work.org",
           },
