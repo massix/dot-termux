@@ -26,6 +26,8 @@ return {
       shade_terminals = true,
       autochdir = true,
       close_on_exit = true,
+      start_in_insert = false,
+      auto_scroll = false,
     },
     cmd = { "ToggleTerm" },
     init = function()

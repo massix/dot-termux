@@ -2,6 +2,7 @@ return {
   {
     "stevearc/overseer.nvim",
     opts = {
+      strategy = "terminal",
       dap = false,
     },
     event = "VeryLazy",

@@ -53,10 +53,6 @@ return {
         { "<leader><tab>", group = "tab" },
       },
     },
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
   },
 
   -- search/replace in multiple files
