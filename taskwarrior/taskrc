@@ -1,0 +1,71 @@
+data.location=\/data\/data\/com.termux\/files\/home\/TaskWarrior\/
+news.version=3.4.1
+
+include dark-256.theme
+
+calendar.details=sparse
+calendar.holidays=full
+color.tag.bug=bold red on rgb000
+color.tag.meeting=bold yellow on rgb000
+color.tagged=
+confirmation=true
+journal.info=true
+journal.time=true
+news.version=3.4.1
+report.completed.columns=uuid.short,end.age,depends.count,tags,priority,size,project,description.desc
+report.completed.description=Completed tasks
+report.completed.filter=status:completed -WAITING
+report.completed.labels=UUID,Completed,Dep,Tags,P,TSZ,Project,Description
+report.completed.sort=project+,end+
+report.delegated.columns=id,status.short,project,delegated,description
+report.delegated.description=Delegated tasks
+report.delegated.filter=delegated.not:
+report.delegated.labels=ID,S,Project,Delegated to,Description
+report.next.columns=id,start.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,size,description,urgency
+report.next.description=Next tasks
+report.next.filter=status:pending -WAITING limit:page delegated:
+report.next.labels=ID,Active,Deps,P,Project,Tag,Recur,S,Due,Until,TSZ,Description,Urg
+report.ready.columns=id,start.age,depends,priority,project,tags,recur,scheduled.countdown,due.relative,until.remaining,size,description,urgency
+report.ready.description=Ready to be worked on
+report.ready.filter=status:pending -WAITING limit:page
+report.ready.labels=ID,Active,Deps,P,Project,Tag,Recur,S,Due,Until,TSZ,Description,Urg
+report.waiting.columns=id,depends.indicator,priority,project,recur.indicator,delegated.indicator,wait,wait.remaining,scheduled,due,until,description,urgency
+report.waiting.description=Waiting tasks
+report.waiting.filter=status:waiting
+report.waiting.labels=ID,D,P,Project,R,@,Wait,Remaining,Sched,Due,Until,Description,Urg
+report.waiting.sort=due+,wait+,urgency-
+summary.all.projects=true
+uda.delegated.default=
+uda.delegated.indicator=@
+uda.delegated.label=Delegated to
+uda.delegated.type=string
+uda.priority.default=M
+uda.priority.label=Priority
+uda.priority.type=string
+uda.priority.values=X,H,M,L
+uda.size.default=
+uda.size.label=T-Shirt Size
+uda.size.type=string
+uda.size.values=XS,S,M,L,XL,XXL,
+urgency.uda.priority.H.coefficient=6.000000
+urgency.uda.priority.L.coefficient=1.300000
+urgency.uda.priority.M.coefficient=3.900000
+urgency.uda.priority.X.coefficient=10.000000
+urgency.uda.size..coefficient=1.000000
+urgency.uda.size.L.coefficient=-0.300000
+urgency.uda.size.M.coefficient=1.200000
+urgency.uda.size.S.coefficient=2.000000
+urgency.uda.size.XL.coefficient=-0.600000
+urgency.uda.size.XS.coefficient=2.500000
+urgency.uda.size.XXL.coefficient=-1.000000
+urgency.uda.sprint.current.coefficient=1.300000
+urgency.uda.sprint.future.coefficient=-1.000000
+urgency.uda.sprint.past.coefficient=8.000000
+weekstart=monday
+
+
+# To use the default location of the XDG directories,
+# move this configuration file from ~/.taskrc to ~/.config/task/taskrc and update location config as follows:
+
+hooks.location=~/.task/hooks
+
